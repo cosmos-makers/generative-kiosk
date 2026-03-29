@@ -226,7 +226,7 @@ export function DifficultyDetector({ inline = false }: { inline?: boolean } = {}
           status: "Simulated calibration running",
         });
         setDifficultyReading(smoothReading(historyRef, { ...reading, source: "simulated" }));
-      }, 1200);
+      }, 200);
     }
 
     async function startMediapipeLoop() {
@@ -421,7 +421,7 @@ export function DifficultyDetector({ inline = false }: { inline?: boolean } = {}
               handResult.landmarks?.[0] ?? [],
             );
           }
-        }, 1400);
+        }, 200);
       } catch {
         await startFallbackLoop();
       }
