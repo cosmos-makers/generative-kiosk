@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 720pt;
+      height: 405pt;
+      font-family: 'Pretendard', sans-serif;
+      background: #0c0c0c;
+      color: #f2f2f0;
+      padding: 40pt 56pt;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <!-- 상단 -->
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 9pt; font-weight: 600; color: #00C9A0; letter-spacing: 0.12em; text-transform: uppercase;">Ralph Stack</p>
+    <p style="font-size: 9pt; color: #333;">cosmos makers</p>
+  </div>
+
+  <!-- 헤드라인 -->
+  <div style="padding: 10pt 0 0 0;">
+    <h2 style="font-size: 22pt; font-weight: 700; color: #f2f2f0; letter-spacing: -0.02em;">Claude가 설계하고, 코딩하고, 감시한다</h2>
+  </div>
+
+  <!-- 2열 레이아웃 -->
+  <div style="flex: 1; display: flex; gap: 32pt; padding: 12pt 0;">
+
+    <!-- 왼쪽: AI Stack -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 10pt;">
+      <p style="font-size: 8pt; font-weight: 700; color: #555; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4pt;">AI Stack</p>
+
+      <div style="display: flex; align-items: flex-start; gap: 12pt; border-top: 1px solid #1a1a1a; padding-top: 10pt;">
+        <p style="font-size: 14pt; line-height: 1.4; margin-top: 0;">🧠</p>
+        <div>
+          <p style="font-size: 9pt; font-weight: 700; color: #f2f2f0;">Claude API</p>
+          <p style="font-size: 8pt; color: #555; margin-top: 3pt; line-height: 1.4;">GenUI 생성 + 음성 인텐트 해석<br>Anthropic SDK · CLI fallback</p>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: flex-start; gap: 12pt; border-top: 1px solid #1a1a1a; padding-top: 10pt;">
+        <p style="font-size: 14pt; line-height: 1.4; margin-top: 0;">👁</p>
+        <div>
+          <p style="font-size: 9pt; font-weight: 700; color: #f2f2f0;">MediaPipe Tasks Vision</p>
+          <p style="font-size: 8pt; color: #555; margin-top: 3pt; line-height: 1.4;">실시간 difficulty detection<br>캘리브레이션 기반 행동 분석</p>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: flex-start; gap: 12pt; border-top: 1px solid #1a1a1a; padding-top: 10pt;">
+        <p style="font-size: 14pt; line-height: 1.4; margin-top: 0;">🎙</p>
+        <div>
+          <p style="font-size: 9pt; font-weight: 700; color: #f2f2f0;">Web Speech API</p>
+          <p style="font-size: 8pt; color: #555; margin-top: 3pt; line-height: 1.4;">음성 입력 · 음성 응답<br>브라우저 네이티브</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 오른쪽: OMC 운영 방식 -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 10pt;">
+      <p style="font-size: 8pt; font-weight: 700; color: #555; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4pt;">Ralph 운영 — OMC</p>
+
+      <div style="border-top: 1px solid #1a1a1a; padding-top: 10pt;">
+        <p style="font-size: 8pt; color: #555; line-height: 1.6; margin-bottom: 10pt;">Opus Multi-Claude · 서브에이전트 병렬 분업</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 6pt;">
+          <p style="font-size: 8pt; font-weight: 600; color: #f2f2f0; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4pt; padding: 4pt 8pt;">planner</p>
+          <p style="font-size: 8pt; font-weight: 600; color: #f2f2f0; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4pt; padding: 4pt 8pt;">executor</p>
+          <p style="font-size: 8pt; font-weight: 600; color: #f2f2f0; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4pt; padding: 4pt 8pt;">debugger</p>
+          <p style="font-size: 8pt; font-weight: 600; color: #f2f2f0; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4pt; padding: 4pt 8pt;">designer</p>
+          <p style="font-size: 8pt; font-weight: 600; color: #f2f2f0; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4pt; padding: 4pt 8pt;">test-engineer</p>
+          <p style="font-size: 8pt; font-weight: 600; color: #f2f2f0; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4pt; padding: 4pt 8pt;">verifier</p>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid #1a1a1a; padding-top: 10pt; display: flex; flex-direction: column; gap: 6pt;">
+        <div style="display: flex; align-items: center; gap: 8pt;">
+          <div style="width: 5pt; height: 5pt; border-radius: 50%; background: #00C9A0;"></div>
+          <p style="font-size: 8pt; color: #888; line-height: 1.4;">`.omx/` 디렉토리로 컨텍스트 공유</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8pt;">
+          <div style="width: 5pt; height: 5pt; border-radius: 50%; background: #00C9A0;"></div>
+          <p style="font-size: 8pt; color: #888; line-height: 1.4;">실행 중 항상 <span style="color: #f2f2f0; font-weight: 600;">데모 가능 상태</span> 유지</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8pt;">
+          <div style="width: 5pt; height: 5pt; border-radius: 50%; background: #00C9A0;"></div>
+          <p style="font-size: 8pt; color: #888; line-height: 1.4;">broken state 금지 — 항상 runnable</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 하단 -->
+  <div></div>
+</body>
+</html>

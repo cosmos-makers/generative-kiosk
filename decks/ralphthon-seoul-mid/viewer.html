@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide Viewer</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #111;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .viewer-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navigation bar */
+    .nav-bar {
+      height: 48px;
+      background: #1a1a1a;
+      border-bottom: 1px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-shrink: 0;
+      z-index: 100;
+    }
+
+    .nav-bar button {
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .nav-bar button:hover {
+      background: #555;
+    }
+
+    .nav-bar button:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+
+    .slide-counter {
+      color: #aaa;
+      font-size: 14px;
+      font-weight: 500;
+      min-width: 60px;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .btn-fullscreen {
+      position: absolute;
+      right: 16px;
+      background: transparent !important;
+      font-size: 18px;
+      padding: 6px 10px !important;
+    }
+
+    /* Slide viewport */
+    .slide-viewport {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slide-scaler {
+      width: 720pt;
+      height: 405pt;
+      position: relative;
+      transform-origin: center center;
+    }
+
+    /* Slide frames (iframes) */
+    .slide-frame {
+      position: absolute;
+      inset: 0;
+      width: 720pt;
+      height: 405pt;
+      border: none;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .slide-frame.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="viewer-container">
+    <!-- Navigation -->
+    <div class="nav-bar">
+      <button id="btn-prev" title="Previous (\u2190)">Prev</button>
+      <span class="slide-counter" id="counter">1 / 5</span>
+      <button id="btn-next" title="Next (\u2192)">Next</button>
+      <button class="btn-fullscreen" id="btn-fs" title="Fullscreen (F)">&#x26F6;</button>
+    </div>
+
+    <!-- Slide viewport -->
+    <div class="slide-viewport" id="viewport">
+      <div class="slide-scaler" id="scaler">
+        <iframe class="slide-frame active" data-slide="1" srcdoc="<!DOCTYPE html>
+<html>
+<head>
+<base href=&quot;./&quot;>
+<script>
+(() => {
+  const slideFile = &quot;slide-01.html&quot;;
+  const localAssetPrefix = &quot;./assets/&quot;;
+  const absolutePathRe = /^(file:\/\/|\/Users\/|\/home\/|\/var\/|\/tmp\/|\/private\/|\/Volumes\/|[A-Za-z]:[\\/]|\\\\)/i;
+  const prefix = '[slides-grab:image]';
+
+  function describeElement(element) {
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) return '';
+    if (element === document.body) return 'body';
+
+    const parts = [];
+    let current = element;
+    while (current &amp;&amp; current.nodeType === Node.ELEMENT_NODE &amp;&amp; current !== document.body) {
+      let part = current.tagName.toLowerCase();
+      if (current.id) {
+        part += '#' + current.id;
+        parts.unshift(part);
+        break;
+      }
+      if (current.classList.length > 0) {
+        part += '.' + Array.from(current.classList).slice(0, 2).join('.');
+      }
+      parts.unshift(part);
+      current = current.parentElement;
+    }
+    return 'body > ' + parts.join(' > ');
+  }
+
+  function warn(message, detail) {
+    console.warn(prefix + ' ' + slideFile + ': ' + message, detail);
+  }
+
+  function fail(message, detail) {
+    console.error(prefix + ' ' + slideFile + ': ' + message, detail);
+  }
+
+  window.addEventListener('error', (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLImageElement)) return;
+    const src = (target.getAttribute('src') || target.currentSrc || '').trim();
+    if (!src || src.startsWith('data:')) return;
+    if (src.startsWith(localAssetPrefix)) {
+      fail('missing local asset', { src });
+      return;
+    }
+    fail('image failed to load', { src });
+  }, true);
+
+  window.addEventListener('DOMContentLoaded', () => {
+    for (const image of document.querySelectorAll('img[src]')) {
+      const src = (image.getAttribute('src') || '').trim();
+      if (!src || src.startsWith('data:')) continue;
+      if (src.startsWith('https://')) {
+        fail('remote image URL is unsupported in saved slides; download it into ./assets/<file>', { src });
+        continue;
+      }
+      if (src.startsWith('http://')) {
+        fail('remote http:// image URL is unsupported in saved slides; download it into ./assets/<file>', { src });
+        continue;
+      }
+      if (absolutePathRe.test(src) || src.startsWith('/')) {
+        fail('non-portable image path is unsupported', { src });
+        continue;
+      }
+      if (!src.startsWith(localAssetPrefix)) {
+        warn('noncanonical local image path should use ./assets/<file>', { src });
+      }
+    }
+
+    for (const element of document.body.querySelectorAll('*')) {
+      if (element === document.body) continue;
+      const backgroundImage = window.getComputedStyle(element).backgroundImage;
+      if (!backgroundImage || backgroundImage === 'none' || !backgroundImage.includes('url(')) continue;
+      fail('non-body background-image is not supported for slide content', {
+        element: describeElement(element),
+        backgroundImage,
+      });
+    }
+  });
+})();
+</script>
+  <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css&quot;>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 720pt;
+      height: 405pt;
+      font-family: 'Pretendard', sans-serif;
+      background: #0c0c0c;
+      color: #f2f2f0;
+      padding: 40pt 56pt;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <!-- 상단 헤더 -->
+  <div style=&quot;display: flex; justify-content: space-between; align-items: center;&quot;>
+    <p style=&quot;font-size: 9pt; font-weight: 500; color: #555; letter-spacing: 0.12em; text-transform: uppercase;&quot;>Ralphthon Seoul 2026</p>
+    <p style=&quot;font-size: 9pt; font-weight: 500; color: #555; letter-spacing: 0.08em;&quot;>cosmos makers</p>
+  </div>
+
+  <!-- 메인 -->
+  <div style=&quot;flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 20pt; overflow: visible;&quot;>
+    <div>
+      <p style=&quot;font-size: 9pt; font-weight: 600; color: #00C9A0; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 14pt;&quot;>Generative Kiosk</p>
+      <h1 style=&quot;font-size: 40pt; font-weight: 700; color: #f2f2f0; letter-spacing: -0.03em; line-height: 1.2; overflow: visible;&quot;>키오스크가<br>사람에게<br>맞춰야 한다</h1>
+    </div>
+  </div>
+
+  <!-- 하단 팀 정보 -->
+  <div style=&quot;display: flex; justify-content: space-between; align-items: flex-end;&quot;>
+    <div style=&quot;display: flex; gap: 24pt;&quot;>
+      <div>
+        <p style=&quot;font-size: 8pt; color: #444; margin-bottom: 5pt; letter-spacing: 0.08em; text-transform: uppercase;&quot;>Team</p>
+        <p style=&quot;font-size: 10pt; font-weight: 600; color: #f2f2f0;&quot;>오제관 · 김은란 · 신태림</p>
+      </div>
+      <div>
+        <p style=&quot;font-size: 8pt; color: #444; margin-bottom: 5pt; letter-spacing: 0.08em; text-transform: uppercase;&quot;>GitHub</p>
+        <p style=&quot;font-size: 10pt; font-weight: 500; color: #555;&quot;>cosmos-makers/generative-kiosk</p>
+      </div>
+    </div>
+    <div style=&quot;width: 36pt; height: 36pt; border: 1.5px solid #2a2a2a; border-radius: 50%; display: flex; align-items: center; justify-content: center;&quot;>
+      <p style=&quot;font-size: 14pt; color: #333;&quot;>↘</p>
+    </div>
+  </div>
+</body>
+</html>
+" sandbox="allow-same-origin"></iframe>
+        <iframe class="slide-frame" data-slide="2" srcdoc="<!DOCTYPE html>
+<html>
+<head>
+<base href=&quot;./&quot;>
+<script>
+(() => {
+  const slideFile = &quot;slide-02.html&quot;;
+  const localAssetPrefix = &quot;./assets/&quot;;
+  const absolutePathRe = /^(file:\/\/|\/Users\/|\/home\/|\/var\/|\/tmp\/|\/private\/|\/Volumes\/|[A-Za-z]:[\\/]|\\\\)/i;
+  const prefix = '[slides-grab:image]';
+
+  function describeElement(element) {
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) return '';
+    if (element === document.body) return 'body';
+
+    const parts = [];
+    let current = element;
+    while (current &amp;&amp; current.nodeType === Node.ELEMENT_NODE &amp;&amp; current !== document.body) {
+      let part = current.tagName.toLowerCase();
+      if (current.id) {
+        part += '#' + current.id;
+        parts.unshift(part);
+        break;
+      }
+      if (current.classList.length > 0) {
+        part += '.' + Array.from(current.classList).slice(0, 2).join('.');
+      }
+      parts.unshift(part);
+      current = current.parentElement;
+    }
+    return 'body > ' + parts.join(' > ');
+  }
+
+  function warn(message, detail) {
+    console.warn(prefix + ' ' + slideFile + ': ' + message, detail);
+  }
+
+  function fail(message, detail) {
+    console.error(prefix + ' ' + slideFile + ': ' + message, detail);
+  }
+
+  window.addEventListener('error', (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLImageElement)) return;
+    const src = (target.getAttribute('src') || target.currentSrc || '').trim();
+    if (!src || src.startsWith('data:')) return;
+    if (src.startsWith(localAssetPrefix)) {
+      fail('missing local asset', { src });
+      return;
+    }
+    fail('image failed to load', { src });
+  }, true);
+
+  window.addEventListener('DOMContentLoaded', () => {
+    for (const image of document.querySelectorAll('img[src]')) {
+      const src = (image.getAttribute('src') || '').trim();
+      if (!src || src.startsWith('data:')) continue;
+      if (src.startsWith('https://')) {
+        fail('remote image URL is unsupported in saved slides; download it into ./assets/<file>', { src });
+        continue;
+      }
+      if (src.startsWith('http://')) {
+        fail('remote http:// image URL is unsupported in saved slides; download it into ./assets/<file>', { src });
+        continue;
+      }
+      if (absolutePathRe.test(src) || src.startsWith('/')) {
+        fail('non-portable image path is unsupported', { src });
+        continue;
+      }
+      if (!src.startsWith(localAssetPrefix)) {
+        warn('noncanonical local image path should use ./assets/<file>', { src });
+      }
+    }
+
+    for (const element of document.body.querySelectorAll('*')) {
+      if (element === document.body) continue;
+      const backgroundImage = window.getComputedStyle(element).backgroundImage;
+      if (!backgroundImage || backgroundImage === 'none' || !backgroundImage.includes('url(')) continue;
+      fail('non-body background-image is not supported for slide content', {
+        element: describeElement(element),
+        backgroundImage,
+      });
+    }
+  });
+})();
+</script>
+  <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css&quot;>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 720pt;
+      height: 405pt;
+      font-family: 'Pretendard', sans-serif;
+      background: #0c0c0c;
+      color: #f2f2f0;
+      padding: 40pt 56pt;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <!-- 상단 -->
+  <div style=&quot;display: flex; justify-content: space-between; align-items: center;&quot;>
+    <p style=&quot;font-size: 9pt; font-weight: 600; color: #FF5C3A; letter-spacing: 0.12em; text-transform: uppercase;&quot;>Problem</p>
+    <p style=&quot;font-size: 9pt; color: #333;&quot;>cosmos makers</p>
+  </div>
+
+  <!-- 메인 레이아웃 -->
+  <div style=&quot;flex: 1; display: flex; gap: 40pt; align-items: center; padding: 16pt 0;&quot;>
+
+    <!-- 왼쪽: 헤드라인 + 인용 -->
+    <div style=&quot;flex: 1.1; display: flex; flex-direction: column; gap: 20pt;&quot;>
+      <h2 style=&quot;font-size: 28pt; font-weight: 700; color: #f2f2f0; letter-spacing: -0.02em; line-height: 1.15;&quot;>키오스크는 늘었고,<br>사람은 포기했다</h2>
+
+      <div style=&quot;border-left: 2.5px solid #FF5C3A; padding-left: 14pt;&quot;>
+        <p style=&quot;font-size: 12pt; font-weight: 500; color: #f2f2f0; line-height: 1.5; font-style: italic;&quot;>&quot;나이 먹으면<br>죽으라는 거야?&quot;</p>
+        <p style=&quot;font-size: 8pt; color: #555; margin-top: 6pt;&quot;>— 키오스크 앞에서, 2023</p>
+      </div>
+    </div>
+
+    <!-- 오른쪽: 통계 3개 -->
+    <div style=&quot;flex: 1; display: flex; flex-direction: column; gap: 8pt;&quot;>
+
+      <div style=&quot;border-top: 1px solid #1e1e1e; padding-top: 8pt;&quot;>
+        <p style=&quot;font-size: 28pt; font-weight: 700; color: #FF5C3A; letter-spacing: -0.02em; line-height: 1.2;&quot;>4 / 5</p>
+        <p style=&quot;font-size: 9pt; color: #888; margin-top: 5pt; line-height: 1.4;&quot;>65세 이상, 키오스크 있는 식당<br>방문을 <span style=&quot;color: #f2f2f0; font-weight: 600;&quot;>포기</span></p>
+      </div>
+
+      <div style=&quot;border-top: 1px solid #1e1e1e; padding-top: 8pt;&quot;>
+        <p style=&quot;font-size: 28pt; font-weight: 700; color: #FF5C3A; letter-spacing: -0.02em; line-height: 1.2;&quot;>76.6%</p>
+        <p style=&quot;font-size: 9pt; color: #888; margin-top: 5pt; line-height: 1.4;&quot;>75세 이상, 키오스크 이용 시<br><span style=&quot;color: #f2f2f0; font-weight: 600;&quot;>불편함</span> 경험</p>
+      </div>
+
+      <div style=&quot;border-top: 1px solid #1e1e1e; padding-top: 8pt;&quot;>
+        <p style=&quot;font-size: 28pt; font-weight: 700; color: #f2f2f0; letter-spacing: -0.02em; line-height: 1.2;&quot;>53만 대</p>
+        <p style=&quot;font-size: 9pt; color: #888; margin-top: 5pt; line-height: 1.4;&quot;>국내 키오스크 수 (2023)<br>2년 새 <span style=&quot;color: #f2f2f0; font-weight: 600;&quot;>2.5배</span> 증가</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 하단 -->
+  <div>
+    <p style=&quot;font-size: 8pt; color: #333;&quot;>출처: 전자신문 2023 · 한국경제 2023 · 한국소비자원</p>
+  </div>
+</body>
+</html>
+" sandbox="allow-same-origin"></iframe>
+        <iframe class="slide-frame" data-slide="3" srcdoc="<!DOCTYPE html>
+<html>
+<head>
+<base href=&quot;./&quot;>
+<script>
+(() => {
+  const slideFile = &quot;slide-03.html&quot;;
+  const localAssetPrefix = &quot;./assets/&quot;;
+  const absolutePathRe = /^(file:\/\/|\/Users\/|\/home\/|\/var\/|\/tmp\/|\/private\/|\/Volumes\/|[A-Za-z]:[\\/]|\\\\)/i;
+  const prefix = '[slides-grab:image]';
+
+  function describeElement(element) {
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) return '';
+    if (element === document.body) return 'body';
+
+    const parts = [];
+    let current = element;
+    while (current &amp;&amp; current.nodeType === Node.ELEMENT_NODE &amp;&amp; current !== document.body) {
+      let part = current.tagName.toLowerCase();
+      if (current.id) {
+        part += '#' + current.id;
+        parts.unshift(part);
+        break;
+      }
+      if (current.classList.length > 0) {
+        part += '.' + Array.from(current.classList).slice(0, 2).join('.');
+      }
+      parts.unshift(part);
+      current = current.parentElement;
+    }
+    return 'body > ' + parts.join(' > ');
+  }
+
+  function warn(message, detail) {
+    console.warn(prefix + ' ' + slideFile + ': ' + message, detail);
+  }
+
+  function fail(message, detail) {
+    console.error(prefix + ' ' + slideFile + ': ' + message, detail);
+  }
+
+  window.addEventListener('error', (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLImageElement)) return;
+    const src = (target.getAttribute('src') || target.currentSrc || '').trim();
+    if (!src || src.startsWith('data:')) return;
+    if (src.startsWith(localAssetPrefix)) {
+      fail('missing local asset', { src });
+      return;
+    }
+    fail('image failed to load', { src });
+  }, true);
+
+  window.addEventListener('DOMContentLoaded', () => {
+    for (const image of document.querySelectorAll('img[src]')) {
+      const src = (image.getAttribute('src') || '').trim();
+      if (!src || src.startsWith('data:')) continue;
+      if (src.startsWith('https://')) {
+        fail('remote image URL is unsupported in saved slides; download it into ./assets/<file>', { src });
+        continue;
+      }
+      if (src.startsWith('http://')) {
+        fail('remote http:// image URL is unsupported in saved slides; download it into ./assets/<file>', { src });
+        continue;
+      }
+      if (absolutePathRe.test(src) || src.startsWith('/')) {
+        fail('non-portable image path is unsupported', { src });
+        continue;
+      }
+      if (!src.startsWith(localAssetPrefix)) {
+        warn('noncanonical local image path should use ./assets/<file>', { src });
+      }
+    }
+
+    for (const element of document.body.querySelectorAll('*')) {
+      if (element === document.body) continue;
+      const backgroundImage = window.getComputedStyle(element).backgroundImage;
+      if (!backgroundImage || backgroundImage === 'none' || !backgroundImage.includes('url(')) continue;
+      fail('non-body background-image is not supported for slide content', {
+        element: describeElement(element),
+        backgroundImage,
+      });
+    }
+  });
+})();
+</script>
+  <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css&quot;>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 720pt;
+      height: 405pt;
+      font-family: 'Pretendard', sans-serif;
+      background: #0c0c0c;
+      color: #f2f2f0;
+      padding: 40pt 56pt;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <!-- 상단 -->
+  <div style=&quot;display: flex; justify-content: space-between; align-items: center;&quot;>
+    <p style=&quot;font-size: 9pt; font-weight: 600; color: #00C9A0; letter-spacing: 0.12em; text-transform: uppercase;&quot;>Solution</p>
+    <p style=&quot;font-size: 9pt; color: #333;&quot;>cosmos makers</p>
+  </div>
+
+  <!-- 헤드라인 -->
+  <div style=&quot;padding: 12pt 0 0 0;&quot;>
+    <h2 style=&quot;font-size: 22pt; font-weight: 700; color: #f2f2f0; letter-spacing: -0.02em; line-height: 1.2;&quot;>감지하고, 물어보고, 맞춰준다</h2>
+    <p style=&quot;font-size: 10pt; color: #555; margin-top: 8pt;&quot;>자동 전환 없음 — 항상 사람이 OK해야 바뀐다</p>
+  </div>
+
+  <!-- 플로우 -->
+  <div style=&quot;flex: 1; display: flex; align-items: center; gap: 0;&quot;>
+
+    <!-- Track A -->
+    <div style=&quot;flex: 1; display: flex; flex-direction: column; gap: 10pt;&quot;>
+      <p style=&quot;font-size: 8pt; font-weight: 700; color: #00C9A0; letter-spacing: 0.1em; text-transform: uppercase;&quot;>Track A — GenUI</p>
+      <div style=&quot;display: flex; flex-direction: column; gap: 6pt;&quot;>
+        <div style=&quot;background: #141414; border: 1px solid #1e1e1e; border-radius: 6pt; padding: 10pt 14pt;&quot;>
+          <p style=&quot;font-size: 9pt; font-weight: 600; color: #f2f2f0;&quot;>일반 키오스크 시작</p>
+          <p style=&quot;font-size: 8pt; color: #555; margin-top: 3pt;&quot;>정상 흐름으로 진입</p>
+        </div>
+        <p style=&quot;font-size: 9pt; color: #333; text-align: center;&quot;>↓</p>
+        <div style=&quot;background: #141414; border: 1px solid #1e1e1e; border-radius: 6pt; padding: 10pt 14pt;&quot;>
+          <p style=&quot;font-size: 9pt; font-weight: 600; color: #f2f2f0;&quot;>MediaPipe 어려움 감지</p>
+          <p style=&quot;font-size: 8pt; color: #555; margin-top: 3pt;&quot;>실시간 행동 분석</p>
+        </div>
+        <p style=&quot;font-size: 9pt; color: #333; text-align: center;&quot;>↓</p>
+        <div style=&quot;background: #141414; border: 1px solid #FF5C3A; border-radius: 6pt; padding: 10pt 14pt;&quot;>
+          <p style=&quot;font-size: 9pt; font-weight: 600; color: #FF5C3A;&quot;>도움 드릴까요? → 사용자 OK</p>
+          <p style=&quot;font-size: 8pt; color: #555; margin-top: 3pt;&quot;>인간이 결정</p>
+        </div>
+        <p style=&quot;font-size: 9pt; color: #333; text-align: center;&quot;>↓</p>
+        <div style=&quot;background: #0a1f1a; border: 1px solid #00C9A0; border-radius: 6pt; padding: 10pt 14pt;&quot;>
+          <p style=&quot;font-size: 9pt; font-weight: 600; color: #00C9A0;&quot;>LLM이 인터페이스 재생성</p>
+          <p style=&quot;font-size: 8pt; color: #555; margin-top: 3pt;&quot;>큰 글씨 · 단순 카드 · 맞춤형</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 구분선 -->
+    <div style=&quot;width: 1px; background: #1e1e1e; align-self: stretch; margin: 0 24pt;&quot;></div>
+
+    <!-- Track B -->
+    <div style=&quot;flex: 1; display: flex; flex-direction: column; gap: 10pt;&quot;>
+      <p style=&quot;font-size: 8pt; font-weight: 700; color: #00C9A0; letter-spacing: 0.1em; text-transform: uppercase;&quot;>Track B — Voice</p>
+      <div style=&quot;display: flex; flex-direction: column; gap: 6pt;&quot;>
+        <div style=&quot;background: #141414; border: 1px solid #1e1e1e; border-radius: 6pt; padding: 10pt 14pt;&quot;>
+          <p style=&quot;font-size: 9pt; font-weight: 600; color: #f2f2f0;&quot;>어려움 감지 + 도움 제안</p>
+          <p style=&quot;font-size: 8pt; color: #555; margin-top: 3pt;&quot;>Track A와 동일 진입점</p>
+        </div>
+        <p style=&quot;font-size: 9pt; color: #333; text-align: center;&quot;>↓</p>
+        <div style=&quot;background: #141414; border: 1px solid #FF5C3A; border-radius: 6pt; padding: 10pt 14pt;&quot;>
+          <p style=&quot;font-size: 9pt; font-weight: 600; color: #FF5C3A;&quot;>음성 모드 선택 → 사용자 OK</p>
+          <p style=&quot;font-size: 8pt; color: #555; margin-top: 3pt;&quot;>인간이 결정</p>
+        </div>
+        <p style=&quot;font-size: 9pt; color: #333; text-align: center;&quot;>↓</p>
+        <div style=&quot;background: #0a1f1a; border: 1px solid #00C9A0; border-radius: 6pt; padding: 10pt 14pt;&quot;>
+          <p style=&quot;font-size: 9pt; font-weight: 600; color: #00C9A0;&quot;>자연어로 주문 완료</p>
+          <p style=&quot;font-size: 8pt; color: #555; margin-top: 3pt;&quot;>LLM 인텐트 해석 · 음성 응답</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 하단 -->
+  <div></div>
+</body>
+</html>
+" sandbox="allow-same-origin"></iframe>
+        <iframe class="slide-frame" data-slide="4" srcdoc="<!DOCTYPE html>
+<html>
+<head>
+<base href=&quot;./&quot;>
+<script>
+(() => {
+  const slideFile = &quot;slide-04.html&quot;;
+  const localAssetPrefix = &quot;./assets/&quot;;
+  const absolutePathRe = /^(file:\/\/|\/Users\/|\/home\/|\/var\/|\/tmp\/|\/private\/|\/Volumes\/|[A-Za-z]:[\\/]|\\\\)/i;
+  const prefix = '[slides-grab:image]';
+
+  function describeElement(element) {
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) return '';
+    if (element === document.body) return 'body';
+
+    const parts = [];
+    let current = element;
+    while (current &amp;&amp; current.nodeType === Node.ELEMENT_NODE &amp;&amp; current !== document.body) {
+      let part = current.tagName.toLowerCase();
+      if (current.id) {
+        part += '#' + current.id;
+        parts.unshift(part);
+        break;
+      }
+      if (current.classList.length > 0) {
+        part += '.' + Array.from(current.classList).slice(0, 2).join('.');
+      }
+      parts.unshift(part);
+      current = current.parentElement;
+    }
+    return 'body > ' + parts.join(' > ');
+  }
+
+  function warn(message, detail) {
+    console.warn(prefix + ' ' + slideFile + ': ' + message, detail);
+  }
+
+  function fail(message, detail) {
+    console.error(prefix + ' ' + slideFile + ': ' + message, detail);
+  }
+
+  window.addEventListener('error', (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLImageElement)) return;
+    const src = (target.getAttribute('src') || target.currentSrc || '').trim();
+    if (!src || src.startsWith('data:')) return;
+    if (src.startsWith(localAssetPrefix)) {
+      fail('missing local asset', { src });
+      return;
+    }
+    fail('image failed to load', { src });
+  }, true);
+
+  window.addEventListener('DOMContentLoaded', () => {
+    for (const image of document.querySelectorAll('img[src]')) {
+      const src = (image.getAttribute('src') || '').trim();
+      if (!src || src.startsWith('data:')) continue;
+      if (src.startsWith('https://')) {
+        fail('remote image URL is unsupported in saved slides; download it into ./assets/<file>', { src });
+        continue;
+      }
+      if (src.startsWith('http://')) {
+        fail('remote http:// image URL is unsupported in saved slides; download it into ./assets/<file>', { src });
+        continue;
+      }
+      if (absolutePathRe.test(src) || src.startsWith('/')) {
+        fail('non-portable image path is unsupported', { src });
+        continue;
+      }
+      if (!src.startsWith(localAssetPrefix)) {
+        warn('noncanonical local image path should use ./assets/<file>', { src });
+      }
+    }
+
+    for (const element of document.body.querySelectorAll('*')) {
+      if (element === document.body) continue;
+      const backgroundImage = window.getComputedStyle(element).backgroundImage;
+      if (!backgroundImage || backgroundImage === 'none' || !backgroundImage.includes('url(')) continue;
+      fail('non-body background-image is not supported for slide content', {
+        element: describeElement(element),
+        backgroundImage,
+      });
+    }
+  });
+})();
+</script>
+  <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css&quot;>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 720pt;
+      height: 405pt;
+      font-family: 'Pretendard', sans-serif;
+      background: #0c0c0c;
+      color: #f2f2f0;
+      padding: 40pt 56pt;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <!-- 상단 -->
+  <div style=&quot;display: flex; justify-content: space-between; align-items: center;&quot;>
+    <p style=&quot;font-size: 9pt; font-weight: 600; color: #00C9A0; letter-spacing: 0.12em; text-transform: uppercase;&quot;>Ralph Stack</p>
+    <p style=&quot;font-size: 9pt; color: #333;&quot;>cosmos makers</p>
+  </div>
+
+  <!-- 헤드라인 -->
+  <div style=&quot;padding: 10pt 0 0 0;&quot;>
+    <h2 style=&quot;font-size: 22pt; font-weight: 700; color: #f2f2f0; letter-spacing: -0.02em;&quot;>Claude가 설계하고, 코딩하고, 감시한다</h2>
+  </div>
+
+  <!-- 2열 레이아웃 -->
+  <div style=&quot;flex: 1; display: flex; gap: 32pt; padding: 12pt 0;&quot;>
+
+    <!-- 왼쪽: AI Stack -->
+    <div style=&quot;flex: 1; display: flex; flex-direction: column; gap: 10pt;&quot;>
+      <p style=&quot;font-size: 8pt; font-weight: 700; color: #555; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4pt;&quot;>AI Stack</p>
+
+      <div style=&quot;display: flex; align-items: flex-start; gap: 12pt; border-top: 1px solid #1a1a1a; padding-top: 10pt;&quot;>
+        <p style=&quot;font-size: 14pt; line-height: 1.4; margin-top: 0;&quot;>🧠</p>
+        <div>
+          <p style=&quot;font-size: 9pt; font-weight: 700; color: #f2f2f0;&quot;>Claude API</p>
+          <p style=&quot;font-size: 8pt; color: #555; margin-top: 3pt; line-height: 1.4;&quot;>GenUI 생성 + 음성 인텐트 해석<br>Anthropic SDK · CLI fallback</p>
+        </div>
+      </div>
+
+      <div style=&quot;display: flex; align-items: flex-start; gap: 12pt; border-top: 1px solid #1a1a1a; padding-top: 10pt;&quot;>
+        <p style=&quot;font-size: 14pt; line-height: 1.4; margin-top: 0;&quot;>👁</p>
+        <div>
+          <p style=&quot;font-size: 9pt; font-weight: 700; color: #f2f2f0;&quot;>MediaPipe Tasks Vision</p>
+          <p style=&quot;font-size: 8pt; color: #555; margin-top: 3pt; line-height: 1.4;&quot;>실시간 difficulty detection<br>캘리브레이션 기반 행동 분석</p>
+        </div>
+      </div>
+
+      <div style=&quot;display: flex; align-items: flex-start; gap: 12pt; border-top: 1px solid #1a1a1a; padding-top: 10pt;&quot;>
+        <p style=&quot;font-size: 14pt; line-height: 1.4; margin-top: 0;&quot;>🎙</p>
+        <div>
+          <p style=&quot;font-size: 9pt; font-weight: 700; color: #f2f2f0;&quot;>Web Speech API</p>
+          <p style=&quot;font-size: 8pt; color: #555; margin-top: 3pt; line-height: 1.4;&quot;>음성 입력 · 음성 응답<br>브라우저 네이티브</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 오른쪽: OMC 운영 방식 -->
+    <div style=&quot;flex: 1; display: flex; flex-direction: column; gap: 10pt;&quot;>
+      <p style=&quot;font-size: 8pt; font-weight: 700; color: #555; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4pt;&quot;>Ralph 운영 — OMC</p>
+
+      <div style=&quot;border-top: 1px solid #1a1a1a; padding-top: 10pt;&quot;>
+        <p style=&quot;font-size: 8pt; color: #555; line-height: 1.6; margin-bottom: 10pt;&quot;>Opus Multi-Claude · 서브에이전트 병렬 분업</p>
+        <div style=&quot;display: flex; flex-wrap: wrap; gap: 6pt;&quot;>
+          <p style=&quot;font-size: 8pt; font-weight: 600; color: #f2f2f0; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4pt; padding: 4pt 8pt;&quot;>planner</p>
+          <p style=&quot;font-size: 8pt; font-weight: 600; color: #f2f2f0; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4pt; padding: 4pt 8pt;&quot;>executor</p>
+          <p style=&quot;font-size: 8pt; font-weight: 600; color: #f2f2f0; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4pt; padding: 4pt 8pt;&quot;>debugger</p>
+          <p style=&quot;font-size: 8pt; font-weight: 600; color: #f2f2f0; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4pt; padding: 4pt 8pt;&quot;>designer</p>
+          <p style=&quot;font-size: 8pt; font-weight: 600; color: #f2f2f0; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4pt; padding: 4pt 8pt;&quot;>test-engineer</p>
+          <p style=&quot;font-size: 8pt; font-weight: 600; color: #f2f2f0; background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 4pt; padding: 4pt 8pt;&quot;>verifier</p>
+        </div>
+      </div>
+
+      <div style=&quot;border-top: 1px solid #1a1a1a; padding-top: 10pt; display: flex; flex-direction: column; gap: 6pt;&quot;>
+        <div style=&quot;display: flex; align-items: center; gap: 8pt;&quot;>
+          <div style=&quot;width: 5pt; height: 5pt; border-radius: 50%; background: #00C9A0;&quot;></div>
+          <p style=&quot;font-size: 8pt; color: #888; line-height: 1.4;&quot;>`.omx/` 디렉토리로 컨텍스트 공유</p>
+        </div>
+        <div style=&quot;display: flex; align-items: center; gap: 8pt;&quot;>
+          <div style=&quot;width: 5pt; height: 5pt; border-radius: 50%; background: #00C9A0;&quot;></div>
+          <p style=&quot;font-size: 8pt; color: #888; line-height: 1.4;&quot;>실행 중 항상 <span style=&quot;color: #f2f2f0; font-weight: 600;&quot;>데모 가능 상태</span> 유지</p>
+        </div>
+        <div style=&quot;display: flex; align-items: center; gap: 8pt;&quot;>
+          <div style=&quot;width: 5pt; height: 5pt; border-radius: 50%; background: #00C9A0;&quot;></div>
+          <p style=&quot;font-size: 8pt; color: #888; line-height: 1.4;&quot;>broken state 금지 — 항상 runnable</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 하단 -->
+  <div></div>
+</body>
+</html>
+" sandbox="allow-same-origin"></iframe>
+        <iframe class="slide-frame" data-slide="5" srcdoc="<!DOCTYPE html>
+<html>
+<head>
+<base href=&quot;./&quot;>
+<script>
+(() => {
+  const slideFile = &quot;slide-05.html&quot;;
+  const localAssetPrefix = &quot;./assets/&quot;;
+  const absolutePathRe = /^(file:\/\/|\/Users\/|\/home\/|\/var\/|\/tmp\/|\/private\/|\/Volumes\/|[A-Za-z]:[\\/]|\\\\)/i;
+  const prefix = '[slides-grab:image]';
+
+  function describeElement(element) {
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) return '';
+    if (element === document.body) return 'body';
+
+    const parts = [];
+    let current = element;
+    while (current &amp;&amp; current.nodeType === Node.ELEMENT_NODE &amp;&amp; current !== document.body) {
+      let part = current.tagName.toLowerCase();
+      if (current.id) {
+        part += '#' + current.id;
+        parts.unshift(part);
+        break;
+      }
+      if (current.classList.length > 0) {
+        part += '.' + Array.from(current.classList).slice(0, 2).join('.');
+      }
+      parts.unshift(part);
+      current = current.parentElement;
+    }
+    return 'body > ' + parts.join(' > ');
+  }
+
+  function warn(message, detail) {
+    console.warn(prefix + ' ' + slideFile + ': ' + message, detail);
+  }
+
+  function fail(message, detail) {
+    console.error(prefix + ' ' + slideFile + ': ' + message, detail);
+  }
+
+  window.addEventListener('error', (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLImageElement)) return;
+    const src = (target.getAttribute('src') || target.currentSrc || '').trim();
+    if (!src || src.startsWith('data:')) return;
+    if (src.startsWith(localAssetPrefix)) {
+      fail('missing local asset', { src });
+      return;
+    }
+    fail('image failed to load', { src });
+  }, true);
+
+  window.addEventListener('DOMContentLoaded', () => {
+    for (const image of document.querySelectorAll('img[src]')) {
+      const src = (image.getAttribute('src') || '').trim();
+      if (!src || src.startsWith('data:')) continue;
+      if (src.startsWith('https://')) {
+        fail('remote image URL is unsupported in saved slides; download it into ./assets/<file>', { src });
+        continue;
+      }
+      if (src.startsWith('http://')) {
+        fail('remote http:// image URL is unsupported in saved slides; download it into ./assets/<file>', { src });
+        continue;
+      }
+      if (absolutePathRe.test(src) || src.startsWith('/')) {
+        fail('non-portable image path is unsupported', { src });
+        continue;
+      }
+      if (!src.startsWith(localAssetPrefix)) {
+        warn('noncanonical local image path should use ./assets/<file>', { src });
+      }
+    }
+
+    for (const element of document.body.querySelectorAll('*')) {
+      if (element === document.body) continue;
+      const backgroundImage = window.getComputedStyle(element).backgroundImage;
+      if (!backgroundImage || backgroundImage === 'none' || !backgroundImage.includes('url(')) continue;
+      fail('non-body background-image is not supported for slide content', {
+        element: describeElement(element),
+        backgroundImage,
+      });
+    }
+  });
+})();
+</script>
+  <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css&quot;>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 720pt;
+      height: 405pt;
+      font-family: 'Pretendard', sans-serif;
+      background: #0c0c0c;
+      color: #f2f2f0;
+      padding: 40pt 56pt;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <!-- 상단 -->
+  <div style=&quot;display: flex; justify-content: space-between; align-items: center;&quot;>
+    <p style=&quot;font-size: 9pt; font-weight: 600; color: #00C9A0; letter-spacing: 0.12em; text-transform: uppercase;&quot;>Progress</p>
+    <p style=&quot;font-size: 9pt; color: #333;&quot;>cosmos makers</p>
+  </div>
+
+  <!-- 헤드라인 -->
+  <div style=&quot;padding: 10pt 0 0 0;&quot;>
+    <h2 style=&quot;font-size: 24pt; font-weight: 700; color: #f2f2f0; letter-spacing: -0.02em; line-height: 1.2;&quot;>코어 AI 파이프라인 완성<br>지금 데모합니다</h2>
+  </div>
+
+  <!-- 진행 상황 그리드 -->
+  <div style=&quot;flex: 1; display: flex; flex-direction: column; gap: 10pt; padding: 10pt 0;&quot;>
+
+    <div style=&quot;display: flex; gap: 12pt; align-items: center;&quot;>
+      <p style=&quot;font-size: 10pt; color: #00C9A0; width: 10pt;&quot;>✓</p>
+      <p style=&quot;font-size: 10pt; font-weight: 600; color: #f2f2f0; width: 200pt;&quot;>GenUI 생성 파이프라인</p>
+      <p style=&quot;font-size: 9pt; color: #555;&quot;>Claude API + CLI fallback · structured output</p>
+    </div>
+
+    <div style=&quot;display: flex; gap: 12pt; align-items: center;&quot;>
+      <p style=&quot;font-size: 10pt; color: #00C9A0; width: 10pt;&quot;>✓</p>
+      <p style=&quot;font-size: 10pt; font-weight: 600; color: #f2f2f0; width: 200pt;&quot;>MediaPipe Difficulty Detector</p>
+      <p style=&quot;font-size: 9pt; color: #555;&quot;>실시간 행동 분석 · 캘리브레이션 기반</p>
+    </div>
+
+    <div style=&quot;display: flex; gap: 12pt; align-items: center;&quot;>
+      <p style=&quot;font-size: 10pt; color: #FF5C3A; width: 10pt;&quot;>→</p>
+      <p style=&quot;font-size: 10pt; font-weight: 600; color: #f2f2f0; width: 200pt;&quot;>Human-in-the-loop 전환 UX</p>
+      <p style=&quot;font-size: 9pt; color: #555;&quot;>도움 제안 → 동의 → GenUI 적용 흐름</p>
+    </div>
+
+    <div style=&quot;display: flex; gap: 12pt; align-items: center;&quot;>
+      <p style=&quot;font-size: 10pt; color: #FF5C3A; width: 10pt;&quot;>→</p>
+      <p style=&quot;font-size: 10pt; font-weight: 600; color: #f2f2f0; width: 200pt;&quot;>Voice Mode 통합</p>
+      <p style=&quot;font-size: 9pt; color: #555;&quot;>Web Speech API · LLM 인텐트 해석 연결</p>
+    </div>
+
+  </div>
+
+  <!-- 하단: 목표 + 팀 -->
+  <div style=&quot;display: flex; justify-content: space-between; align-items: flex-end;&quot;>
+    <div style=&quot;display: flex; align-items: center; gap: 10pt;&quot;>
+      <div style=&quot;width: 8pt; height: 8pt; border-radius: 50%; background: #00C9A0;&quot;></div>
+      <p style=&quot;font-size: 9pt; color: #888;&quot;>데모 환경: <span style=&quot;color: #f2f2f0; font-weight: 600;&quot;>MacBook Chrome fullscreen landscape</span></p>
+    </div>
+    <p style=&quot;font-size: 9pt; color: #333;&quot;>cosmos-makers/generative-kiosk</p>
+  </div>
+</body>
+</html>
+" sandbox="allow-same-origin"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const TOTAL = 5;
+    let current = 1;
+
+    const frames = document.querySelectorAll('.slide-frame');
+    const counter = document.getElementById('counter');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const scaler = document.getElementById('scaler');
+    const viewport = document.getElementById('viewport');
+
+    function goTo(n) {
+      n = Math.max(1, Math.min(TOTAL, n));
+      if (n === current) return;
+      frames[current - 1].classList.remove('active');
+      current = n;
+      frames[current - 1].classList.add('active');
+      counter.textContent = current + ' / ' + TOTAL;
+      btnPrev.disabled = current === 1;
+      btnNext.disabled = current === TOTAL;
+    }
+
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
+
+    btnPrev.addEventListener('click', prev);
+    btnNext.addEventListener('click', next);
+    btnPrev.disabled = true;
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+      else if (e.key === 'Home') { e.preventDefault(); goTo(1); }
+      else if (e.key === 'End') { e.preventDefault(); goTo(TOTAL); }
+      else if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        toggleFullscreen();
+      }
+    });
+
+    // Fullscreen
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen();
+      }
+    }
+    document.getElementById('btn-fs').addEventListener('click', toggleFullscreen);
+
+    // Auto-scale to fit viewport (95% fit)
+    function rescale() {
+      const vw = viewport.clientWidth;
+      const vh = viewport.clientHeight;
+      const slideW = scaler.offsetWidth;
+      const slideH = scaler.offsetHeight;
+      const scale = Math.min(vw / slideW, vh / slideH) * 0.95;
+      scaler.style.transform = 'scale(' + scale + ')';
+    }
+
+    window.addEventListener('resize', rescale);
+    document.addEventListener('fullscreenchange', () => setTimeout(rescale, 100));
+    rescale();
+  </script>
+</body>
+</html>

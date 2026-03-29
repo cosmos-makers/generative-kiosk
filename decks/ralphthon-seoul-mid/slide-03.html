@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 720pt;
+      height: 405pt;
+      font-family: 'Pretendard', sans-serif;
+      background: #0c0c0c;
+      color: #f2f2f0;
+      padding: 40pt 56pt;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <!-- 상단 -->
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <p style="font-size: 9pt; font-weight: 600; color: #00C9A0; letter-spacing: 0.12em; text-transform: uppercase;">Solution</p>
+    <p style="font-size: 9pt; color: #333;">cosmos makers</p>
+  </div>
+
+  <!-- 헤드라인 -->
+  <div style="padding: 12pt 0 0 0;">
+    <h2 style="font-size: 22pt; font-weight: 700; color: #f2f2f0; letter-spacing: -0.02em; line-height: 1.2;">감지하고, 물어보고, 맞춰준다</h2>
+    <p style="font-size: 10pt; color: #555; margin-top: 8pt;">자동 전환 없음 — 항상 사람이 OK해야 바뀐다</p>
+  </div>
+
+  <!-- 플로우 -->
+  <div style="flex: 1; display: flex; align-items: center; gap: 0;">
+
+    <!-- Track A -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 10pt;">
+      <p style="font-size: 8pt; font-weight: 700; color: #00C9A0; letter-spacing: 0.1em; text-transform: uppercase;">Track A — GenUI</p>
+      <div style="display: flex; flex-direction: column; gap: 6pt;">
+        <div style="background: #141414; border: 1px solid #1e1e1e; border-radius: 6pt; padding: 10pt 14pt;">
+          <p style="font-size: 9pt; font-weight: 600; color: #f2f2f0;">일반 키오스크 시작</p>
+          <p style="font-size: 8pt; color: #555; margin-top: 3pt;">정상 흐름으로 진입</p>
+        </div>
+        <p style="font-size: 9pt; color: #333; text-align: center;">↓</p>
+        <div style="background: #141414; border: 1px solid #1e1e1e; border-radius: 6pt; padding: 10pt 14pt;">
+          <p style="font-size: 9pt; font-weight: 600; color: #f2f2f0;">MediaPipe 어려움 감지</p>
+          <p style="font-size: 8pt; color: #555; margin-top: 3pt;">실시간 행동 분석</p>
+        </div>
+        <p style="font-size: 9pt; color: #333; text-align: center;">↓</p>
+        <div style="background: #141414; border: 1px solid #FF5C3A; border-radius: 6pt; padding: 10pt 14pt;">
+          <p style="font-size: 9pt; font-weight: 600; color: #FF5C3A;">도움 드릴까요? → 사용자 OK</p>
+          <p style="font-size: 8pt; color: #555; margin-top: 3pt;">인간이 결정</p>
+        </div>
+        <p style="font-size: 9pt; color: #333; text-align: center;">↓</p>
+        <div style="background: #0a1f1a; border: 1px solid #00C9A0; border-radius: 6pt; padding: 10pt 14pt;">
+          <p style="font-size: 9pt; font-weight: 600; color: #00C9A0;">LLM이 인터페이스 재생성</p>
+          <p style="font-size: 8pt; color: #555; margin-top: 3pt;">큰 글씨 · 단순 카드 · 맞춤형</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 구분선 -->
+    <div style="width: 1px; background: #1e1e1e; align-self: stretch; margin: 0 24pt;"></div>
+
+    <!-- Track B -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 10pt;">
+      <p style="font-size: 8pt; font-weight: 700; color: #00C9A0; letter-spacing: 0.1em; text-transform: uppercase;">Track B — Voice</p>
+      <div style="display: flex; flex-direction: column; gap: 6pt;">
+        <div style="background: #141414; border: 1px solid #1e1e1e; border-radius: 6pt; padding: 10pt 14pt;">
+          <p style="font-size: 9pt; font-weight: 600; color: #f2f2f0;">어려움 감지 + 도움 제안</p>
+          <p style="font-size: 8pt; color: #555; margin-top: 3pt;">Track A와 동일 진입점</p>
+        </div>
+        <p style="font-size: 9pt; color: #333; text-align: center;">↓</p>
+        <div style="background: #141414; border: 1px solid #FF5C3A; border-radius: 6pt; padding: 10pt 14pt;">
+          <p style="font-size: 9pt; font-weight: 600; color: #FF5C3A;">음성 모드 선택 → 사용자 OK</p>
+          <p style="font-size: 8pt; color: #555; margin-top: 3pt;">인간이 결정</p>
+        </div>
+        <p style="font-size: 9pt; color: #333; text-align: center;">↓</p>
+        <div style="background: #0a1f1a; border: 1px solid #00C9A0; border-radius: 6pt; padding: 10pt 14pt;">
+          <p style="font-size: 9pt; font-weight: 600; color: #00C9A0;">자연어로 주문 완료</p>
+          <p style="font-size: 8pt; color: #555; margin-top: 3pt;">LLM 인텐트 해석 · 음성 응답</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 하단 -->
+  <div></div>
+</body>
+</html>
