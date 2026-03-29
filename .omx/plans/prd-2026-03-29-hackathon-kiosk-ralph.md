@@ -22,6 +22,8 @@ Build a hackathon-ready AI-native barrier-free kiosk demo from the existing draf
 5. `debug off` looks like a normal kiosk; `debug on` can be toggled from an always-visible small control and exposes diagnostics without breaking the main experience.
 6. Payment remains clearly mock but visually coherent.
 7. All major behaviors are verifiable through the test spec in `.omx/plans/test-spec-2026-03-29-hackathon-kiosk-ralph.md`.
+8. Each major implementation checkpoint leaves the app in a runnable, demoable state even if Ralph is stopped mid-execution.
+9. A visible running progress surface remains available during execution so the team can continuously inspect the current product state.
 
 ## RALPLAN-DR Summary
 
@@ -115,6 +117,7 @@ Create the concrete Next.js App Router structure described by the draft specs:
 - Base types, single Zustand store, menu loading, utilities, and top-level page routing skeleton
 - Always-visible small debug toggle with panel shell and `debug off` default behavior
 - A thin visible Track A shell so the app gains presentable end-to-end shape early
+- A persistent developer-visible running surface so the team can keep the current app state open while Ralph continues iterating
 
 Primary files:
 - `src/app/page.tsx`
@@ -129,6 +132,7 @@ Acceptance criteria:
 - `page.tsx` can render a basic normal-mode shell with a hidden debug panel and a persistent small toggle that remains visually neutral in `debug off`.
 - Menu JSON is available through app utilities.
 - A presenter can already show the opening normal-mode flow and where GenUI adaptation attaches, even before full adaptive logic is complete.
+- Stopping after this step still leaves behind a coherent runnable shell rather than a broken scaffold.
 
 ### Step 3: Implement the normal-mode + HITL help-offer spine
 
@@ -151,6 +155,7 @@ Acceptance criteria:
 - A user can complete a mocked order through the normal path.
 - Difficulty detection can raise the help offer in the demo environment.
 - Rejecting help does not auto-switch the mode.
+- Stopping after this step still leaves a coherent normal-mode product slice that can be shown live.
 
 ### Step 4: Implement the two core adaptive tracks
 
@@ -176,6 +181,7 @@ Acceptance criteria:
 - Track B completes at least one full happy-path order through a real voice path on MacBook Chrome fullscreen landscape.
 - Outside the happy path, voice failures gracefully degrade back to touch while preserving context.
 - No pattern matching drives the main natural-language decisions.
+- Stopping after this step still leaves at least one usable adaptive track available for live inspection.
 
 ### Step 5: Demo hardening, debug/presentation polish, and verification
 
@@ -198,6 +204,7 @@ Acceptance criteria:
 - `debug on` is easy to manipulate live and exposes enough explanation for judges.
 - The final scripted demo can be run repeatedly on MacBook Chrome fullscreen landscape.
 - Any ambiguity resolved during implementation is reflected back into the PRD/test spec before Ralph claims completion.
+- The team can keep a visible running app/progress surface open during execution to observe the latest working state continuously.
 
 ## Risks and Mitigations
 

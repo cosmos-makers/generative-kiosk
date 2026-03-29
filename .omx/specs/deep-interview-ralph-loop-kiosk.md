@@ -86,6 +86,8 @@ OMX must not decide unilaterally:
 - `debug off` must resemble a normal kiosk
 - `debug on` may expose internals for explanation and judging
 - All natural-language interpretation should be handled by the LLM, not keyword matching
+- Ralph execution must preserve a continuously usable product state; even if execution stops midstream, the current app state should still be demoable rather than half-broken
+- The team must be able to keep a visible running progress surface open while work proceeds so intermediate results are observable at all times
 
 ## Priority order
 
@@ -144,6 +146,8 @@ When difficulty detection activates and the user opts into help, voice mode must
 - `debug on` can explain how the system is deciding and adapting
 - The system works on MacBook Chrome fullscreen landscape
 - The UI remains usable for video/demo capture and large display presentation
+- At every major checkpoint, the current build remains runnable and demoable rather than existing only as partial code changes
+- A visible progress surface can stay open during execution so the team can inspect the currently working result at any time
 
 ## Assumptions exposed and resolved
 

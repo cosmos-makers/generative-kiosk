@@ -11,6 +11,7 @@ This test spec verifies the risk-first MVP plan in `.omx/plans/prd-2026-03-29-ha
 3. Treat `debug off` and `debug on` as different presentation states of the same app.
 4. Prefer repeatable demo-track checks over broad low-value coverage early.
 5. Include stability confidence for a sustained 2-4 hour product runtime window on the target environment.
+6. Require each major checkpoint to remain runnable and inspectable, not just theoretically mergeable.
 
 ## Test Matrix
 
@@ -125,6 +126,15 @@ Verify:
 Pass criteria:
 - Same user flow remains usable in both states.
 
+#### IT-04b: Visible running progress surface
+
+Verify:
+- the team can keep the current app open while Ralph continues working
+- the visible surface reflects the latest runnable state rather than a stale mock
+
+Pass criteria:
+- At any checkpoint, the team can inspect a currently runnable product state without reconstructing it manually.
+
 #### IT-05: Sustained product runtime stability
 
 Environment:
@@ -230,6 +240,7 @@ Ralph should not claim completion until all of the following are true:
 4. `debug off` looks like a normal kiosk.
 5. `debug on` is easy to operate live and supports the judge narrative.
 6. The app demonstrates enough stability confidence for a sustained 2-4 hour product runtime window on the target environment.
+7. Every major checkpoint remained runnable and demoable even if the loop had been stopped there.
 
 ## Observability Notes
 
