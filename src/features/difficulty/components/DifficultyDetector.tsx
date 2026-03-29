@@ -14,28 +14,34 @@ const POSE_MODEL =
   "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task";
 
 type MediapipeBundle = {
-  FilesetResolver: {
-    forVisionTasks(path: string): Promise<unknown>;
-  };
+  FilesetResolver: { forVisionTasks(path: string): Promise<unknown> };
   FaceLandmarker: {
-    createFromModelPath(vision: unknown, path: string): Promise<{
+    createFromOptions(
+      vision: unknown,
+      options: { baseOptions: { modelAssetPath: string }; runningMode: "VIDEO" },
+    ): Promise<{
       detectForVideo(frame: HTMLVideoElement, timestamp: number): {
-        faceLandmarks: Array<Array<{ x: number; y: number }>>;
         faceBlendshapes: Array<{ categories: Array<{ categoryName: string; score: number }> }>;
       };
     }>;
   };
   HandLandmarker: {
-    createFromModelPath(vision: unknown, path: string): Promise<{
+    createFromOptions(
+      vision: unknown,
+      options: { baseOptions: { modelAssetPath: string }; runningMode: "VIDEO" },
+    ): Promise<{
       detectForVideo(frame: HTMLVideoElement, timestamp: number): {
         landmarks: Array<Array<{ x: number; y: number }>>;
       };
     }>;
   };
   PoseLandmarker: {
-    createFromModelPath(vision: unknown, path: string): Promise<{
+    createFromOptions(
+      vision: unknown,
+      options: { baseOptions: { modelAssetPath: string }; runningMode: "VIDEO" },
+    ): Promise<{
       detectForVideo(frame: HTMLVideoElement, timestamp: number): {
-        landmarks: Array<Array<{ x: number; y: number; visibility?: number }>>;
+        landmarks: Array<Array<{ x: number; y: number }>>;
       };
     }>;
   };
@@ -55,8 +61,10 @@ function smoothReading(
   history.current = [...history.current.slice(-3), reading];
   const bucket = history.current;
   const average = (key: keyof DifficultySignalBreakdown) =>
-    bucket.reduce((sum, entry) => sum + (typeof entry[key] === "number" ? (entry[key] as number) : 0), 0) /
-    bucket.length;
+    bucket.reduce(
+      (sum, entry) => sum + (typeof entry[key] === "number" ? (entry[key] as number) : 0),
+      0,
+    ) / bucket.length;
 
   return {
     faceScore: average("faceScore"),
@@ -69,17 +77,20 @@ function smoothReading(
   } satisfies DifficultySignalBreakdown;
 }
 
-export function DifficultyDetector() {
+export function DifficultyDetector({ inline = false }: { inline?: boolean } = {}) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const intervalRef = useRef<number | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const startedAt = useRef(Date.now());
   const historyRef = useRef<DifficultySignalBreakdown[]>([]);
-  const setDifficultyReading = useKioskStore((s) => s.setDifficultyReading);
-  const setDetectorStatus = useKioskStore((s) => s.setDetectorStatus);
-  const sensitivity = useKioskStore((s) => s.diagnostics.sensitivity);
-  const accessibilityMode = useKioskStore((s) => s.accessibilityMode);
-  const isIdle = useKioskStore((s) => s.isIdle);
+  const setDifficultyReading = useKioskStore((state) => state.setDifficultyReading);
+  const setDetectorStatus = useKioskStore((state) => state.setDetectorStatus);
+  const setCalibration = useKioskStore((state) => state.setCalibration);
+  const sensitivity = useKioskStore((state) => state.diagnostics.sensitivity);
+  const accessibilityMode = useKioskStore((state) => state.accessibilityMode);
+  const debugEnabled = useKioskStore((state) => state.debugEnabled);
+  const isIdle = useKioskStore((state) => state.isIdle);
+  const step = useKioskStore((state) => state.step);
 
   useEffect(() => {
     let cancelled = false;
@@ -106,9 +117,20 @@ export function DifficultyDetector() {
           elapsedSeconds,
           gazeSwitches: 1 + wave * 4,
         });
-        setDifficultyReading(
-          smoothReading(historyRef, { ...reading, source: "simulated" }),
-        );
+
+        setCalibration({
+          faceVisible: true,
+          poseVisible: true,
+          handVisible: wave > 0.35,
+          signalStrength: wave,
+          shoulderSpan: 0.05 - wave * 0.025,
+          headOffset: wave * 0.08,
+          pointerGap: 0.05 - wave * 0.04,
+          elapsedSeconds,
+          gazeSwitches: 1 + wave * 4,
+          status: "Simulated calibration running",
+        });
+        setDifficultyReading(smoothReading(historyRef, { ...reading, source: "simulated" }));
       }, 1200);
     }
 
@@ -131,9 +153,18 @@ export function DifficultyDetector() {
         const visionModule = (await import("@mediapipe/tasks-vision")) as MediapipeBundle;
         const vision = await visionModule.FilesetResolver.forVisionTasks(WASM_ROOT);
         const [face, hand, pose] = await Promise.all([
-          visionModule.FaceLandmarker.createFromModelPath(vision, FACE_MODEL),
-          visionModule.HandLandmarker.createFromModelPath(vision, HAND_MODEL),
-          visionModule.PoseLandmarker.createFromModelPath(vision, POSE_MODEL),
+          visionModule.FaceLandmarker.createFromOptions(vision, {
+            baseOptions: { modelAssetPath: FACE_MODEL },
+            runningMode: "VIDEO",
+          }),
+          visionModule.HandLandmarker.createFromOptions(vision, {
+            baseOptions: { modelAssetPath: HAND_MODEL },
+            runningMode: "VIDEO",
+          }),
+          visionModule.PoseLandmarker.createFromOptions(vision, {
+            baseOptions: { modelAssetPath: POSE_MODEL },
+            runningMode: "VIDEO",
+          }),
         ]);
 
         if (cancelled) return;
@@ -153,74 +184,72 @@ export function DifficultyDetector() {
           const leftShoulder = poseLandmarks[11];
           const rightShoulder = poseLandmarks[12];
           const nose = poseLandmarks[0];
-          const shoulderSpan =
-            leftShoulder && rightShoulder
-              ? Math.abs(leftShoulder.x - rightShoulder.x)
-              : 0.1;
-
+          const shoulderSpan = leftShoulder && rightShoulder ? Math.abs(leftShoulder.x - rightShoulder.x) : 0.1;
           const hands = handResult.landmarks ?? [];
           const firstHand = hands[0] ?? [];
           const wrist = firstHand[0];
           const pointer = firstHand[8];
-          const hasSignal =
-            Boolean(categories?.length) ||
-            poseLandmarks.length > 0 ||
-            hands.length > 0;
+          const headOffset =
+            nose && leftShoulder && rightShoulder
+              ? Math.abs(nose.x - (leftShoulder.x + rightShoulder.x) / 2)
+              : 0;
+          const pointerGap = wrist && pointer ? Math.abs(pointer.y - wrist.y) : 1;
+          const gazeSwitches = headOffset * 10;
+          const hasSignal = Boolean(categories?.length) || poseLandmarks.length > 0 || hands.length > 0;
 
           const reading = computeDifficultyScore({
-            browDownAvg:
-              (blendScore(categories, "browDownLeft") +
-                blendScore(categories, "browDownRight")) /
-              2,
+            browDownAvg: (blendScore(categories, "browDownLeft") + blendScore(categories, "browDownRight")) / 2,
             browInnerUp: blendScore(categories, "browInnerUp"),
-            mouthFrownAvg:
-              (blendScore(categories, "mouthFrownLeft") +
-                blendScore(categories, "mouthFrownRight")) /
-              2,
-            eyeSquintAvg:
-              (blendScore(categories, "eyeSquintLeft") +
-                blendScore(categories, "eyeSquintRight")) /
-              2,
+            mouthFrownAvg: (blendScore(categories, "mouthFrownLeft") + blendScore(categories, "mouthFrownRight")) / 2,
+            eyeSquintAvg: (blendScore(categories, "eyeSquintLeft") + blendScore(categories, "eyeSquintRight")) / 2,
             noseWrinkleAvg: blendScore(categories, "noseSneerLeft"),
             mouthPressAvg: blendScore(categories, "mouthPressLeft"),
             jawOpen: blendScore(categories, "jawOpen"),
             sensitivity,
             stillnessMove: shoulderSpan,
-            headUnstable:
-              nose && leftShoulder && rightShoulder
-                ? Math.abs(nose.x - (leftShoulder.x + rightShoulder.x) / 2)
-                : 0,
-            hesitationTurns:
-              wrist && pointer ? Math.abs(pointer.x - wrist.x) * 12 : 0,
+            headUnstable: headOffset,
+            hesitationTurns: wrist && pointer ? Math.abs(pointer.x - wrist.x) * 12 : 0,
             hoverActive: Boolean(wrist && wrist.y < 0.65),
-            hoverSpeed:
-              wrist && pointer ? Math.abs(pointer.y - wrist.y) : 1,
+            hoverSpeed: pointerGap,
             elapsedSeconds,
-            gazeSwitches:
-              nose && leftShoulder && rightShoulder
-                ? Math.abs(nose.x - (leftShoulder.x + rightShoulder.x) / 2) * 10
-                : 0,
+            gazeSwitches,
           });
 
-          const nextReading = smoothReading(historyRef, {
-            ...reading,
-            source: hasSignal ? "mediapipe" : "fallback",
+          setCalibration({
+            faceVisible: Boolean(categories?.length),
+            poseVisible: poseLandmarks.length > 0,
+            handVisible: hands.length > 0,
+            signalStrength: hasSignal ? 0.92 : 0.28,
+            shoulderSpan,
+            headOffset,
+            pointerGap,
+            elapsedSeconds,
+            gazeSwitches,
+            status: hasSignal ? "Live MediaPipe calibration active" : "Signal weak — fallback smoothing applied",
           });
-          setDetectorStatus(
-            hasSignal
-              ? "MediaPipe detector active — live camera scoring"
-              : "MediaPipe signal weak — using smoothed fallback scoring",
+
+          setDifficultyReading(
+            smoothReading(historyRef, {
+              ...reading,
+              source: hasSignal ? "mediapipe" : "fallback",
+            }),
           );
-          setDifficultyReading(nextReading);
         }, 1400);
       } catch {
         await startFallbackLoop();
       }
     }
 
-    if (isIdle || accessibilityMode !== "none") {
+    if (
+      (!inline && (isIdle || accessibilityMode !== "none" || step !== "menu")) ||
+      (inline && accessibilityMode !== "none")
+    ) {
       setDetectorStatus(
-        isIdle ? "Idle — detector paused" : "Adaptive mode active — detector paused",
+        isIdle
+          ? "Idle — detector paused"
+          : accessibilityMode !== "none"
+            ? "Adaptive mode active — detector paused"
+            : "General mode armed — detector starts during menu browsing",
       );
       return;
     }
@@ -233,7 +262,36 @@ export function DifficultyDetector() {
       streamRef.current?.getTracks().forEach((track) => track.stop());
       streamRef.current = null;
     };
-  }, [accessibilityMode, isIdle, sensitivity, setDetectorStatus, setDifficultyReading]);
+  }, [
+    accessibilityMode,
+    debugEnabled,
+    inline,
+    isIdle,
+    sensitivity,
+    setCalibration,
+    setDetectorStatus,
+    setDifficultyReading,
+    step,
+  ]);
 
-  return <video ref={videoRef} className="hidden" muted playsInline />;
+  return (
+    <div
+      data-testid="debug-camera-preview"
+      className={
+        inline
+          ? "block"
+          : debugEnabled
+            ? "fixed bottom-24 right-5 z-40 hidden xl:block"
+            : "pointer-events-none h-0 w-0 overflow-hidden"
+      }
+    >
+      <div className="overflow-hidden rounded-[24px] border border-white/10 bg-[#111111]/92 p-3 text-white shadow-[0_24px_40px_rgba(0,0,0,0.24)] backdrop-blur">
+        <div className="mb-2 flex items-center justify-between text-[10px] uppercase tracking-[0.28em] text-white/55">
+          <span>camera preview</span>
+          <span>mediapipe</span>
+        </div>
+        <video ref={videoRef} className="h-[220px] w-[300px] rounded-[18px] bg-black object-cover" muted playsInline />
+      </div>
+    </div>
+  );
 }

@@ -201,6 +201,7 @@ export function VoiceOrderInterface() {
         <div className="flex gap-3">
           <button
             type="button"
+            data-testid="voice-return-touch"
             onClick={resetBF}
             className="rounded-full border border-white/10 px-4 py-3 text-sm font-semibold text-white/70"
           >
@@ -208,6 +209,7 @@ export function VoiceOrderInterface() {
           </button>
           <button
             type="button"
+            data-testid="voice-listen-toggle"
             onClick={listening ? stop : start}
             disabled={!supported}
             className="rounded-full bg-sky-300 px-5 py-3 font-black text-slate-950 disabled:opacity-50"
@@ -262,6 +264,7 @@ export function VoiceOrderInterface() {
           </label>
           <div className="mt-3 flex gap-3">
             <input
+              data-testid="voice-typed-input"
               value={typedCommand}
               onChange={(event) => setTypedCommand(event.currentTarget.value)}
               placeholder="예: 빅맥 세트 담아줘 / 이제 결제할게"
@@ -269,6 +272,7 @@ export function VoiceOrderInterface() {
             />
             <button
               type="submit"
+              data-testid="voice-typed-submit"
               className="rounded-full bg-white px-5 py-3 font-bold text-slate-950"
             >
               실행
@@ -292,6 +296,7 @@ export function VoiceOrderInterface() {
       {checkoutReady && items.length ? (
         <button
           type="button"
+          data-testid="voice-complete-order"
           onClick={() => completeOrder()}
           className="mt-6 rounded-full bg-amber-300 px-5 py-3 font-black text-slate-950"
         >

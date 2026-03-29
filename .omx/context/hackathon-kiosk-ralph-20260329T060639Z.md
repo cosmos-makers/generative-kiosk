@@ -1,0 +1,32 @@
+# Ralph Context Snapshot — Hackathon Kiosk (2026-03-29 refresh)
+
+- **Task statement**: Execute the active Ralph request for the McDonald-style hackathon kiosk: align the UI with `mdonaldkiosk.png`, restore normal mode as the true default, make GenUI visibly adaptive with on-screen logs, repair debug camera preview and calibration visibility, generate and run 100+ Playwright scenarios, then sync implementation reality back into `prompts/SPEC.md`.
+- **Desired outcome**: A runnable Next.js kiosk that looks and behaves closer to the reference McDonald kiosk in normal mode, exposes a richer adaptive/GenUI experience and debug calibration tools when needed, and ships with large scenario-backed regression coverage plus updated spec docs.
+- **Known facts / evidence**:
+  - Planning artifacts already exist: `.omx/plans/prd-2026-03-29-hackathon-kiosk-ralph.md` and `.omx/plans/test-spec-2026-03-29-hackathon-kiosk-ralph.md`.
+  - `omx explore` is unavailable here because `cargo` is missing.
+  - The codebase is implemented, not empty: App Router pages, feature modules, store, API routes, Vitest tests, and Playwright specs are present under `src/` and `e2e/`.
+  - Current app styling is dark/teal futuristic, not McDonald kiosk-like (`src/app/page.tsx`, `src/app/globals.css`, `src/features/**/*`).
+  - The detector video element is rendered with `className="hidden"`, so the camera preview cannot appear in debug (`src/features/difficulty/components/DifficultyDetector.tsx`).
+  - Debug overlay exists, but there is no dedicated calibration/debug page and no visible camera/canvas preview yet (`src/features/debug/components/DebugPanel.tsx`).
+  - Current E2E coverage is limited to a handful of happy-path tests in `e2e/adaptive-flows.spec.ts` and `e2e/smoke.spec.ts`, far below the requested 100+ scenarios.
+  - The reference image shows a dark status/header bar, white content canvas, McDonald yellow/red accents, soft grey outlines, dense product grid, left category rail, and pill/rounded controls.
+- **Constraints**:
+  - Keep the app runnable and demoable throughout edits.
+  - Respect Ralph planning gate and final verification/deslop requirements.
+  - Prefer reversible, targeted edits rather than broad rewrites without evidence.
+  - Use Playwright for scenario execution and, when possible, visible browser/open-based runs for observation.
+- **Unknowns / open questions**:
+  - How much of the current adaptive logic can be preserved while restyling without destabilizing tests.
+  - Whether camera/speech permissions in this environment allow full non-headless validation.
+  - Whether additional hidden bugs will surface once broad scenario generation is added.
+- **Likely codebase touchpoints**:
+  - `src/app/page.tsx`, `src/app/globals.css`
+  - `src/features/kiosk/**/*`
+  - `src/features/barrier-free/**/*`
+  - `src/features/debug/components/*`
+  - `src/features/difficulty/components/*`
+  - `src/features/voice/**/*`
+  - `src/store/kiosk.ts`
+  - `e2e/*.spec.ts`, `playwright.config.ts`
+  - `prompts/SPEC.md`

@@ -1,0 +1,28 @@
+# Ralph Context Snapshot — Hackathon Kiosk (2026-03-29T06:05:00Z)
+
+- **Task statement**: Complete the active Ralph request for the McDonald's-themed kiosk hackathon app: align the visual system to `mdonaldkiosk.png`, ensure true normal-mode default behavior, make GenUI visibly adaptive with loading/log visibility, fix debug camera preview and add calibration visualization, generate and execute 100+ Playwright scenarios, sync implementation back into `prompts/SPEC.md`, and continue the Ralph hardening loop.
+- **Desired outcome**: A runnable Next.js kiosk demo whose default flow matches a real kiosk-like normal mode, whose barrier-free GenUI/voice flows are opt-in and visibly adaptive, whose debug mode exposes live camera/calibration/log diagnostics without polluting the normal product surface, and whose Playwright suite covers 100+ user/demo scenarios with executable evidence.
+- **Known facts / evidence**:
+  - Required Ralph planning artifacts already exist: `.omx/plans/prd-2026-03-29-hackathon-kiosk-ralph.md` and `.omx/plans/test-spec-2026-03-29-hackathon-kiosk-ralph.md`.
+  - Current implementation exists under `src/app`, `src/features/*`, `src/lib/*`, `src/store/*`, and `e2e/*`.
+  - `omx explore` is unavailable here because the Rust-backed harness is missing (`cargo` not found), so repository lookup falls back to normal shell/code inspection.
+  - The current image reference is available as `mdonaldkiosk.png` and has been read visually via LLM image analysis.
+  - The current UI code uses a dark, futuristic shell that does not match the reference kiosk aesthetic.
+  - `DifficultyDetector` currently renders its `<video>` element with `className="hidden"`, which explains why camera preview is not visible in debug mode.
+  - Existing E2E coverage is limited to a small set of smoke/adaptive replay specs, well below the requested 100+ scenario target.
+- **Constraints**:
+  - Keep product flows continuously runnable and demoable while iterating.
+  - Preserve debug-off as the product surface; debug-on may add overlays/pages but must not replace the product.
+  - Respect the reference image directly rather than inventing a different visual language.
+  - Use Playwright/open-based execution for observable test runs.
+  - Update `prompts/SPEC.md` to match the actual finished implementation.
+- **Unknowns / open questions**:
+  - Whether local browser/device permissions allow real live camera access during automated verification in this environment.
+  - Whether all Anthropic-backed adaptive calls can run live here or will need fallback behavior during tests.
+  - Exact scope of scenario parametrization needed to keep 100+ Playwright scenarios maintainable and runtime-feasible.
+- **Likely codebase touchpoints**:
+  - Visual system: `src/app/globals.css`, `src/app/page.tsx`, kiosk/barrier-free/debug components
+  - Detection/debug: `src/features/difficulty/components/DifficultyDetector.tsx`, `src/features/debug/components/DebugPanel.tsx`, related store/types
+  - Adaptive UX/logging: `src/features/barrier-free/components/*`, `src/features/voice/components/*`, `src/lib/ai/*`, store/types
+  - Scenario coverage: `e2e/*`, `playwright.config.ts`, helper fixtures/data
+  - Spec sync: `prompts/SPEC.md`

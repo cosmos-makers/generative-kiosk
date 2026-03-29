@@ -1,0 +1,29 @@
+# Ralph Context Snapshot — Hackathon Kiosk (2026-03-29 refresh)
+
+- **Task statement**: Execute the active Ralph loop for the hackathon kiosk: align UI with `mdonaldkiosk.png`, make normal mode the default product experience, strengthen visible GenUI/debug MediaPipe behaviors, generate and run 100+ Playwright scenarios, reconcile code with `prompts/SPEC.md`, and raise finish quality before Ralph completion.
+- **Desired outcome**: A runnable McDonald's-like kiosk demo whose default view resembles the provided reference, keeps adaptive/help/voice features explicitly opt-in, exposes live GenUI and calibration diagnostics only in debug, and ships broad automated E2E coverage plus SPEC synchronization.
+- **Known facts / evidence**:
+  - Required planning artifacts already exist: `.omx/plans/prd-2026-03-29-hackathon-kiosk-ralph.md` and `.omx/plans/test-spec-2026-03-29-hackathon-kiosk-ralph.md`.
+  - Current app exists and renders at `src/app/page.tsx`, but screenshot evidence (`/tmp/current-kiosk.png`) shows a dark dashboard-style layout that does not match the provided kiosk reference.
+  - The reference image (`mdonaldkiosk.png`) shows a mobile-like McDonald's kiosk with dark top chrome, promo banner, white content field, left rail categories, product cards, and a bottom cart/action bar.
+  - `DifficultyDetector` hides the camera element entirely (`className="hidden"`) and currently has no visible calibration/canvas/debug viewport in debug mode.
+  - Existing tests: unit/Vitest suite currently passes (`npm test` → 5 files, 22 tests passed). Existing Playwright coverage is only a handful of flows in `e2e/adaptive-flows.spec.ts` and `e2e/smoke.spec.ts`, far short of 100+ scenarios.
+  - `omx explore` is unavailable in this environment because cargo is missing; shell inspection is required.
+  - `docs/shared/agent-tiers.md` is missing, so Ralph delegation must follow role defaults and the local prompt guidance.
+- **Constraints**:
+  - Keep the app runnable/demonstrable through iterations.
+  - Respect debug-off product feel and push calibration/log internals behind debug.
+  - Prefer reversible, evidence-backed changes.
+  - Need concrete verification with Playwright/runtime checks, not speculative completion.
+- **Unknowns / open questions**:
+  - Browser/device permissions for full camera/STT in this environment may still limit end-to-end verification.
+  - Anthropic API availability may affect real GenUI/voice responses; fallback paths likely remain necessary for automated tests.
+  - Exact image-derived design tokens still need a tighter extraction pass.
+- **Likely codebase touchpoints**:
+  - `src/app/page.tsx`, `src/app/globals.css`
+  - `src/features/kiosk/components/*`
+  - `src/features/barrier-free/components/*`
+  - `src/features/debug/components/*`
+  - `src/features/difficulty/components/*`
+  - `src/store/kiosk.ts`, `src/types/index.ts`, `src/data/menu.json`
+  - `e2e/*.spec.ts`, `playwright.config.ts`, `scripts/open-chrome.mjs`, `prompts/SPEC.md`

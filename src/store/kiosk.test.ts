@@ -17,11 +17,13 @@ const menuItem: MenuItem = {
 
 describe("kiosk store", () => {
   it("shows help offer when score crosses threshold in normal mode", () => {
+    useKioskStore.getState().setOrderType("dine-in");
     useKioskStore.getState().setDifficultyScore(75);
     expect(useKioskStore.getState().showHelpOffer).toBe(true);
   });
 
   it("applies cooldown after rejecting help offer", () => {
+    useKioskStore.getState().setOrderType("dine-in");
     useKioskStore.getState().setDifficultyScore(75);
     useKioskStore.getState().rejectHelpOffer();
     useKioskStore.getState().setDifficultyReading({

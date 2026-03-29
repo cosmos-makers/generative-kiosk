@@ -181,12 +181,12 @@ KioskStore {
 - 선택 → `setOrderType` → `step = "menu"`
 
 ### 3.3 메뉴 화면
-- 상단 고정 헤더: 로고 + 이전(←) 버튼 + 장바구니 아이콘(수량 뱃지)
-- 카테고리 탭 (가로 스크롤 고정): 탭 클릭 시 해당 카테고리로 스크롤
-- 메뉴 카드 그리드 (2-4열 반응형): 이미지, 이름, 칼로리, 신상품 뱃지
-- 카드 클릭 → 메뉴 상세 다이얼로그 (이미지, 이름, 설명, 칼로리, 수량 ±, "장바구니 담기")
-- 장바구니 아이콘 클릭 → 우측 사이드 시트 (아이템 목록, 수량 ±, 삭제, "주문하기" 버튼)
-- "주문하기" → `step = "checkout"`
+- 상단 고정 헤더: 시간 + 검색 필드 + 언어 토글(EN/KO) + READY 상태 뱃지
+- 좌측 카테고리 레일: 원형 glyph + 카테고리 이름, 활성 카테고리는 노란 배경으로 강조
+- 메인 콘텐츠: 붉은/오렌지 프로모션 배너 + 흰색 메뉴 카드 그리드
+- 메뉴 카드: 이미지, 메뉴 상태, 이름, 가격, "담기" CTA
+- 하단 고정 주문 트레이: 주문 내역, 총 예상 금액, "주문 취소" / "주문 완료" 버튼
+- "주문 완료" → `step = "checkout"`
 
 ### 3.4 주문 확인/결제 화면 (일반 모드)
 - 주문 항목 전체 목록 (이름, 수량, 칼로리)
@@ -224,12 +224,12 @@ difficultyScore: number  ──▶  Zustand (kiosk store)
 
 ### 4.2 DifficultyDetector 컴포넌트
 
-- 숨겨진 컴포넌트 (UI 없음), 일반/배리어프리 모드 모두에서 실행
-- 아이들 상태이거나 `accessibilityMode !== "none"`이면 동작 중지
+- 일반 모드 메뉴 탐색 단계(`step === "menu"`)에서만 자동 실행, `accessibilityMode !== "none"` 또는 idle 상태면 중지
+- debug on에서는 우측 하단 오버레이에 카메라 프리뷰를 노출하고, `/debug` 페이지에서는 force-active 프리뷰를 별도 렌더링
 - **1초마다** 카메라 프레임 캡처
 - `apiEndpoint` prop 있으면: POST `{frame: base64 jpeg}` → `{score: number}`
-- 없으면 시뮬레이션: sine wave로 30초 주기 (0-55 정상 구간 ↔ 60-95 트리거 구간 교대)
-- `score >= 70` → `setDifficultyScore(score)` + `setShowHelpOffer(true)`
+- 없으면 시뮬레이션: sine wave 기반 smoothed fallback score + calibration metrics 생성
+- `score >= threshold` 이고 `step === "menu"` + `orderType != null` 일 때만 `setShowHelpOffer(true)`
 - 카메라 권한 거부 시 조용히 무시 (시뮬레이션 모드로 자동 전환)
 
 ### 4.3 종합 점수 공식
@@ -581,42 +581,40 @@ LLM은 다음 순서로 UI를 생성한다:
 ## 9. 디버그 패널
 
 ### 9.1 활성화
-- `NODE_ENV === "development"` 또는 URL `?debug=1`
-- 화면 좌하단 고정, z-index 최상위
-- 토글 버튼으로 열기/닫기
+- 메인 화면 우상단 `debug off / debug on` pill 버튼으로 토글
+- `debug on` 시 우측 고정 오버레이 패널 + 우하단 카메라 프리뷰가 동시에 열림
+- 별도 개발자 관측 페이지 `/debug` 제공
 
 ### 9.2 섹션 구성 (펼쳤을 때)
-- **Camera**: 실시간 카메라 미리보기 (160×90, 좌우 반전), LIVE 뱃지, 얼굴 감지 수
-- **Difficulty Score**: 프로그레스 바 + 숫자 (녹색<40, 노란40-69, 빨간70+)
-- **Manual Trigger**: "Score 75" / "Help 팝업" / "Reset" 버튼
-- **State**: isIdle, step, bfStep, accessibilityMode, showHelpOffer 테이블
-- **Quick Switch**: none / large-ui / voice 버튼 (현재 모드 강조)
-- **LLM Logs**: 스크롤 가능 로그창 (최근 50개), 새 로그 시 자동 스크롤
-  - 각 항목: `[HH:MM:SS]` + 타입 뱃지(gen-ui=파란색, voice=보라색) + 프롬프트 요약 + `→` 응답 요약
-  - gen-ui 항목은 PIM 스냅샷(사용자 프로필, 적용된 AdaptForge 규칙) 토글 가능
-  - "clear" 버튼
-- **CLI Status**: Claude CLI 호출 성공/실패 여부, fallback 사용 여부 표시
+- **Camera / Calibration**: 실시간 프리뷰, detector status, source, cooldown, calibration status
+- **Difficulty Score**: face/pose/hand/time/gaze meter + 총점 숫자
+- **Manual Trigger**: threshold / sensitivity range slider, "도움 제안", "안정 상태"
+- **LLM Logs**: 최근 GenUI/voice 로그 목록 + clear 버튼
+- **Voice Transcript**: 사용자/assistant 음성 턴 목록
+- **Session Events**: 최근 상태 이벤트
+- `/debug` 페이지는 위 정보를 넓은 레이아웃으로 재구성해 개발자가 시나리오 중 data flow를 계속 관찰할 수 있게 한다
 
 ---
 
 ## 10. 디자인 시스템
 
 ### 색상
-- 주색: `#FFBC0D` (MDonald 노란색)
-- 다크 배경: `#1A1A1A`
-- 카드 배경: `#27251F`
-- 강조 빨간색: `#DB0007`
-- 텍스트: 흰색, 보조: `rgba(255,255,255,0.6)`
+- 주색: `#FFBC0D` (McDonald yellow)
+- 헤더/트레이 다크 톤: `#1F1F1F` ~ `#2A2A2A`
+- 메인 캔버스/카드 배경: `#FFFFFF`, `#FFF8EF`, `#EFEAE1`
+- 프로모션 배너 레드/오렌지: `#7B1F0F`, `#C23818`, `#FF9433`
+- 주문 완료 / 결제 강조 그린: `#7BC769` / `#BFD8B3`
+- 본문 텍스트: `#1F1D18`, 보조 텍스트: `#6C6456`
 
 ### 타이포그래피
-- 한국어: Noto Sans KR
-- 제목: font-black(900), 버튼: font-bold(700), 본문: font-medium(500)
+- 한국어: 시스템 sans (`Apple SD Gothic Neo`, `Pretendard`, `Inter` fallback)
+- 제목: font-black(900), 버튼: font-black(700~900), 본문: font-medium(500)
 - BF 폰트 레벨: base / lg / xl / 2xl
 
 ### 상호작용
-- 모든 버튼: `active:scale-95` 터치 피드백
-- BF 화면 전환: fade-in + slide-from-bottom (500ms ease-out)
-- BF 옵션 stagger: 60ms 간격 순차 등장
+- 일반 모드: 큰 rounded card / pill 버튼, hover 시 약한 lift
+- BF 화면 전환: adaptive skeleton → card reveal 흐름
+- Voice/GenUI 로그는 디버그 또는 adaptive 화면에서 실시간으로 누적
 
 ---
 
@@ -625,13 +623,16 @@ LLM은 다음 순서로 UI를 생성한다:
 ```
 isIdle = true → <IdleScreen>
 
-accessibilityMode !== "none" → <BFLayout> (+ HelpOfferDialog + DifficultyDetector + DebugPanel)
+`/debug` → camera preview + calibration console + log/event observatory
 
 일반 모드:
-  step === "order-type" → <OrderTypeScreen>
-  step === "menu"       → <Header> + <CategoryTabs> + <MenuGrid> + <CartSheet>
-  step === "checkout"   → <CheckoutScreen>   ← 일반 모드 결제 화면
+  step === "order-type" → <OrderTypeScreen> + promo banner
+  step === "menu"       → <Header> + left category rail + <MenuGrid> + sticky <CartSheet>
+  step === "checkout"   → <CheckoutScreen>
   (모든 일반 모드 화면에 HelpOfferDialog + DifficultyDetector + DebugPanel 포함)
+
+accessibilityMode === "large-ui" → <BFLayout> + <GenUIScreen>/<BFCheckout>
+accessibilityMode === "voice"    → <VoicePermissionGate>/<VoiceOrderInterface>
 ```
 
 ---
@@ -982,10 +983,15 @@ accessibilityMode !== "none" → <BFLayout> (+ HelpOfferDialog + DifficultyDetec
 - API route handlers: mock request/response로 응답 스키마 검증
 
 **E2E 테스트 (Playwright)**
-- 일반 모드 전체 주문 흐름 (주문 타입 → 메뉴 → 장바구니 → 결제)
-- 도움 팝업 → large-ui 모드 전환 → 단계별 화면 표시
-- 도움 팝업 → voice 모드 전환 → 마이크 버튼 표시
-- 아이들 타이머 카운트다운 표시
+- `e2e/scenario-matrix.spec.ts`: 실사용 50개 + demo/debug 50개를 한 파일에서 생성하는 100개 시나리오 매트릭스
+- `e2e/smoke.spec.ts`: 메인 쉘/디버그 페이지 스모크
+- 전체 합계: **102 Playwright tests**
+
+실행 순서:
+1. `npx playwright test e2e/scenario-matrix.spec.ts --list` 로 100개 시나리오 수 확인
+2. `npx playwright test e2e/scenario-matrix.spec.ts`
+3. `npx playwright test e2e/smoke.spec.ts`
+4. 관찰용 브라우저 오픈: `node scripts/open-chrome.mjs 3104`
 
 **커버리지 측정**: `npm run test:coverage` 로 현재 커버리지 확인. 60% 미달 시 해당 Story를 완료 처리하지 않는다.
 
@@ -1038,3 +1044,11 @@ curl -X POST http://localhost:3000/api/gen-ui \
 | US-012 | 30분 | 애니메이션 + action 처리 |
 | US-013 | 20분 | 두 모드 분기 |
 | US-014 | 25분 | 로그 구독 + 자동 스크롤 |
+
+## 2026-03-29 구현 동기화 메모
+
+- 일반 모드가 기본값으로 유지되며, 도움 제안은 일반 주문 화면(`step === "menu"`)에서 체류/난이도 조건을 넘은 뒤에만 표시되도록 보정함.
+- 디자인 시스템은 `mdonaldkiosk.png`를 기준으로 어두운 상단 디바이스 크롬, 검색 필, 오렌지/레드 프로모션 배너, 밝은 메뉴 캔버스, 좌측 카테고리 레일, 하단 장바구니 액션 바 테마로 동기화함.
+- Debug On에서는 카메라 프리뷰, 캘리브레이션 슬라이더, MediaPipe/시뮬레이션 점수, LLM trace, voice transcript를 우측 오버레이로 노출하고, Debug Off에서는 동일 세션의 제품 화면만 유지함.
+- GenUI 진입 후에는 화면 내부에서 Adaptive trace / narration / skeleton state가 보이도록 구현해, 적응형 선택 결과와 공급자 상태를 시각적으로 확인할 수 있게 함.
+- E2E 자동화는 사용자 시나리오 50개 + 데모 시나리오 50개 이상을 목표로 `e2e/scenario-matrix.spec.ts`에서 관리하며, `npx playwright test e2e/scenario-matrix.spec.ts --list` 기준 100개 시나리오가 노출되도록 유지함.

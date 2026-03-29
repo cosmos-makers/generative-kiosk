@@ -1,0 +1,31 @@
+# Ralph Context Snapshot — Hackathon Kiosk 2026-03-29T06:07:14Z
+
+- **Task statement**: Deliver the active Ralph task for the McDonald hackathon kiosk: align the UI to `mdonaldkiosk.png`, keep normal mode as the default experience, make GenUI visibly adaptive with skeleton/loading/logs, fix debug camera preview and add a calibration/debug page, generate and execute 100+ Playwright scenarios (50+ user + 50+ demo/debug), sync implementation realities back into `prompts/SPEC.md`, and keep the product demoable throughout.
+- **Desired outcome**: A runnable Next.js kiosk demo whose default flow visually resembles the reference kiosk, whose adaptive/debug experiences are visibly differentiated and inspectable, and whose behavior is covered by large scenario-driven Playwright coverage plus regression verification.
+- **Known facts / evidence**:
+  - Planning artifacts already exist: `.omx/plans/prd-2026-03-29-hackathon-kiosk-ralph.md` and `.omx/plans/test-spec-2026-03-29-hackathon-kiosk-ralph.md`.
+  - `mdonaldkiosk.png` is present at repo root and has been visually inspected via LLM; current app screenshot (`/tmp/kiosk-home.png`) is a dark dashboard-style UI that does **not** match the kiosk reference.
+  - Current implementation already contains Next.js app, API routes, store, voice hooks/components, difficulty detector, debug panel, and a small Playwright suite.
+  - `DifficultyDetector` hides the `<video>` element entirely (`src/features/difficulty/components/DifficultyDetector.tsx`) so no camera preview is visible in debug mode.
+  - Current debug overlay has sliders/log text but no live camera preview or dedicated calibration page (`src/features/debug/components/DebugPanel.tsx`).
+  - Current GenUI screen logs only after fetch completion and lacks visible skeleton/selection trace during generation (`src/features/barrier-free/components/GenUIScreen.tsx`).
+  - Existing E2E coverage is far below the requested 100+ scenarios (`e2e/adaptive-flows.spec.ts`, `e2e/smoke.spec.ts`).
+  - `omx explore` is unavailable because `cargo` is missing.
+- **Constraints**:
+  - Keep normal mode as the default; adaptive modes must remain explicit opt-in from help offer.
+  - Preserve demoability at every checkpoint.
+  - Use the image as the visual source of truth via LLM visual reading, not a Python-only heuristic.
+  - Final completion still requires regression verification, architect review, deslop pass, and cleanup.
+- **Unknowns / open questions**:
+  - Whether local browser/device permissions will allow full real camera/STT verification during automated tests.
+  - Whether Claude CLI / Anthropic credentials are available for live non-fallback GenUI/voice responses in this environment.
+  - Exact open-browser sequencing UX for the final requested observed E2E run.
+- **Likely touchpoints**:
+  - `src/app/page.tsx`, `src/app/globals.css`
+  - `src/features/kiosk/components/*`
+  - `src/features/barrier-free/components/*`
+  - `src/features/debug/components/*`
+  - `src/features/difficulty/components/*`
+  - `src/features/voice/components/*`
+  - `src/store/kiosk.ts`, `src/types/index.ts`
+  - `e2e/*.spec.ts`, `playwright.config.ts`, `scripts/open-chrome.mjs`, `prompts/SPEC.md`

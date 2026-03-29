@@ -3,11 +3,13 @@ import { formatOrderNumber } from "@/lib/utils";
 import type {
   AccessibilityMode,
   BFStep,
+  CalibrationState,
   CartItem,
   DiagnosticsState,
   DifficultySignalBreakdown,
   KioskStep,
   LLMLogEntry,
+  Locale,
   MenuCategory,
   MenuItem,
   ProgressCheckpoint,
@@ -25,6 +27,19 @@ const emptySignals: DifficultySignalBreakdown = {
   source: "fallback",
 };
 
+const defaultCalibration: CalibrationState = {
+  faceVisible: false,
+  poseVisible: false,
+  handVisible: false,
+  signalStrength: 0,
+  shoulderSpan: 0,
+  headOffset: 0,
+  pointerGap: 0,
+  elapsedSeconds: 0,
+  gazeSwitches: 0,
+  status: "Awaiting calibration",
+};
+
 const defaultDiagnostics: DiagnosticsState = {
   ...emptySignals,
   threshold: 70,
@@ -32,6 +47,7 @@ const defaultDiagnostics: DiagnosticsState = {
   activeMode: "normal",
   cameraReady: false,
   message: "Detector warming up",
+  calibration: defaultCalibration,
 };
 
 const defaultProgress: ProgressCheckpoint = {
@@ -51,6 +67,9 @@ const createEvent = (label: string, detail: string): SessionEvent => ({
 interface Store {
   isIdle: boolean;
   step: KioskStep;
+  locale: Locale;
+  language: Locale;
+  activeCategorySeq: number | null;
   orderType: "dine-in" | "takeout" | null;
   items: CartItem[];
   difficultyScore: number;
@@ -73,11 +92,18 @@ interface Store {
   voiceReady: boolean;
   setIdle(v: boolean): void;
   setStep(step: KioskStep): void;
+  setLocale(locale: Locale): void;
+  setLanguage(locale: Locale): void;
+  setActiveCategory(seq: number): void;
   setOrderType(type: "dine-in" | "takeout"): void;
   addItem(item: MenuItem, categoryName: string, quantity?: number): void;
+  updateItemQuantity(itemId: number, delta: number): void;
+  changeItemQuantity(itemId: number, delta: number): void;
+  clearCart(): void;
   totalCount(): number;
   setDifficultyReading(signals: DifficultySignalBreakdown): void;
   setDifficultyScore(score: number): void;
+  setCalibration(calibration: Partial<CalibrationState>): void;
   setDetectionConfig(
     config: Partial<Pick<DiagnosticsState, "threshold" | "sensitivity">>,
   ): void;
@@ -87,6 +113,7 @@ interface Store {
   resetBF(): void;
   setVoiceReady(ready: boolean): void;
   toggleDebug(): void;
+  setDebugEnabled(enabled: boolean): void;
   addLLMLog(entry: Omit<LLMLogEntry, "id" | "ts">): void;
   clearLLMLogs(): void;
   addVoiceTurn(turn: Omit<VoiceTurn, "ts">): void;
@@ -97,9 +124,21 @@ interface Store {
   setDetectorStatus(status: string): void;
 }
 
+const canOfferHelp = (state: Pick<Store, "accessibilityMode" | "helpCooldownUntil" | "step" | "orderType">) =>
+  state.accessibilityMode === "none" &&
+  state.step === "menu" &&
+  Boolean(state.orderType) &&
+  Date.now() >= state.helpCooldownUntil;
+
+const timeGateSatisfied = (signals: DifficultySignalBreakdown) =>
+  signals.source === "manual" || signals.timeScore >= 0.12;
+
 export const useKioskStore = create<Store>((set, get) => ({
   isIdle: false,
   step: "order-type",
+  locale: "ko",
+  language: "ko",
+  activeCategorySeq: 1,
   orderType: null,
   items: [],
   difficultyScore: 0,
@@ -115,7 +154,7 @@ export const useKioskStore = create<Store>((set, get) => ({
   llmLogs: [],
   liveProgress: defaultProgress,
   presenterNote:
-    "debug off는 제품 흐름을 유지하고 debug on은 내부 정보만 보여줍니다.",
+    "debug off는 실제 키오스크 제품면을 유지하고, debug on은 카메라·캘리브레이션·LLM 로그만 보여줍니다.",
   sessionEvents: [createEvent("checkpoint", "Fresh session ready")],
   voiceTranscript: [],
   lastOrderNumber: null,
@@ -123,6 +162,17 @@ export const useKioskStore = create<Store>((set, get) => ({
   voiceReady: false,
   setIdle: (isIdle) => set({ isIdle }),
   setStep: (step) => set({ step, isIdle: false }),
+  setLocale: (locale) =>
+    set((state) => ({
+      locale,
+      language: locale,
+      sessionEvents: [
+        createEvent("locale", locale === "en" ? "Language changed to English" : "언어를 한국어로 전환"),
+        ...state.sessionEvents,
+      ].slice(0, 20),
+    })),
+  setLanguage: (language) => get().setLocale(language),
+  setActiveCategory: (activeCategorySeq) => set({ activeCategorySeq }),
   setOrderType: (orderType) =>
     set((state) => ({
       orderType,
@@ -138,18 +188,14 @@ export const useKioskStore = create<Store>((set, get) => ({
       sessionEvents: [
         createEvent(
           "order-type",
-          orderType === "takeout"
-            ? "Takeout order selected"
-            : "Dine-in order selected",
+          orderType === "takeout" ? "Takeout order selected" : "Dine-in order selected",
         ),
         ...state.sessionEvents,
       ].slice(0, 20),
     })),
   addItem: (menuItem, categoryName, quantity = 1) =>
     set((state) => {
-      const existing = state.items.find(
-        (item) => item.menuItem.id === menuItem.id,
-      );
+      const existing = state.items.find((item) => item.menuItem.id === menuItem.id);
       const items = existing
         ? state.items.map((item) =>
             item.menuItem.id === menuItem.id
@@ -163,27 +209,46 @@ export const useKioskStore = create<Store>((set, get) => ({
         liveProgress: {
           ...state.liveProgress,
           phase: "cart",
-          label: `${menuItem.korName} ${quantity}개 추가`,
+          label: `${menuItem.korName.replace(/<[^>]+>/g, "")} ${quantity}개 추가`,
           lastUpdated: new Date().toISOString(),
           stability: "stable",
         },
         sessionEvents: [
-          createEvent("cart", `${menuItem.korName} ${quantity}개 added`),
+          createEvent("cart", `${menuItem.korName.replace(/<[^>]+>/g, "")} ${quantity}개 added`),
           ...state.sessionEvents,
         ].slice(0, 20),
       };
     }),
-  totalCount: () =>
-    get().items.reduce((sum, item) => sum + item.quantity, 0),
+  updateItemQuantity: (itemId, delta) =>
+    set((state) => {
+      const items = state.items
+        .map((item) =>
+          item.menuItem.id === itemId ? { ...item, quantity: item.quantity + delta } : item,
+        )
+        .filter((item) => item.quantity > 0);
+      return { items };
+    }),
+  changeItemQuantity: (itemId, delta) => get().updateItemQuantity(itemId, delta),
+  clearCart: () =>
+    set((state) => ({
+      items: [],
+      step: state.lastOrderNumber ? "complete" : "menu",
+      liveProgress: {
+        ...state.liveProgress,
+        phase: "cart",
+        label: "장바구니를 비웠습니다.",
+        lastUpdated: new Date().toISOString(),
+        stability: "watching",
+      },
+    })),
+  totalCount: () => get().items.reduce((sum, item) => sum + item.quantity, 0),
   setDifficultyReading: (signals) =>
     set((state) => {
-      const threshold = state.diagnostics.threshold;
-      const allowHelp = Date.now() >= state.helpCooldownUntil;
       const shouldShow =
-        state.accessibilityMode === "none" &&
-        allowHelp &&
-        signals.totalScore >= threshold;
-      const shouldHide = signals.totalScore < threshold * 0.6;
+        canOfferHelp(state) &&
+        signals.source === "mediapipe" &&
+        signals.totalScore >= state.diagnostics.threshold;
+      const shouldHide = signals.totalScore < state.diagnostics.threshold * 0.6;
 
       return {
         difficultyScore: signals.totalScore,
@@ -198,13 +263,7 @@ export const useKioskStore = create<Store>((set, get) => ({
         showHelpOffer: shouldShow ? true : shouldHide ? false : state.showHelpOffer,
         sessionEvents:
           shouldShow && !state.showHelpOffer
-            ? [
-                createEvent(
-                  "help",
-                  "Difficulty threshold crossed — help offer shown",
-                ),
-                ...state.sessionEvents,
-              ].slice(0, 20)
+            ? [createEvent("help", "Difficulty threshold crossed — help offer shown"), ...state.sessionEvents].slice(0, 20)
             : state.sessionEvents,
       };
     }),
@@ -219,12 +278,19 @@ export const useKioskStore = create<Store>((set, get) => ({
       diagnostics: {
         ...state.diagnostics,
         totalScore: score,
-        message: "Manual override",
+        message: score >= state.diagnostics.threshold ? "Manual trigger armed" : "Manual reset",
       },
-      showHelpOffer:
-        state.accessibilityMode === "none" &&
-        Date.now() >= state.helpCooldownUntil &&
-        score >= state.diagnostics.threshold,
+      showHelpOffer: canOfferHelp(state) && score >= state.diagnostics.threshold,
+    })),
+  setCalibration: (calibration) =>
+    set((state) => ({
+      diagnostics: {
+        ...state.diagnostics,
+        calibration: {
+          ...state.diagnostics.calibration,
+          ...calibration,
+        },
+      },
     })),
   setDetectionConfig: (config) =>
     set((state) => ({
@@ -246,43 +312,47 @@ export const useKioskStore = create<Store>((set, get) => ({
     set((state) => ({
       showHelpOffer: false,
       helpCooldownUntil: Date.now() + 15000,
-      sessionEvents: [
-        createEvent("help", "User dismissed help offer"),
-        ...state.sessionEvents,
-      ].slice(0, 20),
+      liveProgress: {
+        ...state.liveProgress,
+        phase: "menu",
+        label: "일반 모드 유지 — 도움 제안을 닫았습니다.",
+        lastUpdated: new Date().toISOString(),
+        stability: "stable",
+      },
+      sessionEvents: [createEvent("help", "User dismissed help offer"), ...state.sessionEvents].slice(0, 20),
     })),
   acceptHelpMode: (mode) =>
     set((state) => ({
       showHelpOffer: false,
       accessibilityMode: mode,
       voiceReady: mode === "voice" ? state.voiceReady : false,
-      sessionEvents: [
-        createEvent("help", `${mode} mode accepted`),
-        ...state.sessionEvents,
-      ].slice(0, 20),
+      sessionEvents: [createEvent("help", `${mode} mode accepted`), ...state.sessionEvents].slice(0, 20),
       liveProgress: {
         phase: mode,
-        label:
-          mode === "voice"
-            ? "Voice helper path active"
-            : "Generative large-UI path active",
+        label: mode === "voice" ? "Voice helper path active" : "Generative large-UI path active",
         lastUpdated: new Date().toISOString(),
         stability: "stable",
       },
     })),
   resetBF: () =>
-    set({
+    set((state) => ({
       accessibilityMode: "none",
       bfStep: "order-type",
       bfSelectedCategory: null,
       bfSelectedItem: null,
       voiceReady: false,
-    }),
-  setVoiceReady: (voiceReady) => set({ voiceReady }),
-  toggleDebug: () =>
-    set((state) => ({
-      debugEnabled: !state.debugEnabled,
+      step: state.lastOrderNumber ? "complete" : "menu",
+      liveProgress: {
+        ...state.liveProgress,
+        phase: "menu",
+        label: "일반 모드로 복귀했습니다.",
+        lastUpdated: new Date().toISOString(),
+        stability: "stable",
+      },
     })),
+  setVoiceReady: (voiceReady) => set({ voiceReady }),
+  toggleDebug: () => set((state) => ({ debugEnabled: !state.debugEnabled })),
+  setDebugEnabled: (debugEnabled) => set({ debugEnabled }),
   addLLMLog: (entry) =>
     set((state) => ({
       llmLogs: [
@@ -298,10 +368,7 @@ export const useKioskStore = create<Store>((set, get) => ({
   clearLLMLogs: () => set({ llmLogs: [] }),
   addVoiceTurn: (turn) =>
     set((state) => ({
-      voiceTranscript: [
-        ...state.voiceTranscript,
-        { ...turn, ts: new Date().toISOString() },
-      ].slice(-12),
+      voiceTranscript: [...state.voiceTranscript, { ...turn, ts: new Date().toISOString() }].slice(-12),
     })),
   setLiveProgress: (progress) =>
     set((state) => ({
@@ -322,15 +389,15 @@ export const useKioskStore = create<Store>((set, get) => ({
         lastUpdated: new Date().toISOString(),
         stability: "stable",
       },
-      sessionEvents: [
-        createEvent("order", "Mock payment completed"),
-        ...state.sessionEvents,
-      ].slice(0, 20),
+      sessionEvents: [createEvent("order", "Mock payment completed"), ...state.sessionEvents].slice(0, 20),
     })),
   resetSession: () =>
-    set({
+    set((state) => ({
       isIdle: false,
       step: "order-type",
+      locale: state.locale,
+      language: state.locale,
+      activeCategorySeq: 1,
       orderType: null,
       items: [],
       difficultyScore: 0,
@@ -351,7 +418,8 @@ export const useKioskStore = create<Store>((set, get) => ({
         lastUpdated: new Date().toISOString(),
         stability: "stable",
       },
-    }),
+      sessionEvents: [createEvent("checkpoint", "Fresh session ready")],
+    })),
   restart: () => get().resetSession(),
   setDetectorStatus: (detectorStatus) => set({ detectorStatus }),
 }));

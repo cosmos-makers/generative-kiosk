@@ -16,6 +16,8 @@
     "verify:runtime:soak": "RUNTIME_SOAK_CYCLES=6 node scripts/verify-runtime.mjs",
     "verify:runtime:report": "RUNTIME_VERIFY_REPORT_PATH=test-results/runtime-verify-report.json RUNTIME_VERIFY_HISTORY_PATH=.omx/logs/runtime-verify-history.json node scripts/verify-runtime.mjs",
     "verify:runtime:history-summary": "node -e \"const fs=require('fs'); const p='.omx/logs/runtime-verify-history.json'; const items=JSON.parse(fs.readFileSync(p,'utf8')); const latest=items.at(-1)||null; console.log(JSON.stringify({runs:items.length, latestGeneratedAt:latest?.generatedAt??null, allStable:items.every((x)=>x?.soak?.stable===true), maxCycles:items.reduce((m,x)=>Math.max(m, x?.soak?.cycles??0),0)}, null, 2));\"",
+    "dashboard:spec": "node scripts/spec-dashboard.mjs",
+    "dashboard:spec:open": "node scripts/open-chrome.mjs 3216",
     "verify:evidence-summary": "node scripts/evidence-summary.mjs",
     "verify:readiness-report": "node scripts/readiness-report.mjs",
     "write:readiness-report": "node scripts/write-readiness-report.mjs",

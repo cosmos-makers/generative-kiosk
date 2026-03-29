@@ -1,0 +1,31 @@
+# Ralph Context Snapshot — Hackathon Kiosk (2026-03-29T06:10:00Z)
+
+- **Task statement**: Execute the active Ralph loop for the hackathon kiosk: align the UI with `mdonaldkiosk.png`, keep normal mode as the default experience, make GenUI visibly adaptive with on-screen logs/skeletons, fix debug camera preview and calibration visibility, add/expand large-scale scenario coverage (100+ Playwright flows), run observable E2E verification, and sync implementation details back into `prompts/SPEC.md`.
+- **Desired outcome**: A runnable kiosk demo that looks recognizably like the McDonald's reference, defaults to the normal kiosk flow, exposes debug-only camera/calibration observability, makes GenUI visibly different when activated, and has 100+ automated scenario runs plus updated spec alignment.
+- **Known facts / evidence**:
+  - Planning gate is already satisfied via `.omx/plans/prd-2026-03-29-hackathon-kiosk-ralph.md` and `.omx/plans/test-spec-2026-03-29-hackathon-kiosk-ralph.md`.
+  - The repo has a real Next.js implementation under `src/app`, `src/features`, `src/lib`, `src/store`, and initial Playwright specs under `e2e/`.
+  - `mdonaldkiosk.png` is present at repo root; visual reference shows a dark device chrome, centered search pill, hero banner, white menu canvas, left category rail, product cards, and a red/green bottom action bar.
+  - `omx explore` is unavailable here because `cargo` is missing; direct shell/code inspection is required.
+  - Current homepage renders a sparse dark-card layout and does **not** match the kiosk reference screenshot.
+  - `DifficultyDetector` currently renders its `<video>` with `className="hidden"`, which explains the missing camera preview in debug mode.
+  - Existing Playwright coverage is limited to a handful of adaptive/smoke flows and is far below the requested 100+ scenario target.
+- **Constraints**:
+  - Keep normal mode as the default user path; accessibility help must remain user-approved, not auto-switched.
+  - Debug-only internals must stay out of the normal presentation path.
+  - Verification must be evidence-backed (tests/build/typecheck/E2E), and final spec mismatches must be resolved in code and `prompts/SPEC.md`.
+  - Keep the app runnable while iterating; use visible browser-based verification before final completion.
+- **Unknowns / open questions**:
+  - How far real browser/device permissions in this environment will allow MediaPipe camera verification and Playwright debug/browser observation.
+  - Whether fully live external AI provider credentials are configured; fallback behavior may still be needed.
+  - The minimum acceptable granularity for the 100+ scenario suite while keeping runtime tractable.
+- **Likely codebase touchpoints**:
+  - `src/app/page.tsx`, `src/app/globals.css`
+  - `src/features/kiosk/components/*`
+  - `src/features/barrier-free/components/*`
+  - `src/features/debug/components/*`
+  - `src/features/difficulty/components/*`, `src/features/difficulty/lib/scoring.ts`
+  - `src/features/voice/components/*`, `src/features/voice/hooks/*`
+  - `src/store/kiosk.ts`, `src/types/index.ts`, `src/lib/menu.ts`
+  - `e2e/*.spec.ts`, `playwright.config.ts`
+  - `prompts/SPEC.md`

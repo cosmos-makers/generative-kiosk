@@ -1,6 +1,92 @@
 "use client";
+
 import { useState } from "react";
-import type { CartItem } from "@/types";
-import { stripHtml } from "@/lib/utils";
+import { getDisplayName, getItemPrice } from "@/lib/menu";
 import { submitMockOrder } from "@/lib/orders";
-export function CheckoutScreen({ items, onComplete }: { items: CartItem[]; onComplete: (orderNumber?: string) => void }) { const [submitting,setSubmitting]=useState(false); return <section className="rounded-[2rem] border border-white/10 bg-[#08101c] p-6 text-white shadow-2xl"><p className="text-xs uppercase tracking-[0.35em] text-white/40">Mock checkout</p><h2 className="mt-3 text-3xl font-black tracking-tight">결제 전에 주문을 마지막으로 확인하세요</h2><div className="mt-6 grid gap-4 xl:grid-cols-2">{items.map((item)=><div key={item.menuItem.id} className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-4"><p className="text-sm text-white/45">{item.categoryName}</p><h3 className="mt-1 text-xl font-bold">{stripHtml(item.menuItem.korName)}</h3><p className="mt-2 text-sm text-white/55">수량 {item.quantity} · {item.menuItem.calorie} kcal</p></div>)}</div><button type="button" disabled={submitting} onClick={async()=>{ setSubmitting(true); const orderNumber = await submitMockOrder(items); onComplete(orderNumber); setSubmitting(false); }} className="mt-8 rounded-full bg-amber-300 px-5 py-3 text-base font-black text-slate-950 disabled:opacity-60">{submitting ? "주문 처리 중..." : "결제 완료"}</button></section>; }
+import { formatPrice } from "@/lib/utils";
+import type { CartItem, Locale } from "@/types";
+
+export function CheckoutScreen({
+  items,
+  onComplete,
+  onBack,
+  locale,
+}: {
+  items: CartItem[];
+  onComplete: (orderNumber?: string) => void;
+  onBack: () => void;
+  locale: Locale;
+}) {
+  const [submitting, setSubmitting] = useState(false);
+  const totalPrice = items.reduce(
+    (sum, item) => sum + getItemPrice(item.menuItem) * item.quantity,
+    0,
+  );
+
+  return (
+    <section className="kiosk-paper rounded-[34px] p-7 text-[#1f1d18] kiosk-shadow">
+        <p className="text-xs font-black uppercase tracking-[0.34em] text-[#c2482d]">Mock checkout</p>
+      <h2 className="mt-4 text-4xl font-black tracking-tight">
+        {locale === "en"
+          ? "Review the tray before mock payment"
+          : "결제 전에 주문 내역을 마지막으로 확인하세요"}
+      </h2>
+
+      <div className="mt-6 grid gap-4 lg:grid-cols-2">
+        {items.map((item) => (
+          <div
+            key={item.menuItem.id}
+            className="rounded-[26px] border border-[#e3dbc9] bg-white/85 p-5"
+          >
+            <p className="text-xs uppercase tracking-[0.24em] text-[#a08f71]">{item.categoryName}</p>
+            <h3 className="mt-2 text-2xl font-black tracking-tight">
+              {getDisplayName(item.menuItem, locale)}
+            </h3>
+            <p className="mt-3 text-sm leading-7 text-[#655c4d]">
+              {locale === "en" ? "Quantity" : "수량"} {item.quantity} · ₩
+              {formatPrice(getItemPrice(item.menuItem) * item.quantity)}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-6 rounded-[26px] border border-[#e3dbc9] bg-white/85 p-5">
+        <div className="flex items-center justify-between gap-4 text-[#524b41]">
+          <span className="text-sm font-semibold uppercase tracking-[0.24em]">
+            {locale === "en" ? "Estimated total" : "총 예상 금액"}
+          </span>
+          <span className="text-3xl font-black text-[#1f1d18]">₩ {formatPrice(totalPrice)}</span>
+        </div>
+      </div>
+
+      <div className="mt-6 grid gap-3 sm:grid-cols-2">
+        <button
+          type="button"
+          onClick={onBack}
+          className="rounded-[20px] border border-[#cfbea0] bg-white px-5 py-4 text-base font-black text-[#1f1d18]"
+        >
+          {locale === "en" ? "Back to menu" : "메뉴로 돌아가기"}
+        </button>
+        <button
+          type="button"
+          disabled={submitting}
+          onClick={async () => {
+            setSubmitting(true);
+            const orderNumber = await submitMockOrder(items);
+            onComplete(orderNumber);
+            setSubmitting(false);
+          }}
+          className="rounded-[20px] bg-[#7bc769] px-5 py-4 text-base font-black text-[#17310f] disabled:opacity-60"
+        >
+          {submitting
+            ? locale === "en"
+              ? "Submitting…"
+              : "주문 처리 중..."
+            : locale === "en"
+              ? "Complete payment"
+              : "결제 완료"}
+        </button>
+      </div>
+    </section>
+  );
+}

@@ -6,18 +6,24 @@ import { getCategories, getDisplayName, findItemById } from "@/lib/menu";
 import { buildFallbackVoiceAction } from "@/lib/fallbacks";
 
 export async function POST(request: NextRequest) {
-  const body = (await request.json()) as {
+  const body = ((await request
+    .json()
+    .catch(() => ({}))) ?? {}) as {
     transcript: string;
     difficultyScore: number;
     currentStep: BFStep | KioskStep;
     cartItems?: Array<{ id: number; quantity: number }>;
   };
 
-  const fallback = buildFallbackVoiceAction(body);
+  const fallback = buildFallbackVoiceAction({
+    transcript: body.transcript ?? "",
+    currentStep: body.currentStep ?? "items",
+    cartItems: body.cartItems,
+  });
   const prompt = buildVoicePrompt({
-    transcript: body.transcript,
-    difficultyScore: body.difficultyScore,
-    currentStep: body.currentStep,
+    transcript: body.transcript ?? "",
+    difficultyScore: body.difficultyScore ?? 72,
+    currentStep: body.currentStep ?? "items",
     categories: getCategories().map((category) => category.korName),
     items: getCategories()
       .flatMap((category) => category.items.slice(0, 2))
