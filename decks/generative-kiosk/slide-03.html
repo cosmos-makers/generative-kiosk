@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 720pt;
+      height: 405pt;
+      font-family: 'Pretendard', sans-serif;
+      background: #0c0c0c;
+      padding: 36pt 52pt;
+      display: flex;
+      flex-direction: column;
+    }
+    .stat-card {
+      border-radius: 8pt;
+      padding: 18pt 18pt;
+      display: flex;
+      flex-direction: column;
+    }
+    .stat-label {
+      font-size: 9pt;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: auto;
+    }
+    .stat-number {
+      font-size: 38pt;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-top: 12pt;
+    }
+    .stat-source {
+      font-size: 9pt;
+      margin-top: 6pt;
+    }
+  </style>
+</head>
+<body>
+  <!-- 헤더 -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14pt;">
+    <div style="display: flex; align-items: center; gap: 12pt;">
+      <p style="display: inline-block; padding: 4pt 10pt; background: #1a1a1a; border: 1px solid #2a2a2a; color: #888; border-radius: 3pt; font-size: 8pt; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">문제</p>
+      <h2 style="font-size: 20pt; font-weight: 600; color: #ffffff;">키오스크는 늘었는데, 쓸 수 있는 사람은 늘지 않았다</h2>
+    </div>
+    <p style="font-size: 10pt; color: #333;">03</p>
+  </div>
+
+  <!-- 통계 3개 -->
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14pt; margin-bottom: 14pt;">
+    <!-- 통계 1 -->
+    <div class="stat-card" style="background: #1a1a1a; border: 1px solid #2a2a2a; min-height: 110pt;">
+      <p class="stat-label" style="color: #555;">국내 키오스크<br>설치 대수 (2023)</p>
+      <p class="stat-number" style="color: #ffffff;">53.6<span style="font-size: 18pt; font-weight: 500; color: #666;">만 대</span></p>
+      <p class="stat-source" style="color: #444;">과학기술정보통신부</p>
+    </div>
+
+    <!-- 통계 2: 강조 -->
+    <div class="stat-card" style="background: #0f2a22; border: 1px solid #4AE3B5; min-height: 110pt;">
+      <p class="stat-label" style="color: #4AE3B5;">75세 이상 노인<br>키오스크 주문 가능</p>
+      <p class="stat-number" style="color: #4AE3B5; font-size: 42pt;">10%<span style="font-size: 16pt; font-weight: 500; color: #2a9972;"> 미만</span></p>
+      <p class="stat-source" style="color: #2a9972;">서울신문, 2024</p>
+    </div>
+
+    <!-- 통계 3 -->
+    <div class="stat-card" style="background: #1a1a1a; border: 1px solid #2a2a2a; min-height: 110pt;">
+      <p class="stat-label" style="color: #555;">고령층(75세+)<br>불편 경험률</p>
+      <p class="stat-number" style="color: #ffffff;">76.6<span style="font-size: 18pt; font-weight: 500; color: #666;">%</span></p>
+      <p class="stat-source" style="color: #444;">서울디지털재단, 2023</p>
+    </div>
+  </div>
+
+  <!-- 한 줄 요약 -->
+  <div style="padding: 12pt 18pt; border-left: 2px solid #4AE3B5; background: #0f1a16; border-radius: 0 4pt 4pt 0;">
+    <p style="font-size: 11pt; color: #aaa; line-height: 1.6;">불편 1위 이유: <span style="color: #ffffff; font-weight: 500;">"뒷사람 눈치가 보인다"</span> (53.6%) &nbsp;·&nbsp; 시각장애인의 <span style="color: #ffffff; font-weight: 500;">72.3%</span>는 직원을 통해 주문 선호 (보건복지부, 2024)</p>
+  </div>
+</body>
+</html>

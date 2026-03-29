@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 720pt;
+      height: 405pt;
+      font-family: 'Pretendard', sans-serif;
+      background: #0c0c0c;
+      padding: 32pt 48pt;
+      display: flex;
+      flex-direction: column;
+    }
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6pt;
+    }
+    .step-box {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 6pt;
+      padding: 10pt 14pt;
+      text-align: center;
+    }
+    .arrow {
+      font-size: 14pt;
+      color: #333;
+      flex-shrink: 0;
+      align-self: center;
+      margin-top: -8pt;
+    }
+  </style>
+</head>
+<body>
+  <!-- 헤더 -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 22pt;">
+    <div style="display: flex; align-items: center; gap: 12pt;">
+      <p style="display: inline-block; padding: 4pt 10pt; background: #1a1a1a; border: 1px solid #2a2a2a; color: #888; border-radius: 3pt; font-size: 8pt; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">산출물</p>
+      <h2 style="font-size: 20pt; font-weight: 600; color: #ffffff;">어떻게 동작하는가</h2>
+    </div>
+    <p style="font-size: 10pt; color: #333;">05</p>
+  </div>
+
+  <!-- 플로우 -->
+  <div style="flex: 1; display: flex; align-items: center; gap: 8pt;">
+
+    <!-- Step 1: 기존 키오스크 -->
+    <div class="step" style="min-width: 90pt;">
+      <div class="step-box" style="border-color: #333;">
+        <p style="font-size: 18pt; color: #444; margin-bottom: 4pt;">🖥</p>
+        <p style="font-size: 10pt; font-weight: 600; color: #888;">기존 키오스크</p>
+        <p style="font-size: 9pt; color: #555; margin-top: 3pt;">엠도날드</p>
+      </div>
+    </div>
+
+    <p class="arrow">→</p>
+
+    <!-- Step 2: 카메라 -->
+    <div class="step" style="min-width: 90pt;">
+      <div class="step-box">
+        <p style="font-size: 18pt; color: #888; margin-bottom: 4pt;">📷</p>
+        <p style="font-size: 10pt; font-weight: 600; color: #aaa;">카메라</p>
+        <p style="font-size: 9pt; color: #555; margin-top: 3pt;">Visual Recognition</p>
+      </div>
+    </div>
+
+    <p class="arrow">→</p>
+
+    <!-- Step 3: 점수 산출 -->
+    <div class="step" style="min-width: 90pt;">
+      <div class="step-box" style="border-color: #4AE3B5; background: #0f1e1a;">
+        <p style="font-size: 9pt; color: #4AE3B5; font-weight: 600; margin-bottom: 4pt;">점수 산출</p>
+        <p style="font-size: 10pt; font-weight: 600; color: #ffffff;">망설임 감지</p>
+        <p style="font-size: 9pt; color: #2a9972; margin-top: 3pt;">기준치 초과 →</p>
+      </div>
+    </div>
+
+    <p class="arrow">→</p>
+
+    <!-- Step 4: 팝업+음성 -->
+    <div class="step" style="min-width: 80pt;">
+      <div class="step-box" style="border-color: #4AE3B5; background: #0f1e1a;">
+        <p style="font-size: 18pt; color: #4AE3B5; margin-bottom: 4pt;">🔔</p>
+        <p style="font-size: 10pt; font-weight: 600; color: #ffffff;">팝업 + 음성</p>
+      </div>
+    </div>
+
+    <p class="arrow">→</p>
+
+    <!-- 분기 -->
+    <div style="display: flex; flex-direction: column; gap: 10pt; flex: 1;">
+      <!-- 분기 A: 시각장애인 -->
+      <div style="background: #141414; border: 1px solid #2a2a2a; border-radius: 6pt; padding: 10pt 14pt; display: flex; align-items: center; gap: 10pt;">
+        <p style="font-size: 14pt;">🎙</p>
+        <div>
+          <p style="font-size: 9pt; color: #4AE3B5; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;">시각장애인</p>
+          <p style="font-size: 10pt; color: #888; margin-top: 2pt;">보이스 모드 (음성 대화)</p>
+        </div>
+      </div>
+      <!-- 분기 B: UI 미숙 사용자 -->
+      <div style="background: #141414; border: 1px solid #2a2a2a; border-radius: 6pt; padding: 10pt 14pt; display: flex; align-items: center; gap: 10pt;">
+        <p style="font-size: 14pt;">✨</p>
+        <div>
+          <p style="font-size: 9pt; color: #4AE3B5; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;">UI 미숙 사용자</p>
+          <p style="font-size: 10pt; color: #888; margin-top: 2pt;">LLM이 UI를 단순·크게 재구성</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
