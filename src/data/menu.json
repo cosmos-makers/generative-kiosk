@@ -229,7 +229,7 @@
     },
     {
       "seq": 7,
-      "korName": "맥런치",
+      "korName": "m런치",
       "engName": "McLunch",
       "items": [
         {
@@ -580,7 +580,7 @@
     },
     {
       "seq": 2,
-      "korName": "맥모닝",
+      "korName": "m모닝",
       "engName": "McMorning",
       "items": [
         {
@@ -667,7 +667,7 @@
           "id": 135,
           "korName": "에그 맥머핀 세트",
           "engName": "Egg McMuffin Meal",
-          "description": "100% 아라비카로 내린 드립 커피와 바삭바삭 고소한 해쉬 브라운,  신선한 에그 맥머핀으로 즐기는 제대로 된 아침 식사.  이제 맥모닝 세트로 아침을 깨워보세요.    *판매 시간: 새벽 4시 ~ 오전 10시 30분",
+          "description": "100% 아라비카로 내린 드립 커피와 바삭바삭 고소한 해쉬 브라운,  신선한 에그 맥머핀으로 즐기는 제대로 된 아침 식사.  이제 m모닝 세트로 아침을 깨워보세요.    *판매 시간: 새벽 4시 ~ 오전 10시 30분",
           "calorie": "474",
           "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1742427597295.png",
           "menuStatus": "단품,세트",
@@ -677,7 +677,7 @@
           "id": 115,
           "korName": "베이컨 에그 맥머핀 세트",
           "engName": "Bacon Egg McMuffin Meal",
-          "description": "100% 아라비카로 내린 드립 커피와  바삭바삭 고소한 해쉬 브라운,  신선한 베이컨 에그 맥머핀으로 즐기는  제대로 된 아침 식사.  이제 맥모닝 세트로 아침을 깨워보세요.    *판매 시간: 새벽 4시 ~ 오전 10시 30분",
+          "description": "100% 아라비카로 내린 드립 커피와  바삭바삭 고소한 해쉬 브라운,  신선한 베이컨 에그 맥머핀으로 즐기는  제대로 된 아침 식사.  이제 m모닝 세트로 아침을 깨워보세요.    *판매 시간: 새벽 4시 ~ 오전 10시 30분",
           "calorie": "498",
           "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1742427316786.png",
           "menuStatus": "단품,세트",
@@ -687,7 +687,7 @@
           "id": 317,
           "korName": "소시지 에그 맥머핀 콤보",
           "engName": "Sausage Egg McMuffin  Combo",
-          "description": "100% 아라비카로 내린 드립 커피와 신선한 소시지 에그 맥머핀,  커피 한 잔 가격으로 가볍게 즐기는 맥모닝 콤보!    *판매 시간: 새벽 4시 ~ 오전 10시 30분",
+          "description": "100% 아라비카로 내린 드립 커피와 신선한 소시지 에그 맥머핀,  커피 한 잔 가격으로 가볍게 즐기는 m모닝 콤보!    *판매 시간: 새벽 4시 ~ 오전 10시 30분",
           "calorie": "473",
           "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1677677701120.png",
           "menuStatus": "단품,세트",
@@ -697,7 +697,7 @@
           "id": 127,
           "korName": "소시지 에그 맥머핀 세트",
           "engName": "Sausage Egg McMuffin Meal",
-          "description": "100% 아라비카로 내린 드립 커피와  바삭바삭 고소한 해쉬 브라운,  신선한 소시지 에그 맥머핀으로 즐기는  제대로 된 아침 식사.  이제 맥모닝 세트로 아침을 깨워보세요.    *판매 시간: 새벽 4시 ~ 오전 10시 30분",
+          "description": "100% 아라비카로 내린 드립 커피와  바삭바삭 고소한 해쉬 브라운,  신선한 소시지 에그 맥머핀으로 즐기는  제대로 된 아침 식사.  이제 m모닝 세트로 아침을 깨워보세요.    *판매 시간: 새벽 4시 ~ 오전 10시 30분",
           "calorie": "634",
           "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1742427539029.png",
           "menuStatus": "단품,세트",

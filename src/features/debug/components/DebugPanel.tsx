@@ -6,6 +6,7 @@ import {
   Sparkles,
   SlidersHorizontal,
   Waves,
+  Crosshair,
 } from "lucide-react";
 import { useKioskStore } from "@/store/kiosk";
 
@@ -51,7 +52,6 @@ export function DebugPanel() {
   const detectorStatus = useKioskStore((state) => state.detectorStatus);
   const llmLogs = useKioskStore((state) => state.llmLogs);
   const sessionEvents = useKioskStore((state) => state.sessionEvents);
-  const presenterNote = useKioskStore((state) => state.presenterNote);
   const voiceTranscript = useKioskStore((state) => state.voiceTranscript);
   const helpCooldownUntil = useKioskStore((state) => state.helpCooldownUntil);
   const setShowHelpOffer = useKioskStore((state) => state.setShowHelpOffer);
@@ -68,14 +68,8 @@ export function DebugPanel() {
   return (
     <aside
       data-testid="debug-panel"
-      className="fixed inset-y-20 right-4 z-40 hidden w-[380px] max-w-[calc(100vw-2rem)] overflow-y-auto rounded-[30px] border border-white/10 bg-[#07101c]/94 p-5 text-sm text-white shadow-2xl backdrop-blur-xl xl:block"
+      className="fixed top-20 right-4 z-40 hidden h-[400px] w-[400px] max-w-[calc(100vw-2rem)] overflow-y-auto rounded-[30px] border border-white/20 bg-slate-900 p-5 text-sm text-slate-100 shadow-2xl xl:block"
     >
-      <div className="mb-5">
-        <p className="text-[10px] uppercase tracking-[0.32em] text-amber-300">Debug overlay</p>
-        <h3 className="mt-2 text-xl font-black">카메라 · 캘리브레이션 · LLM 흐름</h3>
-        <p className="mt-2 text-xs leading-6 text-white/58">{presenterNote}</p>
-      </div>
-
       <div className="grid gap-3">
         <section className="rounded-[24px] border border-white/10 bg-black/15 p-4">
           <div className="mb-3 flex items-center gap-2 text-amber-300">
@@ -95,6 +89,85 @@ export function DebugPanel() {
             <Meter label="hand" value={diagnostics.handScore} />
             <Meter label="time" value={diagnostics.timeScore} />
             <Meter label="gaze" value={diagnostics.gazeScore} />
+          </div>
+        </section>
+
+        <section className="rounded-[24px] border border-white/10 bg-black/15 p-4">
+          <div className="mb-3 flex items-center gap-2 text-violet-300">
+            <Crosshair className="size-4" /> MediaPipe 캘리브레이션
+          </div>
+          {/* Detection status badges */}
+          <div className="mb-3 flex gap-2">
+            {(
+              [
+                { key: "faceVisible", label: "얼굴" },
+                { key: "poseVisible", label: "포즈" },
+                { key: "handVisible", label: "손" },
+              ] as const
+            ).map(({ key, label }) => (
+              <span
+                key={key}
+                className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] ${
+                  diagnostics.calibration[key]
+                    ? "bg-emerald-500/20 text-emerald-300"
+                    : "bg-white/5 text-white/30"
+                }`}
+              >
+                {label} {diagnostics.calibration[key] ? "ON" : "—"}
+              </span>
+            ))}
+          </div>
+          {/* Landmark metrics */}
+          <div className="space-y-3 text-xs">
+            {/* Head offset — face center X relative to shoulders */}
+            <div>
+              <div className="mb-1 flex justify-between text-white/50">
+                <span>얼굴 위치 (head offset)</span>
+                <span>{diagnostics.calibration.headOffset.toFixed(3)}</span>
+              </div>
+              <div className="relative h-2 rounded-full bg-white/10">
+                <div className="absolute inset-y-0 left-1/2 w-px bg-white/20" />
+                <div
+                  className="absolute h-full w-2 rounded-full bg-violet-400"
+                  style={{
+                    left: `calc(50% + ${diagnostics.calibration.headOffset * 300}% - 4px)`,
+                  }}
+                />
+              </div>
+            </div>
+            {/* Shoulder span — body distance/width */}
+            <div>
+              <div className="mb-1 flex justify-between text-white/50">
+                <span>어깨 폭 (shoulder span)</span>
+                <span>{diagnostics.calibration.shoulderSpan.toFixed(3)}</span>
+              </div>
+              <div className="h-2 rounded-full bg-white/10">
+                <div
+                  className="h-full rounded-full bg-sky-400"
+                  style={{ width: `${Math.min(100, diagnostics.calibration.shoulderSpan * 300)}%` }}
+                />
+              </div>
+            </div>
+            {/* Pointer gap — hand/finger extension */}
+            <div>
+              <div className="mb-1 flex justify-between text-white/50">
+                <span>포인터 간격 (pointer gap)</span>
+                <span>{diagnostics.calibration.pointerGap.toFixed(3)}</span>
+              </div>
+              <div className="h-2 rounded-full bg-white/10">
+                <div
+                  className="h-full rounded-full bg-amber-400"
+                  style={{ width: `${Math.min(100, diagnostics.calibration.pointerGap * 100)}%` }}
+                />
+              </div>
+            </div>
+            {/* Gaze switches */}
+            <div className="flex justify-between text-white/50">
+              <span>시선 전환 (gaze switches)</span>
+              <span className="font-mono text-violet-300">
+                {diagnostics.calibration.gazeSwitches.toFixed(1)}
+              </span>
+            </div>
           </div>
         </section>
 

@@ -84,7 +84,6 @@ interface Store {
   debugEnabled: boolean;
   llmLogs: LLMLogEntry[];
   liveProgress: ProgressCheckpoint;
-  presenterNote: string;
   sessionEvents: SessionEvent[];
   voiceTranscript: VoiceTurn[];
   lastOrderNumber: string | null;
@@ -153,8 +152,6 @@ export const useKioskStore = create<Store>((set, get) => ({
   debugEnabled: false,
   llmLogs: [],
   liveProgress: defaultProgress,
-  presenterNote:
-    "debug off는 실제 키오스크 제품면을 유지하고, debug on은 카메라·캘리브레이션·LLM 로그만 보여줍니다.",
   sessionEvents: [createEvent("checkpoint", "Fresh session ready")],
   voiceTranscript: [],
   lastOrderNumber: null,
