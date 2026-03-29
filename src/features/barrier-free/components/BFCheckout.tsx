@@ -19,11 +19,8 @@ export function BFCheckout({
     <div className="grid gap-5 xl:grid-cols-[1.1fr_0.9fr]">
       <div className="space-y-5 rounded-[1.8rem] border border-white/10 bg-white/[0.06] p-5 text-white">
         <div>
-          <p className="text-xs uppercase tracking-[0.35em] text-emerald-100/70">Adaptive checkout</p>
-          <h2 className="mt-3 text-4xl font-black tracking-tight">큰 글씨 결제로 이어집니다</h2>
-          <p className="mt-3 text-base leading-7 text-white/70">
-            선택 메뉴를 큰 타이포그래피와 단순한 정보 구조로 재정렬했습니다.
-          </p>
+          <p className="text-xs uppercase tracking-[0.35em] text-emerald-100/70">AdaptForge checkout</p>
+          <h2 className="mt-3 text-4xl font-black tracking-tight">시니어 프로필에 맞춘 결제 확인 화면</h2>
         </div>
         <div className="grid gap-4 xl:grid-cols-2">
           {items.map((item) => (
@@ -50,7 +47,7 @@ export function BFCheckout({
           }}
           className="mt-8 w-full rounded-[1.2rem] bg-[#ffbc0d] px-6 py-4 text-lg font-black text-[#2b2318] disabled:opacity-60"
         >
-          {submitting ? "주문 처리 중..." : "도움 모드로 주문 완료"}
+          {submitting ? "주문 처리 중..." : "AdaptForge 화면으로 주문 완료"}
         </button>
       </div>
     </div>

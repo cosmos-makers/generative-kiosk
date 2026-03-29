@@ -68,7 +68,7 @@ export function DebugPanel() {
   return (
     <aside
       data-testid="debug-panel"
-      className="fixed inset-y-20 right-4 z-40 hidden w-[420px] max-w-[calc(100vw-2rem)] rounded-[30px] border border-white/10 bg-[#07101c]/94 p-5 text-sm text-white shadow-2xl backdrop-blur-xl xl:block"
+      className="fixed inset-y-20 right-4 z-40 hidden w-[380px] max-w-[calc(100vw-2rem)] overflow-y-auto rounded-[30px] border border-white/10 bg-[#07101c]/94 p-5 text-sm text-white shadow-2xl backdrop-blur-xl xl:block"
     >
       <div className="mb-5">
         <p className="text-[10px] uppercase tracking-[0.32em] text-amber-300">Debug overlay</p>

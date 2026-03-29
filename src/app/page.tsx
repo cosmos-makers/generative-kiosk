@@ -1,9 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
+import { AdaptForgeScreen } from "@/features/adaptforge/components/AdaptForgeScreen";
 import { BFCheckout } from "@/features/barrier-free/components/BFCheckout";
 import { BFLayout } from "@/features/barrier-free/components/BFLayout";
-import { GenUIScreen } from "@/features/barrier-free/components/GenUIScreen";
 import { DebugPanel, DebugToggle } from "@/features/debug/components/DebugPanel";
 import { DifficultyDetector } from "@/features/difficulty/components/DifficultyDetector";
 import { HelpOfferDialog } from "@/features/difficulty/components/HelpOfferDialog";
@@ -21,7 +21,6 @@ import { useKioskStore } from "@/store/kiosk";
 
 export default function HomePage() {
   const categories = useMemo(() => getCategories(), []);
-  const [searchQuery, setSearchQuery] = useState("");
 
   const isIdle = useKioskStore((state) => state.isIdle);
   const step = useKioskStore((state) => state.step);
@@ -54,7 +53,7 @@ export default function HomePage() {
       <p className="text-xs font-black uppercase tracking-[0.34em] text-white/65">Mock payment complete</p>
       <h2 className="mt-4 text-5xl font-black tracking-[-0.05em]">주문번호 {lastOrderNumber}</h2>
       <p className="mt-4 max-w-2xl text-lg leading-8 text-white/82">
-        일반 모드와 배리어 프리 모드 모두 같은 세션 맥락을 유지한 채 완료 화면까지 도달했습니다.
+        오늘도 맛있는 식사 되세요!
       </p>
       <button
         type="button"
@@ -77,6 +76,7 @@ export default function HomePage() {
         <Header
           locale={locale}
           onLocaleToggle={() => setLocale(locale === "en" ? "ko" : "en")}
+          onHome={resetSession}
         />
 
         <section className="rounded-[34px] border border-[var(--mcd-border)] bg-[rgba(250,245,236,0.96)] p-4 shadow-[0_22px_40px_rgba(0,0,0,0.12)] lg:p-5">
@@ -118,13 +118,13 @@ export default function HomePage() {
           {!isIdle && accessibilityMode === "none" && showCompletion ? completionScreen : null}
 
           {!isIdle && accessibilityMode === "large-ui" ? (
-            <BFLayout title="더 쉬운 순서로 다시 구성한 주문 화면">
+            <BFLayout title="AdaptForge가 재구성한 시니어 주문 화면">
               {showCompletion ? (
                 completionScreen
               ) : step === "checkout" ? (
                 <BFCheckout items={items} onComplete={completeOrder} />
               ) : (
-                <GenUIScreen
+                <AdaptForgeScreen
                   difficultyScore={difficultyScore}
                   cart={items}
                   orderType={orderType}

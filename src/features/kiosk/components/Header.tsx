@@ -5,9 +5,11 @@ import type { Locale } from "@/types";
 export function Header({
   locale,
   onLocaleToggle,
+  onHome,
 }: {
   locale: Locale;
   onLocaleToggle: () => void;
+  onHome?: () => void;
 }) {
   return (
     <header className="flex items-center gap-4 rounded-2xl bg-[#da0000] px-4 py-3 text-white kiosk-glow">
@@ -29,6 +31,15 @@ export function Header({
         >
           {locale === "en" ? "KO" : "EN"}
         </button>
+        {onHome ? (
+          <button
+            type="button"
+            onClick={onHome}
+            className="rounded-lg border border-white/30 px-3 py-1.5 text-xs font-black uppercase tracking-wider text-white hover:bg-white/10"
+          >
+            홈
+          </button>
+        ) : null}
       </div>
     </header>
   );

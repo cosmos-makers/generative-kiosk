@@ -260,7 +260,7 @@ export const useKioskStore = create<Store>((set, get) => ({
           cameraReady: signals.source === "mediapipe",
           message: `${signals.source} detector active`,
         },
-        showHelpOffer: shouldShow ? true : shouldHide ? false : state.showHelpOffer,
+        showHelpOffer: shouldShow ? true : (shouldHide && !state.showHelpOffer) ? false : state.showHelpOffer,
         sessionEvents:
           shouldShow && !state.showHelpOffer
             ? [createEvent("help", "Difficulty threshold crossed — help offer shown"), ...state.sessionEvents].slice(0, 20)
@@ -329,7 +329,7 @@ export const useKioskStore = create<Store>((set, get) => ({
       sessionEvents: [createEvent("help", `${mode} mode accepted`), ...state.sessionEvents].slice(0, 20),
       liveProgress: {
         phase: mode,
-        label: mode === "voice" ? "Voice helper path active" : "Generative large-UI path active",
+        label: mode === "voice" ? "Voice helper path active" : "AdaptForge senior path active",
         lastUpdated: new Date().toISOString(),
         stability: "stable",
       },

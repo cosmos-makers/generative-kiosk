@@ -22,7 +22,7 @@ export function CartSheet({
   );
 
   return (
-    <aside className="sticky bottom-4 z-20 rounded-[2rem] border border-[#1f1f1f] bg-[#111111] p-4 text-white shadow-[0_24px_40px_rgba(0,0,0,0.18)] backdrop-blur lg:px-5">
+    <aside className="rounded-[2rem] border border-[#1f1f1f] bg-[#111111] p-4 text-white shadow-[0_24px_40px_rgba(0,0,0,0.18)] lg:px-5">
       <div className="grid gap-4 lg:grid-cols-[1.2fr_1fr_auto] lg:items-end">
         <div>
           <p className="text-xs uppercase tracking-[0.35em] text-white/45">주문 내역</p>
@@ -73,7 +73,6 @@ export function CartSheet({
           <p className="mt-3 text-[2rem] font-black tracking-[-0.04em] text-white">
             ₩ {formatPrice(totalPrice)}
           </p>
-          <p className="mt-1 text-sm text-white/55">실제 결제는 해커톤 데모용 mock 처리입니다.</p>
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2 lg:min-w-[290px] lg:grid-cols-1">

@@ -8,6 +8,7 @@
   --mcd-yellow: #ffbc0d;
   --mcd-border: #d4ccb8;
   --mcd-muted: #8a7e6e;
+  --mcd-paper: #f7f2e8;
 }
 
 html,
@@ -66,4 +67,259 @@ img {
 
 ::-webkit-scrollbar-track {
   background: transparent;
+}
+
+.genui-stage-shell {
+  position: relative;
+  overflow: hidden;
+}
+
+.genui-stage-shell::before {
+  content: "";
+  position: absolute;
+  inset: -10% -5% auto;
+  height: 34%;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.22), transparent 36%),
+    radial-gradient(circle at 75% 10%, rgba(255, 204, 50, 0.14), transparent 30%);
+  pointer-events: none;
+  filter: blur(12px);
+}
+
+.genui-stage {
+  position: relative;
+}
+
+.genui-card-enter {
+  opacity: 0;
+  translate: 0 24px;
+  scale: 0.97;
+  animation: genui-card-enter 720ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.genui-transition-wash::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.46), transparent 32%),
+    linear-gradient(135deg, rgba(255, 204, 50, 0.2), rgba(255, 255, 255, 0.08));
+  animation: genui-transition-wash 280ms ease-out forwards;
+  pointer-events: none;
+}
+
+.help-offer-shell {
+  position: relative;
+  overflow: hidden;
+}
+
+.help-offer-shell::before {
+  content: "";
+  position: absolute;
+  inset: -10% 40% 58% -15%;
+  background: radial-gradient(circle, rgba(255, 204, 50, 0.22), transparent 70%);
+  filter: blur(14px);
+  pointer-events: none;
+}
+
+.help-mode-card {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease,
+    opacity 180ms ease;
+}
+
+.help-mode-card:hover,
+.help-mode-card:focus-visible {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 22px 34px rgba(34, 31, 26, 0.12);
+}
+
+.help-mode-card:disabled {
+  cursor: default;
+}
+
+.genui-card-selected {
+  scale: 1.035;
+  box-shadow: 0 26px 48px rgba(255, 188, 13, 0.22);
+  animation:
+    genui-card-enter 420ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards,
+    genui-selected-pulse 420ms ease-out;
+}
+
+.liquid-glass {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  backdrop-filter: blur(22px) saturate(1.15);
+  -webkit-backdrop-filter: blur(22px) saturate(1.15);
+  --glass-x: 50%;
+  --glass-y: 50%;
+  --glass-rotate-x: 0deg;
+  --glass-rotate-y: 0deg;
+  transform: perspective(1200px) rotateX(var(--glass-rotate-x)) rotateY(var(--glass-rotate-y));
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease;
+}
+
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at var(--glass-x) var(--glass-y), rgba(255, 255, 255, 0.34), transparent 26%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.02) 42%, rgba(255, 204, 50, 0.06));
+  opacity: 0.92;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.liquid-glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.liquid-glass:hover,
+.liquid-glass:focus-visible {
+  box-shadow:
+    0 18px 34px rgba(17, 24, 39, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}
+
+.liquid-glass-button {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  --glass-x: 50%;
+  --glass-y: 50%;
+  transition:
+    box-shadow 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease,
+    transform 220ms ease;
+}
+
+.liquid-glass-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at var(--glass-x) var(--glass-y), rgba(255, 255, 255, 0.28), transparent 28%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.04) 44%, rgba(255, 204, 50, 0.05));
+  pointer-events: none;
+  z-index: 0;
+}
+
+.liquid-glass-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.liquid-glass-button > * {
+  position: relative;
+  z-index: 1;
+}
+
+.liquid-glass-button:hover,
+.liquid-glass-button:focus-visible {
+  box-shadow:
+    0 18px 30px rgba(17, 24, 39, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}
+
+.liquid-glass-subtle {
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(14px) saturate(1.05);
+  -webkit-backdrop-filter: blur(14px) saturate(1.05);
+}
+
+.liquid-glass-subtle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.03));
+  pointer-events: none;
+}
+
+@keyframes genui-card-enter {
+  0% {
+    opacity: 0;
+    translate: 0 24px;
+    scale: 0.97;
+    filter: blur(10px);
+  }
+
+  55% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes genui-selected-pulse {
+  0% {
+    scale: 1;
+  }
+
+  45% {
+    scale: 1.04;
+  }
+
+  100% {
+    scale: 1.02;
+  }
+}
+
+@keyframes genui-transition-wash {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .genui-card-enter,
+  .genui-card-selected {
+    animation: none;
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+    filter: none;
+  }
+
+  .liquid-glass,
+  .help-mode-card {
+    transition: none;
+    transform: none;
+  }
 }

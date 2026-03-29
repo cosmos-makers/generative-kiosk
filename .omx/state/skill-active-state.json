@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "active": false,
+  "active": true,
   "skill": "ralph",
   "keyword": "Ralph",
-  "phase": "planning",
+  "phase": "reviewing",
   "activated_at": "2026-03-29T06:51:28.452Z",
-  "updated_at": "2026-03-29T08:03:23.115Z",
+  "updated_at": "2026-03-29T08:32:36.270Z",
   "source": "keyword-detector",
   "input_lock": {
     "active": false,
@@ -24,6 +24,5 @@
     ],
     "message": "Deep interview is active; auto-approval shortcuts are blocked until the interview finishes.",
     "exit_reason": "handoff"
-  },
-  "completed_at": "2026-03-29T08:03:23.125Z"
+  }
 }
