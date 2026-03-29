@@ -19,7 +19,7 @@ Build a hackathon-ready AI-native barrier-free kiosk demo from the existing draf
 2. Demo Track B works end-to-end: normal kiosk entry -> difficulty detection -> help offer -> user-approved voice mode -> spoken guidance/order flow -> order completion.
 3. The main demo path uses real LLM-backed GenUI and real MediaPipe-based detection on the MacBook Chrome target environment.
 4. Voice mode is real and functional, not stubbed, and can complete at least one full happy-path order via voice on the target environment; fallback back to touch/GenUI exists only as recovery for instability outside that happy path.
-5. `debug off` looks like a normal kiosk; `debug on` can be toggled from an always-visible small control and exposes diagnostics without breaking the main experience.
+5. `debug off` preserves the same real product behavior, including normal mode, GenUI, and voice, while hiding calibration/log/diagnostic surfaces; `debug on` can be toggled from an always-visible small control and exposes diagnostics without breaking the main experience.
 6. Payment remains clearly mock but visually coherent.
 7. All major behaviors are verifiable through the test spec in `.omx/plans/test-spec-2026-03-29-hackathon-kiosk-ralph.md`.
 8. Each major implementation checkpoint leaves the app in a runnable, demoable state even if Ralph is stopped mid-execution.
@@ -129,7 +129,7 @@ Primary files:
 
 Acceptance criteria:
 - Typecheck passes with the scaffolded structure.
-- `page.tsx` can render a basic normal-mode shell with a hidden debug panel and a persistent small toggle that remains visually neutral in `debug off`.
+- `page.tsx` can render a basic product shell with a hidden debug panel and a persistent small toggle that remains visually neutral in `debug off`.
 - Menu JSON is available through app utilities.
 - A presenter can already show the opening normal-mode flow and where GenUI adaptation attaches, even before full adaptive logic is complete.
 - Stopping after this step still leaves behind a coherent runnable shell rather than a broken scaffold.
@@ -200,7 +200,7 @@ Primary files:
 - `.omx/plans/test-spec-2026-03-29-hackathon-kiosk-ralph.md`
 
 Acceptance criteria:
-- `debug off` feels like a normal kiosk.
+- `debug off` preserves the same product flows while hiding calibration, score, log, and internal diagnostic surfaces.
 - `debug on` is easy to manipulate live and exposes enough explanation for judges.
 - The final scripted demo can be run repeatedly on MacBook Chrome fullscreen landscape.
 - Any ambiguity resolved during implementation is reflected back into the PRD/test spec before Ralph claims completion.
@@ -231,7 +231,7 @@ Mitigation:
 
 Mitigation:
 - Keep the debug toggle tiny and persistent
-- Keep diagnostics panel fully collapsed in `debug off`
+- Keep calibration, logs, and diagnostics hidden in `debug off` without disabling the real product flows
 - Treat the debug panel as an overlay, not a co-equal permanent pane
 
 ## Verification Steps
@@ -240,7 +240,7 @@ Mitigation:
 2. Verify Speech API behavior manually on MacBook Chrome fullscreen landscape before broad implementation.
 3. Verify MediaPipe threshold crossing and help-offer cadence manually with debug enabled.
 4. Run end-to-end checks for both main demo tracks before marking the app Ralph-ready.
-5. Confirm `debug off` screenshots/readouts look like a normal kiosk and `debug on` readouts are judge-friendly.
+5. Confirm `debug off` still allows the same product flows while hiding calibration/log/diagnostics, and `debug on` readouts are judge-friendly.
 
 ## ADR
 

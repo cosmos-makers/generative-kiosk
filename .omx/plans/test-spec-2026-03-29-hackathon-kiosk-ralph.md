@@ -120,7 +120,7 @@ Primary targets:
 
 Verify:
 - tiny debug toggle is always visible
-- `debug off` hides diagnostics
+- `debug off` hides diagnostics while keeping the same real product flows available
 - `debug on` exposes score/log/diagnostic surfaces without breaking the main flow
 
 Pass criteria:
@@ -151,7 +151,7 @@ Pass criteria:
 Primary targets:
 - `src/features/debug/components/DebugPanel.tsx`
 - `src/app/page.tsx`
-- The tiny debug toggle remains visually neutral enough that `debug off` still reads like a normal kiosk.
+- The tiny debug toggle remains visually neutral enough that `debug off` still feels like the same product rather than a technical console.
 
 ### End-to-end tests
 
@@ -190,6 +190,7 @@ Path:
 
 Pass criteria:
 - No technical overlays, raw scores, prompts, or diagnostics are visible.
+- GenUI path and voice path remain available in the same product, with only internal calibration/logging surfaces hidden.
 
 #### E2E-04: Debug-on judge narrative
 
@@ -204,7 +205,7 @@ Pass criteria:
 
 1. Launch on MacBook Chrome fullscreen landscape.
 2. Verify the tiny debug toggle is visible but not distracting.
-3. Show normal kiosk behavior with debug off.
+3. Show product behavior with debug off, including access to normal mode, GenUI help, and voice help without internal diagnostics.
 4. Trigger difficulty detection and show the help offer.
 5. Accept help and show the GenUI path.
 6. Reset and repeat with the voice path.
@@ -237,7 +238,7 @@ Ralph should not claim completion until all of the following are true:
 1. Unit tests for store/scoring/parsing pass.
 2. Integration checks for speech, detection, GenUI, and debug split pass.
 3. Track A and Track B both pass on the target demo environment.
-4. `debug off` looks like a normal kiosk.
+4. `debug off` preserves the same product behavior while hiding calibration, score, log, and internal diagnostic surfaces.
 5. `debug on` is easy to operate live and supports the judge narrative.
 6. The app demonstrates enough stability confidence for a sustained 2-4 hour product runtime window on the target environment.
 7. Every major checkpoint remained runnable and demoable even if the loop had been stopped there.

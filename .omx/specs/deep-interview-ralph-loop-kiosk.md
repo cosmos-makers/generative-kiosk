@@ -122,7 +122,7 @@ When difficulty detection activates and the user opts into help, voice mode must
 
 ### Debug off
 
-- Looks like a standard kiosk
+- Preserves the real product experience, including normal mode, GenUI path, and voice path
 - No exposed difficulty scores
 - No LLM prompt/response raw traces
 - No visible internal state tables
@@ -142,7 +142,7 @@ When difficulty detection activates and the user opts into help, voice mode must
 - Voice mode works end-to-end on the demo environment
 - Accessibility transitions require explicit user approval
 - Payment completion is clearly mocked but functionally coherent
-- `debug off` presents as a normal kiosk
+- `debug off` preserves the full product experience while hiding calibration, logs, and internal diagnostics
 - `debug on` can explain how the system is deciding and adapting
 - The system works on MacBook Chrome fullscreen landscape
 - The UI remains usable for video/demo capture and large display presentation
