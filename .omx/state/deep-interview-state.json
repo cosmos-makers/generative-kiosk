@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "current_phase": "deep-interview",
   "iteration": 3,
   "started_at": "2026-03-29T02:07:53Z",
@@ -48,5 +48,6 @@
     "pressure_pass_complete": false
   },
   "last_turn_at": "2026-03-29T02:10:03.085Z",
-  "new_decision_boundary": "구현 중 발생하는 모호성은 작업을 멈추지 말고 해결하며, 관련 문서를 즉시 업데이트한다."
+  "new_decision_boundary": "구현 중 발생하는 모호성은 작업을 멈추지 말고 해결하며, 관련 문서를 즉시 업데이트한다.",
+  "completed_at": "2026-03-29T02:48:54.136Z"
 }

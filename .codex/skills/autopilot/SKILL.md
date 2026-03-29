@@ -216,7 +216,7 @@ Pipeline configuration options:
 
 ```toml
 [omx.autopilot.pipeline]
-maxRalphIterations = 10    # Ralph verification iteration ceiling
+maxRalphIterations = 50    # Ralph verification iteration ceiling
 workerCount = 2            # Number of Codex CLI team workers
 agentType = "executor"     # Agent type for team workers
 ```
