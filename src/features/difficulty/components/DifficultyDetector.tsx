@@ -86,8 +86,88 @@ function smoothReading(
   } satisfies DifficultySignalBreakdown;
 }
 
+// Eye landmark index groups for face mesh (468-point model)
+const LEFT_EYE_INDICES = [33, 7, 163, 144, 145, 153, 154, 155, 133, 173, 157, 158, 159, 160, 161, 246];
+const RIGHT_EYE_INDICES = [362, 382, 381, 380, 374, 373, 390, 249, 263, 466, 388, 387, 386, 385, 384, 398];
+
+function drawFaceOverlay(
+  canvas: HTMLCanvasElement,
+  faceLandmarks: Landmark[],
+  handLandmarks: Landmark[],
+) {
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+  const w = canvas.width;
+  const h = canvas.height;
+  ctx.clearRect(0, 0, w, h);
+  if (faceLandmarks.length === 0 && handLandmarks.length === 0) return;
+
+  const px = (x: number) => x * w;
+  const py = (y: number) => y * h;
+
+  // Face mesh: every 4th point as tiny green dots
+  ctx.fillStyle = "rgba(0,255,128,0.35)";
+  for (let i = 0; i < faceLandmarks.length; i += 4) {
+    const lm = faceLandmarks[i];
+    ctx.beginPath();
+    ctx.arc(px(lm.x), py(lm.y), 1.2, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Eye contours in cyan
+  for (const indices of [LEFT_EYE_INDICES, RIGHT_EYE_INDICES]) {
+    ctx.beginPath();
+    indices.forEach((idx, i) => {
+      const lm = faceLandmarks[idx];
+      if (!lm) return;
+      if (i === 0) ctx.moveTo(px(lm.x), py(lm.y));
+      else ctx.lineTo(px(lm.x), py(lm.y));
+    });
+    ctx.closePath();
+    ctx.strokeStyle = "rgba(0,220,255,0.85)";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.fillStyle = "rgba(0,220,255,0.08)";
+    ctx.fill();
+  }
+
+  // Eye corner dots
+  for (const idx of [33, 133, 263, 362]) {
+    const lm = faceLandmarks[idx];
+    if (!lm) continue;
+    ctx.beginPath();
+    ctx.arc(px(lm.x), py(lm.y), 3, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(0,220,255,0.9)";
+    ctx.fill();
+  }
+
+  // Nose tip crosshair
+  const noseTip = faceLandmarks[4];
+  if (noseTip) {
+    const nx = px(noseTip.x);
+    const ny = py(noseTip.y);
+    ctx.strokeStyle = "rgba(255,200,0,0.85)";
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(nx - 7, ny); ctx.lineTo(nx + 7, ny);
+    ctx.moveTo(nx, ny - 7); ctx.lineTo(nx, ny + 7);
+    ctx.stroke();
+  }
+
+  // Hand pointer ring
+  const pointer = handLandmarks[8];
+  if (pointer) {
+    ctx.beginPath();
+    ctx.arc(px(pointer.x), py(pointer.y), 9, 0, Math.PI * 2);
+    ctx.strokeStyle = "rgba(255,80,80,0.9)";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+}
+
 export function DifficultyDetector({ inline = false }: { inline?: boolean } = {}) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const intervalRef = useRef<number | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const startedAt = useRef(Date.now());
@@ -106,7 +186,6 @@ export function DifficultyDetector({ inline = false }: { inline?: boolean } = {}
   const accessibilityMode = useKioskStore((state) => state.accessibilityMode);
   const debugEnabled = useKioskStore((state) => state.debugEnabled);
   const isIdle = useKioskStore((state) => state.isIdle);
-  const step = useKioskStore((state) => state.step);
 
   useEffect(() => {
     let cancelled = false;
@@ -330,6 +409,18 @@ export function DifficultyDetector({ inline = false }: { inline?: boolean } = {}
               source: hasSignal ? "mediapipe" : "fallback",
             }),
           );
+
+          // Canvas overlay: draw face mesh + eye tracking
+          if (canvasRef.current && videoRef.current) {
+            const vid = videoRef.current;
+            canvasRef.current.width = vid.clientWidth || 268;
+            canvasRef.current.height = vid.clientHeight || 180;
+            drawFaceOverlay(
+              canvasRef.current,
+              faceResult.faceLandmarks?.[0] ?? [],
+              handResult.landmarks?.[0] ?? [],
+            );
+          }
         }, 1400);
       } catch {
         await startFallbackLoop();
@@ -337,19 +428,18 @@ export function DifficultyDetector({ inline = false }: { inline?: boolean } = {}
     }
 
     if (
-      (!inline && (isIdle || accessibilityMode !== "none" || step !== "menu")) ||
+      (!inline && (isIdle || accessibilityMode !== "none")) ||
       (inline && accessibilityMode !== "none")
     ) {
       setDetectorStatus(
         isIdle
           ? "Idle — detector paused"
-          : accessibilityMode !== "none"
-            ? "Adaptive mode active — detector paused"
-            : "General mode armed — detector starts during menu browsing",
+          : "Adaptive mode active — detector paused",
       );
       return;
     }
 
+    startedAt.current = Date.now();
     void startMediapipeLoop();
 
     return () => {
@@ -367,31 +457,32 @@ export function DifficultyDetector({ inline = false }: { inline?: boolean } = {}
     setCalibration,
     setDetectorStatus,
     setDifficultyReading,
-    step,
   ]);
 
   return (
     <div
       data-testid="debug-camera-preview"
-      className={
-        inline
-          ? "block"
-          : debugEnabled
-            ? "fixed bottom-24 right-5 z-40 hidden xl:block"
-            : "pointer-events-none h-0 w-0 overflow-hidden"
-      }
+      className={inline ? "block" : "pointer-events-none h-0 w-0 overflow-hidden"}
     >
-      <div className="overflow-hidden rounded-[24px] border border-white/10 bg-[#111111]/92 p-3 text-white shadow-[0_24px_40px_rgba(0,0,0,0.24)] backdrop-blur">
-        <div className="mb-2 flex items-center justify-between text-[10px] uppercase tracking-[0.28em] text-white/55">
+      <div className="overflow-hidden rounded-[18px] border border-white/10 bg-[#111111] p-2 text-white">
+        <div className="mb-1.5 flex items-center justify-between text-[10px] uppercase tracking-[0.28em] text-white/40">
           <span>camera preview</span>
           <span>mediapipe</span>
         </div>
-        <video
-          ref={videoRef}
-          className="h-[220px] w-[300px] rounded-[18px] bg-black object-cover"
-          muted
-          playsInline
-        />
+        <div className="relative">
+          <video
+            ref={videoRef}
+            className="w-full rounded-[12px] bg-black object-cover"
+            style={{ height: "180px" }}
+            muted
+            playsInline
+          />
+          <canvas
+            ref={canvasRef}
+            className="absolute inset-0 rounded-[12px] pointer-events-none"
+            style={{ width: "100%", height: "180px" }}
+          />
+        </div>
       </div>
     </div>
   );

@@ -15,7 +15,6 @@ import { IdleScreen } from "@/features/kiosk/components/IdleScreen";
 import { MenuGrid } from "@/features/kiosk/components/MenuGrid";
 import { OrderTypeScreen } from "@/features/kiosk/components/OrderTypeScreen";
 import { VoiceOrderInterface } from "@/features/voice/components/VoiceOrderInterface";
-import { VoicePermissionGate } from "@/features/voice/components/VoicePermissionGate";
 import { getCategories } from "@/lib/menu";
 import { useKioskStore } from "@/store/kiosk";
 
@@ -31,7 +30,7 @@ export default function HomePage() {
   const accessibilityMode = useKioskStore((state) => state.accessibilityMode);
   const orderType = useKioskStore((state) => state.orderType);
   const lastOrderNumber = useKioskStore((state) => state.lastOrderNumber);
-  const voiceReady = useKioskStore((state) => state.voiceReady);
+  const debugEnabled = useKioskStore((state) => state.debugEnabled);
   const setIdle = useKioskStore((state) => state.setIdle);
   const setLocale = useKioskStore((state) => state.setLocale);
   const setActiveCategory = useKioskStore((state) => state.setActiveCategory);
@@ -42,7 +41,6 @@ export default function HomePage() {
   const clearCart = useKioskStore((state) => state.clearCart);
   const completeOrder = useKioskStore((state) => state.completeOrder);
   const resetSession = useKioskStore((state) => state.resetSession);
-  const setVoiceReady = useKioskStore((state) => state.setVoiceReady);
 
   const activeCategory =
     categories.find((category) => category.seq === activeCategorySeq) ?? categories[0];
@@ -66,20 +64,21 @@ export default function HomePage() {
   ) : null;
 
   return (
-    <main className="min-h-screen bg-[linear-gradient(180deg,#f7f2ea_0%,#eee5d7_100%)] px-4 py-5 lg:px-8">
-      <DifficultyDetector />
-      <DebugPanel />
+    <main className="h-screen overflow-hidden flex bg-[linear-gradient(180deg,#f7f2ea_0%,#eee5d7_100%)]">
       <HelpOfferDialog />
 
-      <DebugToggle />
-      <div className="mx-auto flex max-w-[1320px] flex-col gap-5">
+      {/* 메인 키오스크 컬럼 */}
+      <div className="flex-1 min-w-0 flex flex-col h-full overflow-hidden px-4 pt-5 pb-3 lg:px-6">
+        {/* 처리용 디텍터 — 디버그 패널 off일 때만 (on이면 패널 안에서 inline으로 실행) */}
+        {!debugEnabled && <DifficultyDetector />}
+
         <Header
           locale={locale}
           onLocaleToggle={() => setLocale(locale === "en" ? "ko" : "en")}
           onHome={resetSession}
         />
 
-        <section className="rounded-[34px] border border-[var(--mcd-border)] bg-[rgba(250,245,236,0.96)] p-4 shadow-[0_22px_40px_rgba(0,0,0,0.12)] lg:p-5">
+        <section className="mt-4 flex-1 min-h-0 overflow-hidden flex flex-col rounded-[34px] border border-[var(--mcd-border)] bg-[rgba(250,245,236,0.96)] p-4 shadow-[0_22px_40px_rgba(0,0,0,0.12)] lg:p-5">
           {isIdle ? <IdleScreen onStart={() => setIdle(false)} /> : null}
 
           {!isIdle && accessibilityMode === "none" && step === "order-type" ? (
@@ -87,8 +86,8 @@ export default function HomePage() {
           ) : null}
 
           {!isIdle && accessibilityMode === "none" && step === "menu" ? (
-            <div className="grid gap-5 xl:grid-cols-[128px_1fr]">
-              <aside className="rounded-[28px] bg-[rgba(255,255,255,0.82)] p-3 kiosk-shadow">
+            <div className="flex-1 min-h-0 overflow-hidden grid gap-5 xl:grid-cols-[128px_1fr]">
+              <aside className="overflow-y-auto rounded-[28px] bg-[rgba(255,255,255,0.82)] p-3 kiosk-shadow">
                 <CategoryTabs
                   categories={categories.slice(0, 6)}
                   activeSeq={activeCategory?.seq ?? 1}
@@ -96,23 +95,27 @@ export default function HomePage() {
                   locale={locale}
                 />
               </aside>
-              <MenuGrid
-                category={activeCategory}
-                locale={locale}
-                onSelect={(item) =>
-                  addItem(item, locale === "en" ? activeCategory.engName : activeCategory.korName)
-                }
-              />
+              <div className="overflow-y-auto min-h-0">
+                <MenuGrid
+                  category={activeCategory}
+                  locale={locale}
+                  onSelect={(item) =>
+                    addItem(item, locale === "en" ? activeCategory.engName : activeCategory.korName)
+                  }
+                />
+              </div>
             </div>
           ) : null}
 
           {!isIdle && accessibilityMode === "none" && step === "checkout" ? (
-            <CheckoutScreen
-              items={items}
-              locale={locale}
-              onComplete={completeOrder}
-              onBack={() => setStep("menu")}
-            />
+            <div className="flex-1 min-h-0 overflow-y-auto">
+              <CheckoutScreen
+                items={items}
+                locale={locale}
+                onComplete={completeOrder}
+                onBack={() => setStep("menu")}
+              />
+            </div>
           ) : null}
 
           {!isIdle && accessibilityMode === "none" && showCompletion ? completionScreen : null}
@@ -134,29 +137,46 @@ export default function HomePage() {
             </BFLayout>
           ) : null}
 
-          {!isIdle && accessibilityMode === "voice" && !voiceReady ? (
-            showCompletion ? (
-              completionScreen
-            ) : (
-              <VoicePermissionGate onContinue={() => setVoiceReady(true)} />
-            )
-          ) : null}
-
-          {!isIdle && accessibilityMode === "voice" && voiceReady ? (
+          {!isIdle && accessibilityMode === "voice" ? (
             showCompletion ? completionScreen : <VoiceOrderInterface />
           ) : null}
         </section>
 
         {!isIdle && accessibilityMode === "none" && step === "menu" ? (
-          <CartSheet
-            items={items}
-            onCheckout={() => setStep("checkout")}
-            onClear={clearCart}
-            onAdjust={updateItemQuantity}
-            locale={locale}
-          />
+          <div className="mt-3 flex-none">
+            <CartSheet
+              items={items}
+              onCheckout={() => setStep("checkout")}
+              onClear={clearCart}
+              onAdjust={updateItemQuantity}
+              locale={locale}
+            />
+          </div>
         ) : null}
       </div>
+
+      {/* 디버그 사이드 패널 */}
+      {debugEnabled ? (
+        <aside className="w-[300px] flex-none h-full bg-slate-900 flex flex-col overflow-hidden border-l border-white/10">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 flex-none">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-[11px] font-bold text-white tracking-[0.2em] uppercase">Dev Panel</span>
+            </div>
+            <DebugToggle inline />
+          </div>
+          {/* 카메라 프리뷰 + 디텍터 (inline 모드) */}
+          <div className="flex-none px-3 pt-3">
+            <DifficultyDetector inline />
+          </div>
+          {/* 나머지 디버그 패널 내용 */}
+          <div className="flex-1 min-h-0 overflow-y-auto">
+            <DebugPanel />
+          </div>
+        </aside>
+      ) : (
+        <DebugToggle />
+      )}
     </main>
   );
 }

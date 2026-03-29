@@ -68,12 +68,12 @@ export function DebugPanel() {
   return (
     <aside
       data-testid="debug-panel"
-      className="fixed top-20 right-4 z-40 hidden h-[400px] w-[400px] max-w-[calc(100vw-2rem)] overflow-y-auto rounded-[30px] border border-white/20 bg-slate-900 p-5 text-sm text-slate-100 shadow-2xl xl:block"
+      className="w-full p-4 text-sm text-slate-100"
     >
       <div className="grid gap-3">
         <section className="rounded-[24px] border border-white/10 bg-black/15 p-4">
           <div className="mb-3 flex items-center gap-2 text-amber-300">
-            <Camera className="size-4" /> 카메라/캘리브레이션
+            <Camera className="size-4" /> 어려움 점수
           </div>
           <p className="text-3xl font-black">{Math.round(diagnostics.totalScore)}</p>
           <p className="mt-2 text-xs text-white/60">
