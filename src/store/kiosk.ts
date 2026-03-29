@@ -243,9 +243,9 @@ export const useKioskStore = create<Store>((set, get) => ({
     set((state) => {
       const shouldShow =
         canOfferHelp(state) &&
-        signals.source === "mediapipe" &&
-        signals.totalScore >= state.diagnostics.threshold;
-      const shouldHide = signals.totalScore < state.diagnostics.threshold * 0.6;
+        timeGateSatisfied(signals) &&
+        signals.totalScore >= 70;
+      const shouldHide = signals.totalScore < 42;
 
       return {
         difficultyScore: signals.totalScore,

@@ -430,7 +430,7 @@ export function applySeniorAdaptForge(input: {
       input.difficultyScore >= 85
         ? "선택 수를 3개로 제한하고 읽기 부담을 더 줄였습니다."
         : "큰 글씨, 짧은 설명, 고정 장바구니로 주문 부담을 낮췄습니다.",
-    displayScale: input.difficultyScore >= 80 ? "2xl" : "xl",
+    displayScale: input.difficultyScore >= 85 ? "2xl" : "xl",
     journey: buildJourney(input.orderType ?? null, input.cart),
     categoryChoices,
     featuredItems,
