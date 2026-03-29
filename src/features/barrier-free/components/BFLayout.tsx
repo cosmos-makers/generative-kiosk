@@ -1,0 +1,2 @@
+"use client";
+export function BFLayout({ title, children }: { title: string; children: React.ReactNode }) { return <section className="space-y-6 rounded-[2rem] border border-emerald-300/20 bg-[#09131b] p-6 text-white shadow-2xl"><div><p className="text-xs uppercase tracking-[0.35em] text-emerald-200/60">Adaptive flow</p><h2 className="mt-3 text-4xl font-black tracking-tight">{title}</h2></div>{children}</section>; }

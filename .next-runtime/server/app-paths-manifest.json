@@ -1,0 +1,6 @@
+{
+  "/page": "app/page.js",
+  "/api/orders/route": "app/api/orders/route.js",
+  "/api/gen-ui/route": "app/api/gen-ui/route.js",
+  "/api/voice-order/route": "app/api/voice-order/route.js"
+}

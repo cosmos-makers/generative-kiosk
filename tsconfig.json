@@ -1,0 +1,55 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es2022"
+    ],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "next-env.d.ts",
+    "src/app/layout.tsx",
+    "src/app/page.tsx",
+    "src/app/globals.css",
+    "src/lib/menu.ts",
+    "src/lib/utils.ts",
+    "src/lib/runtime-status.ts",
+    "src/store/kiosk.ts",
+    "src/types/index.ts",
+    "src/features/difficulty/components/DifficultyDetector.tsx",
+    "src/features/difficulty/components/HelpOfferDialog.tsx",
+    "src/features/difficulty/lib/scoring.ts",
+    "src/features/debug/components/DebugControls.tsx",
+    "src/features/debug/components/DebugPanel.tsx",
+    ".next/types/**/*.ts",
+    ".next-dev/types/**/*.ts",
+    ".next-e2e/types/**/*.ts",
+    ".next-runtime/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

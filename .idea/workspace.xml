@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b1faca56-25a0-41c3-9108-b3d3e5ed4201" name="Changes" comment="playwright mcp 추가">
+      <change beforePath="$PROJECT_DIR$/.codex/.personality_migration" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/.tmp/plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.codex/.tmp/plugins" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/agents/analyst.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/agents/architect.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/agents/build-fixer.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/agents/code-reviewer.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/agents/code-simplifier.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/agents/critic.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/agents/debugger.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/agents/dependency-expert.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/agents/designer.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/agents/executor.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/agents/explore.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/agents/git-master.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/agents/planner.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/agents/researcher.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/agents/security-reviewer.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/agents/team-executor.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/agents/test-engineer.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/agents/verifier.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/agents/vision.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/agents/writer.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/auth.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/cache/codex_apps_tools/c14f538907af049f5d8c5532ee5cef6639de76d8.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/log/codex-tui.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/logs_1.sqlite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/models_cache.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/.app.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/.codex-plugin/plugin.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/assets/github-small.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/assets/github.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gh-address-comments/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gh-address-comments/SKILL.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gh-address-comments/agents/openai.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gh-address-comments/assets/github-small.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gh-address-comments/assets/github.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gh-address-comments/scripts/fetch_comments.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gh-fix-ci/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gh-fix-ci/SKILL.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gh-fix-ci/agents/openai.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gh-fix-ci/assets/github-small.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gh-fix-ci/assets/github.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gh-fix-ci/scripts/inspect_pr_checks.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/github/SKILL.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/github/agents/openai.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/github/assets/github-small.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/github/assets/github.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/yeet/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/yeet/SKILL.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/yeet/agents/openai.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/yeet/assets/yeet-small.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/yeet/assets/yeet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/gmail/d88301d4694edc6282ca554e97fb8425cbd5a250/.app.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/gmail/d88301d4694edc6282ca554e97fb8425cbd5a250/.codex-plugin/plugin.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/gmail/d88301d4694edc6282ca554e97fb8425cbd5a250/assets/gmail-small.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/gmail/d88301d4694edc6282ca554e97fb8425cbd5a250/assets/gmail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/gmail/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gmail-inbox-triage/SKILL.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/gmail/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gmail-inbox-triage/agents/openai.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/gmail/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gmail-inbox-triage/assets/gmail-small.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/gmail/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gmail-inbox-triage/assets/gmail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/gmail/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gmail/SKILL.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/gmail/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gmail/agents/openai.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/gmail/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gmail/assets/gmail-small.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/gmail/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gmail/assets/gmail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/gmail/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gmail/assets/gmail.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/gmail/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gmail/references/forward-workflow.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/gmail/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gmail/references/label-actions.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/gmail/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gmail/references/reply-workflow.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/gmail/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/gmail/references/search-workflow.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/.app.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/.codex-plugin/plugin.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/assets/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/assets/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar-daily-brief/SKILL.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar-daily-brief/agents/openai.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar-daily-brief/assets/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar-daily-brief/assets/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar-daily-brief/scripts/render_day_brief.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar-free-up-time/SKILL.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar-free-up-time/agents/openai.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar-free-up-time/assets/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar-free-up-time/assets/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar-group-scheduler/SKILL.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar-group-scheduler/agents/openai.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar-group-scheduler/assets/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar-group-scheduler/assets/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar-meeting-prep/SKILL.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar-meeting-prep/agents/openai.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar-meeting-prep/assets/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar-meeting-prep/assets/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar/SKILL.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar/agents/openai.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar/assets/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/plugins/cache/openai-curated/google-calendar/d88301d4694edc6282ca554e97fb8425cbd5a250/skills/google-calendar/assets/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/prompts/analyst.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/prompts/architect.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/prompts/build-fixer.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/prompts/code-reviewer.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/prompts/code-simplifier.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/prompts/critic.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/prompts/debugger.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/prompts/dependency-expert.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/prompts/designer.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/prompts/executor.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/prompts/explore.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/prompts/git-master.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/prompts/planner.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/prompts/researcher.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/prompts/security-reviewer.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/prompts/team-executor.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/prompts/test-engineer.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/prompts/verifier.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/prompts/vision.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/prompts/writer.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/sessions/2026/03/29/rollout-2026-03-29T10-22-16-019d372f-3e18-7770-9dd5-974d1f97e2ae.jsonl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/sessions/2026/03/29/rollout-2026-03-29T10-35-26-019d373b-4b3d-7763-be71-0549992e524e.jsonl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.codex/version.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.omx/context/deep-interview-ralph-loop-kiosk-20260329T020753Z.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.omx/interviews/ralph-loop-kiosk-20260329T022529Z.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.omx/logs/tmux-hook-2026-03-29.jsonl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.omx/logs/turns-2026-03-29.jsonl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.omx/metrics.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.omx/plans/prd-2026-03-29-hackathon-kiosk-ralph.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.omx/plans/test-spec-2026-03-29-hackathon-kiosk-ralph.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.omx/specs/deep-interview-ralph-loop-kiosk.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.omx/state/deep-interview-state.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.omx/state/hud-state.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.omx/state/notify-hook-state.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.omx/state/skill-active-state.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.omx/state/tmux-hook-state.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.omx/tmux-hook.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/difficulty-detector.md" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Rebase.Settings">
+    <option name="NEW_BASE" value="origin/main" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "GEUP"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/cosmos-makers/generative-kiosk",
+    "accountId": "add370ef-de98-4014-9708-7ddc9939ddf2"
+  }
+}]]></component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="3BbAoEGdC4kw4M7R9MDwy25aelY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/kim-eunran/project/generative-kiosk"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/prompts" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b1faca56-25a0-41c3-9108-b3d3e5ed4201" name="Changes" comment="" />
+      <created>1774747568840</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1774747568840</updated>
+    </task>
+    <task id="LOCAL-00001" summary="README.md 수정">
+      <option name="closed" value="true" />
+      <created>1774750819098</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1774750819098</updated>
+    </task>
+    <task id="LOCAL-00002" summary="playwright mcp 추가">
+      <option name="closed" value="true" />
+      <created>1774751941534</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1774751941534</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="README.md 수정" />
+    <MESSAGE value="playwright mcp 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="playwright mcp 추가" />
+  </component>
+</project>

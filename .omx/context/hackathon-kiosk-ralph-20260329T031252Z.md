@@ -1,0 +1,25 @@
+# Ralph Context Snapshot — Hackathon Kiosk
+
+- **Task statement**: Use `.omx/plans/prd-2026-03-29-hackathon-kiosk-ralph.md` as the main execution plan and `.omx/plans/test-spec-2026-03-29-hackathon-kiosk-ralph.md` as the completion gate. Source of truth is `.omx/specs/deep-interview-ralph-loop-kiosk.md`; detailed implementation references are `prompts/SPEC.md` and `difficulty-detector.md`.
+- **Desired outcome**: A runnable Next.js kiosk demo where debug-off preserves real normal/GenUI/voice product flows while hiding calibration/score/log/internal diagnostics, and debug-on exposes those internals as an overlay. Development should keep a visible live progress surface and stay continuously runnable/demonstrable.
+- **Known facts / evidence**:
+  - Plan/test-spec/source-of-truth artifacts exist in `.omx/`.
+  - `prompts/SPEC.md` and `difficulty-detector.md` specify the app structure, store, UI flow, and difficulty scoring.
+  - The repo currently has no implementation files (`package.json`, `src/`, TS/TSX) yet.
+  - `omx explore` is unavailable in this environment because `cargo` is missing.
+  - `docs/shared/agent-tiers.md` is missing; Ralph tier selection will follow the role prompt defaults plus skill policy.
+- **Constraints**:
+  - Keep the product runnable and demoable at each checkpoint.
+  - Preserve debug-off product experience while keeping debug-on as an overlay.
+  - Use Playwright during execution for monitoring.
+  - Prefer low-risk, reversible steps; do not break the live demo path.
+  - Target MacBook Chrome fullscreen landscape first.
+- **Unknowns / open questions**:
+  - Whether Anthropic/Claude credentials and CLI are present for fully real LLM calls in this environment.
+  - Whether browser/device permissions in this environment allow full MediaPipe + speech verification.
+  - Final visual direction details beyond the planning docs.
+- **Likely codebase touchpoints**:
+  - Root app scaffold: `package.json`, `next.config.*`, `tsconfig.json`, Tailwind/PostCSS config, `src/app/*`
+  - Feature modules under `src/features/{kiosk,barrier-free,voice,difficulty,debug}`
+  - Shared modules under `src/{store,types,lib,data}`
+  - Tests under `src/**/*.test.ts(x)` and Playwright config/specs

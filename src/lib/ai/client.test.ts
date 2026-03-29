@@ -1,0 +1,4 @@
+import { describe, expect, it, vi } from "vitest";
+vi.mock("node:child_process",()=>({ execFile: vi.fn((_command:string,_args:string[],_options:unknown,callback:(error:Error|null,result:{stdout:string})=>void)=>{ callback(null,{ stdout: JSON.stringify({ title:"도움을 드릴게요", description:"큰 글씨 화면", fontScale:"xl", maxOptions:4, cards:[{ id:"c1", title:"버거", subtitle:"4개 메뉴", helper:"가장 쉬운 선택", emphasis:"primary" }], ctaLabel:"계속 진행", narration:"천천히 진행하세요" }) }); }) }));
+import { generateAdaptiveUI } from "@/lib/ai/client";
+describe("ai client",()=>{ it("parses structured JSON from the model response", async()=>{ const result = await generateAdaptiveUI("prompt", { title:"fallback", description:"fallback", fontScale:"xl", maxOptions:4, cards:[], ctaLabel:"fallback", narration:"fallback" }); expect(result.provider).toBe("claude-cli"); expect(result.object.cards[0]?.title).toBe("버거"); }); });

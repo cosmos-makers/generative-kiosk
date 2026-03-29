@@ -1,0 +1,67 @@
+{
+  "pid": 73595,
+  "parent_pid": 73565,
+  "started_at": "2026-03-29T04:51:11.540Z",
+  "cwd": "/Users/kim-eunran/project/generative-kiosk",
+  "notify_script": "/Users/kim-eunran/.nvm/versions/node/v20.17.0/lib/node_modules/oh-my-codex/dist/scripts/notify-hook.js",
+  "poll_ms": 250,
+  "pid_file": "/Users/kim-eunran/project/generative-kiosk/.omx/state/notify-fallback.pid",
+  "max_lifetime_ms": 21600000,
+  "tracked_files": 6,
+  "seen_turns": 0,
+  "dispatch_drain": {
+    "enabled": true,
+    "max_per_tick": 5,
+    "run_count": 11790,
+    "leader_only": true,
+    "last_tick_at": "2026-03-29T05:57:56.552Z",
+    "last_result": {
+      "processed": 0,
+      "skipped": 0,
+      "failed": 0
+    },
+    "last_error": null
+  },
+  "leader_nudge": {
+    "enabled": true,
+    "leader_only": true,
+    "stale_threshold_ms": 180000,
+    "precomputed_leader_stale": false,
+    "last_tick_at": "2026-03-29T05:57:56.552Z",
+    "last_error": null,
+    "run_count": 11790
+  },
+  "ralph_continue_steer": {
+    "enabled": true,
+    "cadence_ms": 60000,
+    "message": "Ralph loop active continue",
+    "active": true,
+    "last_state_check_at": "2026-03-29T05:57:56.627Z",
+    "last_sent_at": "",
+    "cooldown_anchor_at": "2026-03-29T03:03:51.181Z",
+    "last_reason": "global_cooldown",
+    "last_error": null,
+    "state_path": "/Users/kim-eunran/project/generative-kiosk/.omx/state/sessions/omx-1774759871485-z39jlv/ralph-state.json",
+    "pane_id": "",
+    "pane_current_command": "",
+    "current_phase": "verifying",
+    "shared_timestamp_path": "/Users/kim-eunran/project/generative-kiosk/.omx/state/ralph-last-steer-at",
+    "shared_last_sent_at": "2026-03-29T05:57:11.927Z",
+    "singleton_lock_path": "/Users/kim-eunran/project/generative-kiosk/.omx/state/ralph-continue-steer.lock"
+  },
+  "fallback_auto_nudge": {
+    "enabled": true,
+    "stall_ms": 5000,
+    "last_tick_at": "2026-03-29T05:57:56.622Z",
+    "last_turn_at": "2026-03-29T05:57:17.159Z",
+    "last_turn_count": 59,
+    "last_message": "이 시점에서 Ralph를 더 이어가는 가장 올바른 행동은:\n\n**실기기 검증 로그를 실제로 채우는 것**  \n파일:\n- `test-results/manual-device-logs/",
+    "last_reason": "eligible_but_not_sent",
+    "last_error": null,
+    "last_nudged_signature": "",
+    "last_nudged_at": ""
+  },
+  "stop_reason": "signal",
+  "stop_signal": "SIGTERM",
+  "stopping": true
+}

@@ -1,0 +1,47 @@
+{
+  "active": false,
+  "iteration": 11,
+  "max_iterations": 20,
+  "current_phase": "executing",
+  "started_at": "2026-03-29T03:12:52Z",
+  "task_description": "Build the hackathon kiosk using .omx/plans/prd-2026-03-29-hackathon-kiosk-ralph.md as the execution plan and .omx/plans/test-spec-2026-03-29-hackathon-kiosk-ralph.md as the completion gate; keep debug-off product flows intact while debug-on exposes diagnostics as an overlay; maintain a live observable progress surface and verify with Playwright during execution.",
+  "context_snapshot_path": ".omx/context/hackathon-kiosk-ralph-20260329T031252Z.md",
+  "plan_path": ".omx/plans/prd-2026-03-29-hackathon-kiosk-ralph.md",
+  "test_spec_path": ".omx/plans/test-spec-2026-03-29-hackathon-kiosk-ralph.md",
+  "source_of_truth_path": ".omx/specs/deep-interview-ralph-loop-kiosk.md",
+  "detail_refs": [
+    "prompts/SPEC.md",
+    "difficulty-detector.md"
+  ],
+  "notes": [
+    "omx explore unavailable because cargo is missing",
+    "docs/shared/agent-tiers.md not found"
+  ],
+  "last_turn_at": "2026-03-29T04:47:36.560Z",
+  "checkpoint": "Store observability and calibration handling improved again; current remaining pain is flaky direct dev-server runtime probing on reused ports returning HTML instead of route JSON intermittently, while code-level verification remains green.",
+  "dev_server": "http://localhost:3106",
+  "architect_verification": "PASS with remaining risks around real MediaPipe, real voice API lane, and real GenUI lane.",
+  "playwright_smoke": "passed on webServer port 3104",
+  "remaining_focus": [
+    "stabilize direct Playwright/manual probe on live dev port",
+    "improve MediaPipe scoring calibration quality",
+    "increase real LLM path usage when credentials available",
+    "long-runtime hardening"
+  ],
+  "verification": {
+    "typecheck": "pass",
+    "tests": "26 passed",
+    "lint": "pass earlier",
+    "build": "pass in prior clean sequential runs",
+    "runtime_probe": "intermittent on long-lived dev server ports"
+  },
+  "note": "Parallel build and Playwright can race on .next during verification; sequential build remains green.",
+  "runtime_probes": [
+    "voice-order: 포장으로 할게 -> orderType=takeout",
+    "voice-order: 하나 더 담아줘 + cart context -> add-item id=178 quantity=1",
+    "gen-ui: takeout/cart summary reflected in description/cta"
+  ],
+  "max_iterations_auto_expand_count": 1,
+  "max_iterations_auto_expanded_at": "2026-03-29T04:43:37.455Z",
+  "completed_at": "2026-03-29T04:48:57.327Z"
+}

@@ -1,0 +1,2 @@
+"use client";
+export function VoicePermissionGate({ onContinue }: { onContinue: () => void }) { return <section className="rounded-[2rem] border border-sky-200/20 bg-sky-400/10 p-8 text-white shadow-2xl"><p className="text-xs uppercase tracking-[0.35em] text-sky-100/70">Adaptive Track B</p><h2 className="mt-4 text-4xl font-black tracking-tight">음성으로 주문을 도와드릴게요</h2><button type="button" onClick={onContinue} className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-5 py-3 font-black text-slate-950">마이크 권한 확인 후 시작</button></section>; }

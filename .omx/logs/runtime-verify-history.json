@@ -1,0 +1,102 @@
+[
+  {
+    "generatedAt": "2026-03-29T05:34:18.783Z",
+    "orders": {
+      "status": 200,
+      "orderNumber": "A-547"
+    },
+    "voice": {
+      "status": 200,
+      "action": "add-item",
+      "targetItemId": 178,
+      "quantity": 2
+    },
+    "gen": {
+      "status": 200,
+      "title": "버거 추천",
+      "ctaLabel": "장바구니 검토로 이동"
+    },
+    "ui": {
+      "debugOverlaySeen": true
+    },
+    "soak": {
+      "cycles": 2,
+      "stable": true
+    }
+  },
+  {
+    "generatedAt": "2026-03-29T05:34:57.476Z",
+    "orders": {
+      "status": 200,
+      "orderNumber": "A-485"
+    },
+    "voice": {
+      "status": 200,
+      "action": "add-item",
+      "targetItemId": 178,
+      "quantity": 2
+    },
+    "gen": {
+      "status": 200,
+      "title": "버거 추천",
+      "ctaLabel": "장바구니 검토로 이동"
+    },
+    "ui": {
+      "debugOverlaySeen": true
+    },
+    "soak": {
+      "cycles": 2,
+      "stable": true
+    }
+  },
+  {
+    "generatedAt": "2026-03-29T05:35:24.854Z",
+    "orders": {
+      "status": 200,
+      "orderNumber": "A-759"
+    },
+    "voice": {
+      "status": 200,
+      "action": "add-item",
+      "targetItemId": 178,
+      "quantity": 2
+    },
+    "gen": {
+      "status": 200,
+      "title": "버거 추천",
+      "ctaLabel": "장바구니 검토로 이동"
+    },
+    "ui": {
+      "debugOverlaySeen": true
+    },
+    "soak": {
+      "cycles": 2,
+      "stable": true
+    }
+  },
+  {
+    "generatedAt": "2026-03-29T05:39:07.534Z",
+    "orders": {
+      "status": 200,
+      "orderNumber": "A-798"
+    },
+    "voice": {
+      "status": 200,
+      "action": "add-item",
+      "targetItemId": 178,
+      "quantity": 2
+    },
+    "gen": {
+      "status": 200,
+      "title": "버거 추천",
+      "ctaLabel": "장바구니 검토로 이동"
+    },
+    "ui": {
+      "debugOverlaySeen": true
+    },
+    "soak": {
+      "cycles": 6,
+      "stable": true
+    }
+  }
+]

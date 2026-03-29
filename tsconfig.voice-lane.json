@@ -1,0 +1,23 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "incremental": false,
+    "tsBuildInfoFile": ".omx/tmp-voice-lane.tsbuildinfo"
+  },
+  "include": [
+    "src/types/index.ts",
+    "src/lib/utils.ts",
+    "src/lib/menu.ts",
+    "src/store/kiosk.ts",
+    "src/lib/ai/prompts.ts",
+    "src/lib/ai/client.ts",
+    "src/app/api/voice-order/route.ts",
+    "src/features/voice/hooks/useSTT.ts",
+    "src/features/voice/hooks/useVoice.ts",
+    "src/features/voice/components/VoicePermissionGate.tsx",
+    "src/features/voice/components/VoiceOrderInterface.tsx",
+    "src/lib/ai/client.test.ts",
+    "src/store/kiosk.test.ts",
+    "next-env.d.ts"
+  ]
+}

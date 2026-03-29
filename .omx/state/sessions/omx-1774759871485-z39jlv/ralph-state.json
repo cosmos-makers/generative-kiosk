@@ -1,0 +1,32 @@
+{
+  "active": false,
+  "iteration": 31,
+  "max_iterations": 40,
+  "current_phase": "verifying",
+  "context_snapshot_path": ".omx/context/hackathon-kiosk-ralph-20260329T031252Z.md",
+  "prd_path": ".omx/plans/prd-2026-03-29-hackathon-kiosk-ralph.md",
+  "test_spec_path": ".omx/plans/test-spec-2026-03-29-hackathon-kiosk-ralph.md",
+  "verified": [
+    "typecheck",
+    "vitest",
+    "lint",
+    "build",
+    "playwright smoke",
+    "playwright adaptive flows",
+    "lsp diagnostics"
+  ],
+  "remaining_risks": [
+    "voice fallback recovery still uses rule-based interpretation",
+    "build and Playwright verification must run sequentially because both touch .next"
+  ],
+  "next_focus": "Continue hardening the voice fallback path toward stricter natural-language/LLM handling without regressing the live demo.",
+  "started_at": "2026-03-29T05:12:06.786Z",
+  "last_turn_at": "2026-03-29T05:57:17.105Z",
+  "latest_checkpoint": "Automated gates green after GenUI/voice/debug/hardening pass",
+  "live_dev_url": "http://localhost:3105",
+  "e2e_suite": "npx playwright test e2e/smoke.spec.ts e2e/adaptive-flows.spec.ts",
+  "build_isolated_from_dev": true,
+  "max_iterations_auto_expand_count": 3,
+  "max_iterations_auto_expanded_at": "2026-03-29T05:56:18.604Z",
+  "completed_at": "2026-03-29T05:57:56.680Z"
+}
