@@ -49,7 +49,8 @@ Keep runtime marker contracts stable and non-destructive when overlays are appli
 - Lock existing behavior with regression tests before cleanup edits when behavior is not already protected.
 - Prefer deletion over addition.
 - Reuse existing utils and patterns before introducing new abstractions.
-- No new dependencies without explicit request.
+- If required dependencies are missing, install them proactively to complete the task unless the user explicitly forbids it.
+- If dependency choice, package name, or install method is unclear, verify with official documentation or web search before installing.
 - Keep diffs small, reviewable, and reversible.
 - Run lint, typecheck, tests, and static analysis after changes.
 - Final reports must include changed files, simplifications made, and remaining risks.

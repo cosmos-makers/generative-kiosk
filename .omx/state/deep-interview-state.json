@@ -1,0 +1,52 @@
+{
+  "active": true,
+  "current_phase": "deep-interview",
+  "iteration": 3,
+  "started_at": "2026-03-29T02:07:53Z",
+  "task_description": "Clarify draft kiosk specs with a deep interview and prepare a Ralph-ready handoff for the hackathon.",
+  "interview_id": "deep-interview-ralph-loop-kiosk-20260329T020753Z",
+  "profile": "standard",
+  "type": "greenfield",
+  "initial_idea": "Start the Ralph loop for the hackathon using the draft SPEC.md and difficulty-detector.md, with deep interview clarity, subagents, and any missing AGENTS/spec artifacts.",
+  "rounds": [
+    {
+      "round": 1,
+      "target": "scope-and-non-goals",
+      "question": "해커톤 데모에서 반드시 실제여야 하는 것과 시뮬레이션 허용 가능한 것을 구분해 달라.",
+      "answer": "모호성은 빌드 중에 생길 수 있으며, 그때그때 해결하고 문서를 업데이트하면서 진행해야 한다. 한국어로 진행을 원한다.",
+      "analysis": "사용자는 실행 중 문서 갱신을 허용하는 의사결정 경계를 제시했지만, 무엇이 반드시 실제여야 하는지와 비목표 범위는 아직 명시하지 않았다."
+    }
+  ],
+  "current_ambiguity": 0.36,
+  "threshold": 0.2,
+  "max_rounds": 12,
+  "challenge_modes_used": [],
+  "codebase_context": {
+    "implementation_present": false,
+    "drafts_present": [
+      "prompts/SPEC.md",
+      "difficulty-detector.md"
+    ],
+    "notes": [
+      "Spec is detailed but implementation tree is not present yet.",
+      "There are internal contradictions around real-vs-simulated behavior and trigger thresholds."
+    ]
+  },
+  "current_stage": "intent-first",
+  "current_focus": "non-goals-and-demo-truth",
+  "context_snapshot_path": ".omx/context/deep-interview-ralph-loop-kiosk-20260329T020753Z.md",
+  "scores": {
+    "intent": 0.92,
+    "outcome": 0.74,
+    "scope": 0.62,
+    "constraints": 0.8,
+    "success": 0.58
+  },
+  "readiness_gates": {
+    "non_goals_explicit": false,
+    "decision_boundaries_explicit": true,
+    "pressure_pass_complete": false
+  },
+  "last_turn_at": "2026-03-29T02:10:03.085Z",
+  "new_decision_boundary": "구현 중 발생하는 모호성은 작업을 멈추지 말고 해결하며, 관련 문서를 즉시 업데이트한다."
+}

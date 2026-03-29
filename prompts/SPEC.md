@@ -4,13 +4,13 @@
 
 MDonald 배리어프리 키오스크는 패스트푸드 환경에서 디지털 소외 계층이 겪는 탐색 실패, 시야 문제, 시간 압박, 심리적 부담을 해소하기 위한 AI 네이티브 웹 키오스크다.
 
-**핵심 아이디어**: 사용자가 키오스크에 맞추는 것이 아니라, 키오스크가 사용자에게 맞춰진다. 사용자의 멈춤, 반복 실수, 화면 왕복, 얼굴 표정을 실시간으로 분석한 뒤 Generative UI로 더 쉬운 화면을 즉석 생성한다.
+**핵심 아이디어**: AdaptForge 논문(Adaptive and Accessible User Interfaces for Seniors Through Model-Driven Engineering) 차용, ㄴ사용자가 키오스크에 맞추는 것이 아니라, 키오스크가 사용자에게 맞춰진다. 사용자의 멈춤, 반복 실수, 화면 왕복, 얼굴 표정을 실시간으로 분석한 뒤 Generative UI로 더 쉬운 화면을 즉석 생성한다.
 
 **Generative UI 컨셉**: 고정된 UI 템플릿이 아니라, LLM이 현재 키오스크의 추상 UI 모델(PIM)을 분석하고 사용자 프로필을 주입하여 매 단계마다 새로운 UI를 생성한다. 모든 LLM 처리는 자연어 기반으로 동작하며 패턴 매칭이나 키워드 분기를 사용하지 않는다.
 
-**Debug Mode**: 해커톤 데모용 디버그 모드에서는 어려움 감지 점수, 행동 로그, AI의 PIM 분석 및 UI 생성 과정이 실시간으로 표시된다. 이는 실제로 동작하는 기능이며 가짜 데이터를 사용하지 않는다.
+**Debug Mode**: MeidaPipe이용 해커톤 데모용 디버그 모드에서는 어려움 감지 점수, 행동 로그, AI의 PIM 분석 및 UI 생성 과정이 실시간으로 표시된다. 이는 실제로 동작하는 기능이며 가짜 데이터를 사용하지 않는다.
 
-**해커톤 미션**: AI Applications — 실제 문제를 해결하는 AI 애플리케이션. Proactive, agentic, long-running, multi-agent, workflow 중심의 AI 네이티브 제품.
+**해커톤 미션**: AI Applications — 현실 문제를 해결하는 wow-moment included AI 애플리케이션.
 
 ---
 
