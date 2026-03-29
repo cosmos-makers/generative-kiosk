@@ -72,10 +72,8 @@ export default function HomePage() {
       <DebugPanel />
       <HelpOfferDialog />
 
+      <DebugToggle />
       <div className="mx-auto flex max-w-[1320px] flex-col gap-5">
-        <div className="flex justify-end">
-          <DebugToggle inline />
-        </div>
         <Header
           locale={locale}
           onLocaleToggle={() => setLocale(locale === "en" ? "ko" : "en")}
@@ -149,7 +147,7 @@ export default function HomePage() {
           ) : null}
         </section>
 
-        {!isIdle && accessibilityMode === "none" && step !== "complete" ? (
+        {!isIdle && accessibilityMode === "none" && step === "menu" ? (
           <CartSheet
             items={items}
             onCheckout={() => setStep("checkout")}

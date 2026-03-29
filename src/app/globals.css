@@ -4,6 +4,10 @@
 
 :root {
   color-scheme: dark;
+  --mcd-charcoal: #1d1b18;
+  --mcd-yellow: #ffbc0d;
+  --mcd-border: #d4ccb8;
+  --mcd-muted: #8a7e6e;
 }
 
 html,
