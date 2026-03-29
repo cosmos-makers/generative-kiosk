@@ -1,0 +1,1143 @@
+{
+  "categories": [
+    {
+      "seq": 1,
+      "korName": "버거",
+      "engName": "Burgers",
+      "items": [
+        {
+          "id": 799,
+          "korName": "베토디 바질크림치즈 세트",
+          "engName": "Bacon Tomato Deluxe Basil Cream Cheese Meal",
+          "description": "맥도날드 스테디셀러 베이컨 토마토 디럭스와  진한 바질크림치즈가 만나 프레시하게!    *판매 시간 : 10:30AM~4AM",
+          "calorie": "1000-1194",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/03/Corp_PC_VIEW_772x530_베토디바질크림_EVM_2.png",
+          "menuStatus": "단품,세트,런치",
+          "newIcon": ""
+        },
+        {
+          "id": 798,
+          "korName": "맥스파이시<sub class=reg>®</sub> 바질크림치즈 세트",
+          "engName": "McSpicy<sub class=reg>®</sub> Basil Cream Cheese Meal",
+          "description": "매콤 바삭한 상하이 패티에  진한 바질크림치즈를 더해 더 풍미있게!    *판매 시간 : 10:30AM~4AM",
+          "calorie": "954-1148",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/03/Corp_PC_VIEW_772x530_맥스파이시바질크림_EVM_2.png",
+          "menuStatus": "단품,세트,런치",
+          "newIcon": ""
+        },
+        {
+          "id": 178,
+          "korName": "빅맥<sub class=reg>®</sub> 세트",
+          "engName": "Big Mac<sub class=reg>®</sub> Meal",
+          "description": "100% 순 쇠고기 패티 두 장에 빅맥<sub class=reg>®</sub>만의  특별한 소스. 입안에서 살살 녹는 치즈와 신선한 양상추, 양파, 그리고 피클까지. 50년 넘게 전 세계인의 입맛을 사로 잡은 버거의 대명사.    *판매 시간: 10:30AM~4AM",
+          "calorie": "906~1045",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/빅맥®_세트.png",
+          "menuStatus": "단품,세트,런치",
+          "newIcon": ""
+        },
+        {
+          "id": 796,
+          "korName": "더블 맥스파이시<sub class=reg>®</sub> 상하이 버거 세트",
+          "engName": "Double McSpicy<sub class=reg>®</sub> Shanghai Burger Meal",
+          "description": "쌀가루로 더 바삭해진 매콤한 닭가슴살 패티를 하나 더!  두 장으로 꽉 채운 매콤 바삭한 맛    *판매 시간 : 10:30AM~4AM",
+          "calorie": "1191-1330",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/02/Corp_PC_VIEW_772x530_더블상하이_EVM.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 603,
+          "korName": "맥스파이시<sub class=reg>®</sub> 상하이 버거 세트",
+          "engName": "McSpicy<sub class=reg>®</sub> Shanghai Burger Meal",
+          "description": "쌀가루가 더해져 더 바삭해진 100% 닭가슴살 패티에  아삭아삭한 양상추와 신선한 토마토까지!  더 바삭하고 맛있어진 NEW 맥스파이시 상하이 버거로  입맛도 기분도 화끈하게!    *판매 시간: 10:30AM~4AM",
+          "calorie": "825~964",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1723562660091.png",
+          "menuStatus": "단품,세트,런치",
+          "newIcon": ""
+        },
+        {
+          "id": 2,
+          "korName": "1955<sub>®</sub> 버거 세트",
+          "engName": "1955<sub>®</sub> Burger Meal",
+          "description": "113g 두툼한 순 쇠고기 패티, 특별한 1955 소스에  깊은 풍미의 그릴드 어니언까지!   맥도날드가 처음 생긴 1955년의 맛을 담은  영원한 오리지널 1955 버거     *판매 시간: 10:30AM~4AM",
+          "calorie": "896~1035",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1723564262197.png",
+          "menuStatus": "단품,세트,런치",
+          "newIcon": ""
+        },
+        {
+          "id": 189,
+          "korName": "더블 쿼터파운더<sub>®</sub> 치즈 세트",
+          "engName": "Double Quarter Pounder<sub class=reg>®</sub> with Cheese Meal",
+          "description": "좋아하는건 더 많이 즐기시라고, 두 배 이상 커진 1/4 파운드 비프 패티가 두 장 (226그램)! 육즙이 풍부한 고기 맛을  그대로 살린 100% 순 쇠고기 패티 두 장과 치즈 두 장이  입안 가득 완벽하게 조화되는 놀라운 맛    *판매 시간: 10:30AM~4AM",
+          "calorie": "1094~1233",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1723563759418.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 188,
+          "korName": "쿼터파운더<sub class=reg>®</sub> 치즈 세트",
+          "engName": "Quarter Pounder<sub class=reg>®</sub> with Cheese Meal",
+          "description": "쿼터파운더라는 이름에서 알 수 있듯이 두 배 이상 커진   1/4파운드(113그램) 비프와 부드러운 치즈 두 장의 환상궁합!   두툼한 순 쇠고기 패티와 신선한 치즈의 풍부한 맛으로  세계적으로 사랑받고 있는 맥도날드의 대표적인 프리미엄 버거    *판매 시간: 10:30AM~4AM",
+          "calorie": "859~999",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1723563812629.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 471,
+          "korName": "맥크리스피<sub class=reg>™</sub> 치킨 디럭스 세트",
+          "engName": "McCrispy<sub class=reg>™</sub> Chicken Deluxe Meal",
+          "description": "100% 통닭다리살 겉바속촉 케이준 치킨 패티,   촉촉한 포테이토 브리오쉬 번, 스페셜 스모키 소스가  선사하는 놀랍도록 새로운 맛의 치킨 버거!   *판매 시간: 10:30AM~4AM",
+          "calorie": "902~1041",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/02/Corp_PC_VIEW_맥크리피_치킨_디럭스_772x530_new.png",
+          "menuStatus": "단품,세트,런치",
+          "newIcon": ""
+        },
+        {
+          "id": 470,
+          "korName": "맥크리스피<sub class=reg>™</sub> 치킨 클래식 세트",
+          "engName": "McCrispy<sub class=reg>™</sub> Chicken Classic Meal",
+          "description": "100% 통닭다리살 겉바속촉 케이준 치킨 패티!  치킨 버거 본연의 맛에 충실한 클래식 버거    *판매 시간: 10:30AM~4AM",
+          "calorie": "891-1030",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/02/Corp_PC_VIEW_맥크리피_치킨_클래식_772x530_new.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 187,
+          "korName": "베이컨 토마토 디럭스 세트",
+          "engName": "Bacon Tomato Deluxe Meal",
+          "description": "두 장의 100% 순 쇠고기 패티에 그릴에 구워  더욱 고소한 1장의 베이컨을 얹고, 신선한 토마토와 양상추,  매콤달콤한 스위트 칠리 소스, 치즈, 마요네즈를 더해 더욱 풍부하고 신선한 맛의 프리미엄 버거    *판매 시간: 10:30AM~4AM",
+          "calorie": "894~1033",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1723563896442.png",
+          "menuStatus": "단품,세트,런치",
+          "newIcon": ""
+        },
+        {
+          "id": 293,
+          "korName": "맥치킨<sub class=reg>®</sub> 모짜렐라 세트",
+          "engName": "McChicken<sub class=reg>®</sub> Mozzarella</br>Meal",
+          "description": "든든한 맥치킨에 골든 모짜렐라 치즈 스틱 2개와 매콤한 아라비아따 소스를 더해 강렬하게 재탄생한 맥치킨 모짜렐라!    *판매 시간: 10:30AM~4AM",
+          "calorie": "1066~1206",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1723563301214.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 291,
+          "korName": "맥치킨<sub class=reg>®</sub> 세트",
+          "engName": "McChicken<sub class=reg>®</sub></br>Meal",
+          "description": "바삭한 치킨 패티, 고소한 화이트 마요 소스와 아삭한 양상추가 함께! 더 업그레이드된 맛으로 돌아온 맥치킨    *판매 시간: 10:30AM~4AM",
+          "calorie": "847~986",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1723563415066.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 186,
+          "korName": "더블 불고기 버거 세트",
+          "engName": "Double Bulgogi Burger Meal",
+          "description": "진한 불고기 소스의 패티가 두 장!  여기에 고소한 치즈와 마요네즈,   신선한 양상추를 곁들인 깊고 풍부한 맛.    *판매 시간: 10:30AM~4AM",
+          "calorie": "959~1098",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1723563975095.png",
+          "menuStatus": "단품,세트,런치",
+          "newIcon": ""
+        },
+        {
+          "id": 181,
+          "korName": "불고기 버거 세트",
+          "engName": "Bulgogi Burger<br>Meal",
+          "description": "한국인의 입맛에 딱 맞는 불고기 소스에  잘 재운 패티와 고소한 마요네즈,  신선한 양상추의 맛있는 조합.    *판매 시간: 10:30AM~4AM",
+          "calorie": "732~872",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1723564031536.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 81,
+          "korName": "슈비 버거 세트",
+          "engName": "Shrimp Beef Burger <br>Meal",
+          "description": "탱~글한 통새우살에 비프 패티를 더해 푸짐하게~ 슈비 버거    *판매 시간: 10:30AM~4AM",
+          "calorie": "863~1003",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1723564188909.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 220,
+          "korName": "슈슈 버거 세트",
+          "engName": "Supreme Shrimp Burger <br>Meal",
+          "description": "탱~글한 통새우살 가득~ 슈슈 버거    * 판매 시간: 10:30AM~4AM",
+          "calorie": "732~872",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1723563590522.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 606,
+          "korName": "토마토 치즈 비프 버거 세트",
+          "engName": "Tomato Cheese Beef Burger Meal",
+          "description": "신선한 토마토와 고소한 치즈버거의 조화    *판매 시간: 10:30AM~4AM",
+          "calorie": "727~866",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1742426716721.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 331,
+          "korName": "트리플 치즈버거 세트",
+          "engName": "Triple cheeseburger Meal",
+          "description": "부드러운 치즈와 풍부한 육즙의 패티를  세배 더 진하게 즐길 수 있는 트리플 치즈버거    *매장별 상황에 따라 해당 제품이 제공되지 않을 수 있습니다.",
+          "calorie": "987~1136",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1744956010637.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 224,
+          "korName": "더블 치즈버거 세트",
+          "engName": "Double Cheeseburger Meal",
+          "description": "고소하고 부드러운 치즈와  100% 순 쇠고기 패티가 두개  맥도날드만의 더블 치즈버거!!    *판매 시간: 10:30AM~4AM",
+          "calorie": "802~942",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1723563512104.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 318,
+          "korName": "치즈버거 세트",
+          "engName": "Cheeseburger Meal",
+          "description": "고소하고 부드러운 치즈와 100% 순 쇠고기 패티, 맥도날드만의 심플한 클래식 치즈버거.    *판매 시간: 10:30AM~4AM",
+          "calorie": "641~781",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1723563067813.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 26,
+          "korName": "햄버거",
+          "engName": "Hamburger",
+          "description": "100% 순 쇠고기 패티에 상큼한 피클과 양파,  기본에 충실한 맥도날드 햄버거.    *판매 시간 : 오전 10시 30분 ~ 새벽 4시",
+          "calorie": "266",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/햄버거.png",
+          "menuStatus": "단품",
+          "newIcon": ""
+        }
+      ]
+    },
+    {
+      "seq": 7,
+      "korName": "맥런치",
+      "engName": "McLunch",
+      "items": [
+        {
+          "id": 799,
+          "korName": "베토디 바질크림치즈 세트",
+          "engName": "Bacon Tomato Deluxe Basil Cream Cheese Meal",
+          "description": "맥도날드 스테디셀러 베이컨 토마토 디럭스와  진한 바질크림치즈가 만나 프레시하게!    *판매 시간 : 10:30AM~4AM",
+          "calorie": "1000-1194",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/03/Corp_PC_VIEW_772x530_베토디바질크림_EVM_2.png",
+          "menuStatus": "단품,세트,런치",
+          "newIcon": ""
+        },
+        {
+          "id": 798,
+          "korName": "맥스파이시<sub class=reg>®</sub> 바질크림치즈 세트",
+          "engName": "McSpicy<sub class=reg>®</sub> Basil Cream Cheese Meal",
+          "description": "매콤 바삭한 상하이 패티에  진한 바질크림치즈를 더해 더 풍미있게!    *판매 시간 : 10:30AM~4AM",
+          "calorie": "954-1148",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/03/Corp_PC_VIEW_772x530_맥스파이시바질크림_EVM_2.png",
+          "menuStatus": "단품,세트,런치",
+          "newIcon": ""
+        },
+        {
+          "id": 178,
+          "korName": "빅맥<sub class=reg>®</sub> 세트",
+          "engName": "Big Mac<sub class=reg>®</sub> Meal",
+          "description": "100% 순 쇠고기 패티 두 장에 빅맥<sub class=reg>®</sub>만의  특별한 소스. 입안에서 살살 녹는 치즈와 신선한 양상추, 양파, 그리고 피클까지. 50년 넘게 전 세계인의 입맛을 사로 잡은 버거의 대명사.    *판매 시간: 10:30AM~4AM",
+          "calorie": "906~1045",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/빅맥®_세트.png",
+          "menuStatus": "단품,세트,런치",
+          "newIcon": ""
+        },
+        {
+          "id": 603,
+          "korName": "맥스파이시<sub class=reg>®</sub> 상하이 버거 세트",
+          "engName": "McSpicy<sub class=reg>®</sub> Shanghai Burger Meal",
+          "description": "쌀가루가 더해져 더 바삭해진 100% 닭가슴살 패티에  아삭아삭한 양상추와 신선한 토마토까지!  더 바삭하고 맛있어진 NEW 맥스파이시 상하이 버거로  입맛도 기분도 화끈하게!    *판매 시간: 10:30AM~4AM",
+          "calorie": "825~964",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1723562660091.png",
+          "menuStatus": "단품,세트,런치",
+          "newIcon": ""
+        },
+        {
+          "id": 2,
+          "korName": "1955<sub>®</sub> 버거 세트",
+          "engName": "1955<sub>®</sub> Burger Meal",
+          "description": "113g 두툼한 순 쇠고기 패티, 특별한 1955 소스에  깊은 풍미의 그릴드 어니언까지!   맥도날드가 처음 생긴 1955년의 맛을 담은  영원한 오리지널 1955 버거     *판매 시간: 10:30AM~4AM",
+          "calorie": "896~1035",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1723564262197.png",
+          "menuStatus": "단품,세트,런치",
+          "newIcon": ""
+        },
+        {
+          "id": 471,
+          "korName": "맥크리스피<sub class=reg>™</sub> 치킨 디럭스 세트",
+          "engName": "McCrispy<sub class=reg>™</sub> Chicken Deluxe Meal",
+          "description": "100% 통닭다리살 겉바속촉 케이준 치킨 패티,   촉촉한 포테이토 브리오쉬 번, 스페셜 스모키 소스가  선사하는 놀랍도록 새로운 맛의 치킨 버거!   *판매 시간: 10:30AM~4AM",
+          "calorie": "902~1041",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/02/Corp_PC_VIEW_맥크리피_치킨_디럭스_772x530_new.png",
+          "menuStatus": "단품,세트,런치",
+          "newIcon": ""
+        },
+        {
+          "id": 187,
+          "korName": "베이컨 토마토 디럭스 세트",
+          "engName": "Bacon Tomato Deluxe Meal",
+          "description": "두 장의 100% 순 쇠고기 패티에 그릴에 구워  더욱 고소한 1장의 베이컨을 얹고, 신선한 토마토와 양상추,  매콤달콤한 스위트 칠리 소스, 치즈, 마요네즈를 더해 더욱 풍부하고 신선한 맛의 프리미엄 버거    *판매 시간: 10:30AM~4AM",
+          "calorie": "894~1033",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1723563896442.png",
+          "menuStatus": "단품,세트,런치",
+          "newIcon": ""
+        },
+        {
+          "id": 186,
+          "korName": "더블 불고기 버거 세트",
+          "engName": "Double Bulgogi Burger Meal",
+          "description": "진한 불고기 소스의 패티가 두 장!  여기에 고소한 치즈와 마요네즈,   신선한 양상추를 곁들인 깊고 풍부한 맛.    *판매 시간: 10:30AM~4AM",
+          "calorie": "959~1098",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1723563975095.png",
+          "menuStatus": "단품,세트,런치",
+          "newIcon": ""
+        }
+      ]
+    },
+    {
+      "seq": 8,
+      "korName": "해피 스낵",
+      "engName": "Happy Snack",
+      "items": [
+        {
+          "id": 793,
+          "korName": "고구마 후라이",
+          "engName": "Sweet Potato Fries",
+          "description": "바삭 달콤!   고구마의 풍미를 느낄 수 있는 특별한 맛, 고구마 후라이",
+          "calorie": "295",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/02/Corp_PC_VIEW_772x530_고구마후라이_해피.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 576,
+          "korName": "아이스 드립 커피 Medium",
+          "engName": "Iced Drip Coffee Medium",
+          "description": "갓 내린 부드러운 맛!  드립 커피를 시원하게 만나보세요.",
+          "calorie": "10",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1708663234209.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 714,
+          "korName": "아이스 드립커피 Large",
+          "engName": "Iced Drip Coffee Large",
+          "description": "100% 아라비카로 풍부한 아로마의 드립 커피를  시원하게 만나보세요!",
+          "calorie": "14",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1753862426041.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 595,
+          "korName": "맥너겟<sub class=reg>®</sub> 4조각",
+          "engName": "McNuggets<sub class=reg>®</sub> 4pc",
+          "description": "바삭하고 촉촉한 치킨이 한 입에 쏙!  다양한 소스로 입맛에 맞게 즐겨보세요!    *판매 시간: 10:30AM~04:00AM",
+          "calorie": "163",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1715674478138.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 657,
+          "korName": "한입 초코 츄러스 3조각",
+          "engName": "Bite Sized Choco Churros 3pc",
+          "description": "바삭한 초코 츄러스에 가득 찬 진한 초코 필링!   함께 제공되는 시나몬 슈가를 뿌려서 더욱 달콤하게 즐겨보세요.",
+          "calorie": "253",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1736299008239.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 438,
+          "korName": "바닐라 쉐이크 Medium",
+          "engName": "Vanilla Shake Medium",
+          "description": "신선한 우유에 달콤한 바닐라 시럽으로 맛을 더한  깔끔한 쉐이크!     인기 스낵을 하루 종일 할인하는 해피 스낵으로 만나보세요!      * 해피 스낵 할인은 매장 방문에 한함",
+          "calorie": "344",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1651228037031.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 785,
+          "korName": "창녕 갈릭 비프 스낵랩",
+          "engName": "Changnyeong Garlic Beef Snack Wrap",
+          "description": "갈릭 아이올리 소스와 비프패티의 만남!  스낵랩으로 가볍게 창녕 갈릭 버거의 맛을 즐겨보세요.    *판매시간: 오전10시30분~ 새벽4시",
+          "calorie": "326",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/01/Corp_PC_View_772x530_26_해피스낵1Q_창녕갈릭스낵랩.png",
+          "menuStatus": "",
+          "newIcon": ""
+        }
+      ]
+    },
+    {
+      "seq": 4,
+      "korName": "사이드&디저트",
+      "engName": "Side & Dessert",
+      "items": [
+        {
+          "id": 792,
+          "korName": "고구마 후라이",
+          "engName": "Sweet Potato Fries",
+          "description": "바삭 달콤!   고구마의 풍미를 느낄 수 있는 특별한 맛, 고구마 후라이",
+          "calorie": "295",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/02/Corp_PC_VIEW_772x530_고구마후라이.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 784,
+          "korName": "창녕 갈릭 비프 스낵랩",
+          "engName": "Changnyeong Garlic Beef Snack wrap",
+          "description": "갈릭 아이올리 소스와 비프패티의 만남!  스낵랩으로 가볍게 창녕 갈릭 버거의 맛을 즐겨보세요.    *판매시간: 오전10시30분~ 새벽4시",
+          "calorie": "326",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/01/Corp_PC_VIEW_772x530_창녕갈릭스낵랩.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 783,
+          "korName": "맥윙<sub class=reg>™</sub> 2조각",
+          "engName": "McWing<sub class=reg>™</sub> 2pcs",
+          "description": "짭조롬하게 시즈닝 된 바삭한 껍질과 쫄깃한 속살의 조화로운 맛, 맥윙    *판매 시간 : 10:30AM~4AM",
+          "calorie": "228",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/03/Corp_PC_view_772x530_맥윙-2pc.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 782,
+          "korName": "맥윙<sub class=reg>™</sub> 4조각",
+          "engName": "McWing<sub class=reg>™</sub> 4pcs",
+          "description": "짭조롬하게 시즈닝 된 바삭한 껍질과 쫄깃한 속살의 조화로운 맛, 맥윙    *판매 시간 : 10:30AM~4AM",
+          "calorie": "455",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/03/Corp_PC_view_772x530_맥윙-4pc.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 781,
+          "korName": "맥윙<sub class=reg>™</sub> 8조각",
+          "engName": "McWing<sub class=reg>™</sub> 8pcs",
+          "description": "짭조롬하게 시즈닝 된 바삭한 껍질과 쫄깃한 속살의 조화로운 맛, 맥윙    *판매 시간 : 10:30AM~4AM",
+          "calorie": "910",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/03/Corp_PC_view_772x530_맥윙-8pc.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 780,
+          "korName": "맥윙<sub class=reg>™</sub> 2조각 콤보",
+          "engName": "McWing<sub class=reg>™</sub> 2pcs Combo",
+          "description": "짭조롬하게 시즈닝 된 바삭한 껍질과 쫄깃한 속살의 조화로운 맛, 맥윙    *판매 시간 : 10:30AM~4AM",
+          "calorie": "228~368",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/03/Corp_PC_view772x530_맥윙_combo-2pc.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 779,
+          "korName": "맥윙<sub class=reg>™</sub> 4조각 콤보",
+          "engName": "McWing<sub class=reg>™</sub> 4pcs Combo",
+          "description": "짭조롬하게 시즈닝 된 바삭한 껍질과 쫄깃한 속살의 조화로운 맛, 맥윙    *판매 시간 : 10:30AM~4AM",
+          "calorie": "455~595",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/03/Corp_PC_view772x530_맥윙_combo-4pc.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 284,
+          "korName": "맥너겟<sub class=reg>®</sub> 4조각",
+          "engName": "McNuggets<sub class=reg>®</sub> 4pc",
+          "description": "바삭하고 촉촉한 치킨이 한 입에 쏙!  다양한 소스로 입맛에 맞게 즐겨보세요!",
+          "calorie": "163",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1612402131024.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 722,
+          "korName": "맥너겟<sub class=reg>®</sub> 6조각",
+          "engName": "McNuggets<sub class=reg>®</sub> 6pc",
+          "description": "바삭하고 촉촉한 치킨이 한 입에 쏙!  다양한 소스로 입맛에 맞게 즐겨보세요!",
+          "calorie": "244",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/맥너겟®6조각.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 143,
+          "korName": "골든 모짜렐라 치즈스틱 2조각",
+          "engName": "Golden Mozzarella Cheese Sticks 2pcs",
+          "description": "속이 꽉 찬 황금빛 바삭함!  자연 모짜렐라 치즈로 빈틈 없이 고소한  맥도날드 치즈스틱을  다양하게 즐겨보세요!",
+          "calorie": "165",
+          "imageUrl": "https://www.mcdonalds.co.kr/uploadFolder/product/prov_201902080435496530.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 719,
+          "korName": "골든 모짜렐라 치즈스틱 4조각",
+          "engName": "Golden Mozzarella Cheese Sticks 4pcs",
+          "description": "속이 꽉 찬 황금빛 바삭함!  자연 모짜렐라 치즈로 빈틈 없이 고소한  맥도날드 치즈스틱을 다양하게 즐겨보세요!",
+          "calorie": "330",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/골든_모짜렐라_치즈스틱_4조각.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 88,
+          "korName": "후렌치 후라이 Small",
+          "engName": "French Fries Small",
+          "description": "통으로 썰어낸 감자를 맥도날드만의 노하우로 튀겨낸 남다른 맛과 바삭함!   맥도날드의 역사가 담긴 월드 클래스 후렌치 후라이",
+          "calorie": "210",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/후렌치_후라이_Small.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 720,
+          "korName": "후렌치 후라이 Medium",
+          "engName": "French Fries Medium",
+          "description": "통으로 썰어낸 감자를 맥도날드만의 노하우로 튀겨낸 남다른 맛과 바삭함!   맥도날드의 역사가 담긴 월드 클래스 후렌치 후라이",
+          "calorie": "324",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/후렌치_후라이_Medium.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 721,
+          "korName": "후렌치 후라이 Large",
+          "engName": "French Fries Large",
+          "description": "통으로 썰어낸 감자를 맥도날드만의 노하우로 튀겨낸 남다른 맛과 바삭함!   맥도날드의 역사가 담긴 월드 클래스 후렌치 후라이",
+          "calorie": "397",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/후렌치_후라이_Large.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 196,
+          "korName": "상하이 치킨 스낵랩",
+          "engName": "Shanghai Chicken Snack Wrap",
+          "description": "매콤한 치킨에 달콤한 화이트 마요 소스로 매콤달콤하게!  베이컨에 양상추, 또띠아까지 어우러져  씹는 맛까지 즐겁다!",
+          "calorie": "303",
+          "imageUrl": "https://www.mcdonalds.co.kr/uploadFolder/product/prov_201902080435011620.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 193,
+          "korName": "맥스파이시<sub class=reg>®</sub> 치킨 텐더",
+          "engName": "McSpicy<sub class=reg>®</sub> Chicken Tenders",
+          "description": "부드러운 100% 닭안심살을 스파이시 시즈닝으로  매콤 바삭하게 튀겨낸 치킨 텐더!  2가지 소스로 입맛에 맞게 즐겨보세요!",
+          "calorie": "197",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1612402252126.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 126,
+          "korName": "해쉬 브라운",
+          "engName": "Hash Brown",
+          "description": "씹으면 바삭바삭,  속은 부드러운 감자의 고소함.    *판매 시간: 새벽 4시 ~ 오전 10시 30분",
+          "calorie": "162",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1742426888535.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 467,
+          "korName": "코울슬로",
+          "engName": "Coleslaw",
+          "description": "양배추, 당근, 양파가 상큼하고 크리미한 마요 드레싱과  어우러져 아삭하게 씹히는 샐러드",
+          "calorie": "179",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1680761626050.png",
+          "menuStatus": "",
+          "newIcon": ""
+        }
+      ]
+    },
+    {
+      "seq": 2,
+      "korName": "맥모닝",
+      "engName": "McMorning",
+      "items": [
+        {
+          "id": 797,
+          "korName": "바질크림치즈 에그 머핀 세트",
+          "engName": "Basil Cream Cheese Egg Muffin Meal",
+          "description": "신선한 에그 머핀에 바질크림치즈를 더해  아침을 더 프레시하게!",
+          "calorie": "497",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/03/Corp_PC_VIEW_772x530_바질크림머핀_EVB_2.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 795,
+          "korName": "과카몰레 베이컨 에그 머핀 세트",
+          "engName": "Guacamole Bacon Egg Muffin Meal",
+          "description": "상큼고소 과카몰레에  갓 구운 신선한 계란과 베이컨을 더해  담백하게 즐기는 머핀!",
+          "calorie": "547",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/02/Corp_PC_VIEW_772x530_과카몰레머핀베이컨에그_EVB_1.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 794,
+          "korName": "과카몰레 치킨 머핀 세트",
+          "engName": "Guacamole Chicken Muffin Meal",
+          "description": "상큼고소 과카몰레에  바삭한 치킨과 아삭한 양상추를 더해   든든하게 즐기는 머핀!",
+          "calorie": "674",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/02/Corp_PC_VIEW_772x530_과카몰레머핀치킨_EVB_1.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 499,
+          "korName": "베이컨 에그 맥그리들 콤보",
+          "engName": "Bacon Egg McGriddles Combo",
+          "description": "메이플 시럽이 들어간 달콤한 핫케익 번에   고소한 베이컨으로 완성한 단짠의 맛! 단짠촉촉 맥그리들",
+          "calorie": "410",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1680763057513.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 496,
+          "korName": "베이컨 에그 맥그리들 세트",
+          "engName": "Bacon Egg McGriddles Meal",
+          "description": "메이플 시럽이 들어간 달콤한 핫케익 번에   고소한 베이컨으로 완성한 단짠의 맛! 단짠촉촉 맥그리들",
+          "calorie": "572",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1742427202264.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 500,
+          "korName": "소시지 에그 맥그리들 콤보",
+          "engName": "Sausage Egg McGriddles Combo",
+          "description": "메이플 시럽이 들어간 달콤한 핫케익 번에  촉촉한 소시지 패티로 완성한 단짠의 맛! 단짠촉촉 맥그리들",
+          "calorie": "515",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1680762935158.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 498,
+          "korName": "소시지 에그 맥그리들  세트",
+          "engName": "Sausage Egg McGriddles Meal",
+          "description": "메이플 시럽이 들어간 달콤한 핫케익 번에   촉촉한 소시지 패티로 완성한 단짠의 맛! 단짠촉촉 맥그리들",
+          "calorie": "677",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1742427457922.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 366,
+          "korName": "베이컨 토마토 에그 머핀 세트",
+          "engName": "BLT Egg Muffin Meal",
+          "description": "100% 아라비카로 내린 드립 커피와  갓 구워내 따뜻하고 신선한  베이컨 토마토 에그 머핀 세트    *판매 시간: 새벽 4시 ~ 오전 10시 30분",
+          "calorie": "509",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1742427076140.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 135,
+          "korName": "에그 맥머핀 세트",
+          "engName": "Egg McMuffin Meal",
+          "description": "100% 아라비카로 내린 드립 커피와 바삭바삭 고소한 해쉬 브라운,  신선한 에그 맥머핀으로 즐기는 제대로 된 아침 식사.  이제 맥모닝 세트로 아침을 깨워보세요.    *판매 시간: 새벽 4시 ~ 오전 10시 30분",
+          "calorie": "474",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1742427597295.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 115,
+          "korName": "베이컨 에그 맥머핀 세트",
+          "engName": "Bacon Egg McMuffin Meal",
+          "description": "100% 아라비카로 내린 드립 커피와  바삭바삭 고소한 해쉬 브라운,  신선한 베이컨 에그 맥머핀으로 즐기는  제대로 된 아침 식사.  이제 맥모닝 세트로 아침을 깨워보세요.    *판매 시간: 새벽 4시 ~ 오전 10시 30분",
+          "calorie": "498",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1742427316786.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 317,
+          "korName": "소시지 에그 맥머핀 콤보",
+          "engName": "Sausage Egg McMuffin  Combo",
+          "description": "100% 아라비카로 내린 드립 커피와 신선한 소시지 에그 맥머핀,  커피 한 잔 가격으로 가볍게 즐기는 맥모닝 콤보!    *판매 시간: 새벽 4시 ~ 오전 10시 30분",
+          "calorie": "473",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1677677701120.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 127,
+          "korName": "소시지 에그 맥머핀 세트",
+          "engName": "Sausage Egg McMuffin Meal",
+          "description": "100% 아라비카로 내린 드립 커피와  바삭바삭 고소한 해쉬 브라운,  신선한 소시지 에그 맥머핀으로 즐기는  제대로 된 아침 식사.  이제 맥모닝 세트로 아침을 깨워보세요.    *판매 시간: 새벽 4시 ~ 오전 10시 30분",
+          "calorie": "634",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1742427539029.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 295,
+          "korName": "치킨 치즈 머핀 세트",
+          "engName": "Chicken 'n Cheese Muffin Meal",
+          "description": "100% 아라비카로 내린 드립 커피와  바삭한 치킨 패티와 고소한 치즈로 아침에도 든든하게!    *판매 시간: 새벽 4시 ~ 오전 10시 30분",
+          "calorie": "677",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1742427704912.png",
+          "menuStatus": "단품,세트",
+          "newIcon": ""
+        },
+        {
+          "id": 196,
+          "korName": "상하이 치킨 스낵랩",
+          "engName": "Shanghai Chicken Snack Wrap",
+          "description": "매콤한 치킨에 달콤한 화이트 마요 소스로 매콤달콤하게!  베이컨에 양상추, 또띠아까지 어우러져  씹는 맛까지 즐겁다!",
+          "calorie": "303",
+          "imageUrl": "https://www.mcdonalds.co.kr/uploadFolder/product/prov_201902080435011620.png",
+          "menuStatus": "",
+          "newIcon": ""
+        }
+      ]
+    },
+    {
+      "seq": 3,
+      "korName": "해피밀",
+      "engName": "Happy Meal",
+      "items": [
+        {
+          "id": 119,
+          "korName": "베이컨 에그 맥머핀",
+          "engName": "Bacon Egg McMuffin",
+          "description": "부드러운 계란, 바삭바삭한 베이컨과 고소한 치즈가  갓 구워진 따뜻한 맥머핀    *판매 시간: 새벽 4시 ~ 오전 10시 30분",
+          "calorie": "327",
+          "imageUrl": "https://www.mcdonalds.co.kr/uploadFolder/product/prov_201901290309065310.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 9,
+          "korName": "소시지 에그 맥머핀",
+          "engName": "Sausage Egg McMuffin",
+          "description": "잉글리쉬 머핀 위에 먹음직스럽게 올려진 치즈와 계란,   그리고 촉촉한 소시지 패티의 맛있는 조화!    *판매 시간: 새벽 4시 ~ 오전 10시 30분",
+          "calorie": "463",
+          "imageUrl": "https://www.mcdonalds.co.kr/uploadFolder/product/prov_201903190244458360.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 120,
+          "korName": "에그 맥머핀",
+          "engName": "Egg McMuffin",
+          "description": "캐나디안 스타일 베이컨과 계란의 클래식한 만남,  맥도날드의 아침을 탄생하게 한 바로 그 메뉴.    *판매 시간: 새벽 4시 ~ 오전 10시 30분",
+          "calorie": "303",
+          "imageUrl": "https://www.mcdonalds.co.kr/uploadFolder/product/prov_201901290308474630.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 80,
+          "korName": "핫케익 2조각",
+          "engName": "Hotcakes 2pcs",
+          "description": "부드럽게 구워낸 핫케이크에  향긋한 버터와 달콤한 시럽을 살며시 부어   오늘 하루도 기분 좋게 시작하세요.    *판매 시간: 새벽 4시 ~ 오전 10시 30분",
+          "calorie": "223",
+          "imageUrl": "https://www.mcdonalds.co.kr/uploadFolder/product/prov_201902111059484930.png",
+          "menuStatus": "단품",
+          "newIcon": ""
+        },
+        {
+          "id": 607,
+          "korName": "후룻볼 파인애플",
+          "engName": "Fruit bowls Pineapple",
+          "description": "달콤하고 신선한 파인애플을  간편하게 즐길 수 있는 과일 간식",
+          "calorie": "-",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1720153394293.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 126,
+          "korName": "해쉬 브라운",
+          "engName": "Hash Brown",
+          "description": "씹으면 바삭바삭,  속은 부드러운 감자의 고소함.    *판매 시간: 새벽 4시 ~ 오전 10시 30분",
+          "calorie": "162",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1742426888535.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 33,
+          "korName": "생수",
+          "engName": "Mineral Water",
+          "description": "활력을 되찾아주는 깔끔한 미네랄 생수.",
+          "calorie": "-",
+          "imageUrl": "https://www.mcdonalds.co.kr/uploadFolder/product/prov_201901290258201760.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 649,
+          "korName": "오렌지 주스",
+          "engName": "Orange Juice",
+          "description": "정상적인 면역기능에 필요한 아연이 풍부한,  세계 1위 미닛메이드의 오렌지 주스",
+          "calorie": "-",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1734681316004.png",
+          "menuStatus": "",
+          "newIcon": ""
+        }
+      ]
+    },
+    {
+      "seq": 5,
+      "korName": "맥카페&음료",
+      "engName": "McCafe & Drinks",
+      "items": [
+        {
+          "id": 28,
+          "korName": "아메리카노 Medium",
+          "engName": "Americano Medium",
+          "description": "바로 내린 100% 친환경 커피로  더 신선하게! 더 풍부하게!",
+          "calorie": "12",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1677680290018.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 729,
+          "korName": "아메리카노 Large",
+          "engName": "Americano Large",
+          "description": "바로 내린 100% 친환경 커피로  더 신선하게! 더 풍부하게!",
+          "calorie": "15",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/아메리카노_Large.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 309,
+          "korName": "디카페인 아메리카노 Medium",
+          "engName": "Decaffeine Americano Medium",
+          "description": "바로 내린 100% 친환경 커피로 더 신선하게! 더 풍부하게! 이제 디카페인으로도 즐겨보세요!  *일부 매장 판매 제외",
+          "calorie": "12",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1677679725954.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 730,
+          "korName": "디카페인 아메리카노 Large",
+          "engName": "Decaffeine Americano Large",
+          "description": "바로 내린 100% 친환경 커피로 더 신선하게! 더 풍부하게! 이제 디카페인으로도 즐겨보세요!  *일부 매장 판매 제외",
+          "calorie": "12",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/디카페인_아메리카노_Large.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 209,
+          "korName": "아이스 아메리카노 Medium",
+          "engName": "Iced Americano Medium",
+          "description": "바로 내린 100% 친환경 커피로  더 신선하게! 더 풍부하게!",
+          "calorie": "9",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1610887631017.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 731,
+          "korName": "아이스 아메리카노 Large",
+          "engName": "Iced Americano Large",
+          "description": "바로 내린 100% 친환경 커피로  더 신선하게! 더 풍부하게!",
+          "calorie": "10",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/아이스아메리카노_라지.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 312,
+          "korName": "디카페인 아이스 아메리카노 Medium",
+          "engName": "Decaffeine Americano Medium",
+          "description": "바로 내린 100% 친환경 커피로 더 신선하게! 더 풍부하게! 이제 디카페인으로도 즐겨보세요!  *일부 매장 판매 제외",
+          "calorie": "8",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1610889486625.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 732,
+          "korName": "디카페인 아이스 아메리카노 Large",
+          "engName": "Decaffeine Iced Americano Large",
+          "description": "바로 내린 100% 친환경 커피로 더 신선하게! 더 풍부하게!  이제 디카페인으로도 즐겨보세요!  *일부 매장 판매 제외",
+          "calorie": "10",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/디카페인_아이스_아메리카노_Large.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 29,
+          "korName": "카페라떼 Medium",
+          "engName": "Café Latte Medium",
+          "description": "바로 내린 100% 친환경 커피가 신선한 우유를 만나  더 신선하고 부드럽게!",
+          "calorie": "149",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1677680118201.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 725,
+          "korName": "카페라떼 Large",
+          "engName": "Café Latte Large",
+          "description": "바로 내린 100% 친환경 커피가 신선한 우유를 만나  더 신선하고 부드럽게!",
+          "calorie": "194",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/카페라떼_Large.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 311,
+          "korName": "디카페인 카페라떼 Medium",
+          "engName": "Decaffeine Café Latte Medium",
+          "description": "바로 내린 100% 친환경 커피가 신선한 우유를 만나 더 신선하고 부드럽게! 이제 디카페인으로도 즐겨보세요!  *일부 매장 판매 제외",
+          "calorie": "150",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1677679216326.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 726,
+          "korName": "디카페인 카페라떼 Large",
+          "engName": "Decaffeine Café Latte Large",
+          "description": "바로 내린 100% 친환경 커피가 신선한 우유를 만나 더 신선하고 부드럽게! 이제 디카페인으로도 즐겨보세요!  *일부 매장 판매 제외",
+          "calorie": "190",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/디카페인_카페라떼_라지png.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 203,
+          "korName": "아이스 카페라떼 Medium",
+          "engName": "Iced Café Latte Medium",
+          "description": "바로 내린 100% 친환경 커피가 신선한 우유를 만나  더 신선하고 부드럽게!",
+          "calorie": "108",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1610885477469.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 727,
+          "korName": "아이스 카페라떼 Large",
+          "engName": "Iced Café Latte Large",
+          "description": "바로 내린 100% 친환경 커피가 신선한 우유를 만나  더 신선하고 부드럽게!",
+          "calorie": "133",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/아이스_카페라떼_Large.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 313,
+          "korName": "디카페인 아이스 카페라떼 Medium",
+          "engName": "Decaffeine Iced Café Latte Medium",
+          "description": "바로 내린 100% 친환경 커피가 신선한 우유를 만나 더 신선하고 부드럽게! 이제 디카페인으로도 즐겨보세요!  *일부 매장 판매 제외",
+          "calorie": "114",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1610887233610.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 728,
+          "korName": "디카페인 아이스 카페라떼 Large",
+          "engName": "Decaffeine Iced Café Latte Large",
+          "description": "바로 내린 100% 친환경 커피가 신선한 우유를 만나 더 신선하고 부드럽게! 이제 디카페인으로도 즐겨보세요!  *일부 매장 판매 제외",
+          "calorie": "133",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/디카페인_아이스_카페라떼_Large.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 421,
+          "korName": "바닐라 라떼 Medium",
+          "engName": "Vanilla Latte Medium",
+          "description": "바로 내린 100% 친환경 커피의 진한 맛과 향,   1A등급 우유, 그리고 천연 바닐라 향으로 달콤함까지!",
+          "calorie": "227",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1677678794782.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 723,
+          "korName": "바닐라 라떼 Large",
+          "engName": "Vanilla Latte Large",
+          "description": "바로 내린 100% 친환경 커피의 진한 맛과 향,   1A등급 우유, 그리고 천연 바닐라 향으로 달콤함까지!",
+          "calorie": "323",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/바닐라라떼_라지png.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 786,
+          "korName": "디카페인 바닐라 라떼 Medium",
+          "engName": "Decaffeine Vanilla Latte Medium",
+          "description": "바로 내린 100% 친환경 커피의 진한 맛과 향,   1A등급 우유, 그리고 천연 바닐라 향으로 달콤함까지!  이제 디카페인으로도 즐겨보세요!  *일부 매장 판매 제외",
+          "calorie": "227",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/02/Corp_PC_VIEW_772x530_디카페인_바닐라라뗴_M.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 787,
+          "korName": "디카페인 바닐라 라떼 Large",
+          "engName": "Decaffeine Vanilla Latte Large",
+          "description": "바로 내린 100% 친환경 커피의 진한 맛과 향,   1A등급 우유, 그리고 천연 바닐라 향으로 달콤함까지!  이제 디카페인으로도 즐겨보세요!  *일부 매장 판매 제외",
+          "calorie": "319",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/02/Corp_PC_VIEW_772x530_디카페인_바닐라라뗴_L.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 422,
+          "korName": "아이스 바닐라 라떼 Medium",
+          "engName": "Iced Vanilla Latte Medium",
+          "description": "바로 내린 100% 친환경 커피의 진한 맛과 향,   1A등급 우유, 그리고 천연 바닐라 향으로 달콤함까지!",
+          "calorie": "186",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1654652269651.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 724,
+          "korName": "아이스 바닐라 라떼 Large",
+          "engName": "Iced Vanilla Latte Large",
+          "description": "바로 내린 100% 친환경 커피의 진한 맛과 향,   1A등급 우유, 그리고 천연 바닐라 향으로 달콤함까지!",
+          "calorie": "263",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/아이스바닐라라테_라지.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 788,
+          "korName": "디카페인 아이스 바닐라 라떼 Medium",
+          "engName": "Decaffeine Iced Vanilla Latte Medium",
+          "description": "바로 내린 100% 친환경 커피의 진한 맛과 향,  1A등급 우유, 그리고 천연 바닐라 향으로 달콤함까지!  이제 디카페인으로도 즐겨보세요!  *일부 매장 판매 제외",
+          "calorie": "191",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/02/Corp_PC_VIEW_772x530_바닐라라떼_디카페_M.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 789,
+          "korName": "디카페인 아이스 바닐라 라떼 Large",
+          "engName": "Decaffeine Iced Vanilla Latte Large",
+          "description": "바로 내린 100% 친환경 커피의 진한 맛과 향,  1A등급 우유, 그리고 천연 바닐라 향으로 달콤함까지!  이제 디카페인으로도 즐겨보세요!  *일부 매장 판매 제외",
+          "calorie": "263",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2026/02/Corp_PC_VIEW_772x530_바닐라라떼_디카페_L.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 30,
+          "korName": "카푸치노 Medium",
+          "engName": "Cappuccino Medium",
+          "description": "바로 내린 100% 친환경 커피로 추출한 에스프레소  위에 갓 만든 우유 거품으로 더 부드럽게!",
+          "calorie": "93",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1677679951061.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 733,
+          "korName": "카푸치노 Large",
+          "engName": "Cappuccino Large",
+          "description": "바로 내린 100% 친환경 커피로 추출한 에스프레소  위에 갓 만든 우유 거품으로 더 부드럽게!",
+          "calorie": "120",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/카푸치노_Large.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 310,
+          "korName": "디카페인 카푸치노 Medium",
+          "engName": "Decaffeine Cappuccino Medium",
+          "description": "바로 내린 100% 친환경 커피로 추출한 에스프레소 위에 갓 만든 우유 거품으로 더 부드럽게! 이제 디카페인으로도 즐겨보세요!  *일부 매장 판매 제외",
+          "calorie": "89",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1677679486199.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 734,
+          "korName": "디카페인 카푸치노 Large",
+          "engName": "Decaffeine Cappuccino Large",
+          "description": "바로 내린 100% 친환경 커피로 추출한 에스프레소 위에 갓 만든 우유 거품으로 더 부드럽게!  이제 디카페인으로도 즐겨보세요!  *일부 매장 판매 제외",
+          "calorie": "120",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/디카페인_카푸치노_Large.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 27,
+          "korName": "드립 커피 Medium",
+          "engName": "Drip Coffee Medium",
+          "description": "100% 아라비카 원두를 드립 커피의 부드러움으로 만나보세요.",
+          "calorie": "10",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1677680459621.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 735,
+          "korName": "드립 커피 Large",
+          "engName": "Drip Coffee Large",
+          "description": "100% 아라비카 원두를 드립 커피의 부드러움으로 만나보세요.",
+          "calorie": "12",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/드립_커피_Large.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 230,
+          "korName": "아이스 드립 커피 Medium",
+          "engName": "Iced Drip Coffee Medium",
+          "description": "100% 아라비카로 풍부한 아로마의 드립 커피를  시원하게 만나보세요!",
+          "calorie": "10",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/product/pcfile/1610889861261.png",
+          "menuStatus": "",
+          "newIcon": ""
+        },
+        {
+          "id": 736,
+          "korName": "아이스 드립 커피 Large",
+          "engName": "Iced Drip Coffee Large",
+          "description": "100% 아라비카로 풍부한 아로마의 드립 커피를  시원하게 만나보세요!",
+          "calorie": "14",
+          "imageUrl": "https://www.mcdonalds.co.kr/upload/2025/08/아이스_드립_커피_Large.png",
+          "menuStatus": "",
+          "newIcon": ""
+        }
+      ]
+    }
+  ]
+}
