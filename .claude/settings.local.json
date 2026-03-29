@@ -3,7 +3,8 @@
     "allow": [
       "Bash(git stash:*)",
       "Bash(git add:*)",
-      "Bash(lsof -iTCP -sTCP:LISTEN -P)"
+      "Bash(lsof -iTCP -sTCP:LISTEN -P)",
+      "Bash(find /Users/kim-eunran/project/generative-kiosk -type f -name *adaptforge* -o -name *AdaptForge*)"
     ]
   }
 }

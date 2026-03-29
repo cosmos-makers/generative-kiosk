@@ -13,6 +13,16 @@ export function Header({
 }) {
   return (
     <header className="flex items-center gap-4 rounded-2xl bg-[#da0000] px-4 py-3 text-white kiosk-glow">
+      {onHome ? (
+        <button
+          type="button"
+          onClick={onHome}
+          className="self-start rounded-lg border border-white/30 px-3 py-1.5 text-xs font-black uppercase tracking-wider text-white hover:bg-white/10"
+        >
+          홈
+        </button>
+      ) : null}
+
       <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-[#ffbc0d]">
         <span className="text-2xl font-black leading-none text-[#da0000]" style={{ fontFamily: "Arial Black, sans-serif" }}>
           M
@@ -31,15 +41,6 @@ export function Header({
         >
           {locale === "en" ? "KO" : "EN"}
         </button>
-        {onHome ? (
-          <button
-            type="button"
-            onClick={onHome}
-            className="rounded-lg border border-white/30 px-3 py-1.5 text-xs font-black uppercase tracking-wider text-white hover:bg-white/10"
-          >
-            홈
-          </button>
-        ) : null}
       </div>
     </header>
   );
